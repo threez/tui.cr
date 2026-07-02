@@ -1,0 +1,11 @@
+name: tui
+version: 0.1.0
+
+authors:
+  - Vincent Landgraf <vincent@landgrafx.de>
+
+description: Minimal Crystal TUI primitives.
+
+crystal: ">= 1.19.1"
+
+license: MIT
