@@ -90,10 +90,13 @@ describe TUI::ListView do
       # land outside [offset, offset + visible).
       10.times { list.handle_key(TUI::KeyEvent.new(TUI::Key::MouseWheelDown), ctl) }
 
-      cursor = list.selected_index.not_nil!
-      offset = scroller.offset
-      cursor.should be >= offset
-      cursor.should be < offset + 15
+      cursor = list.selected_index
+      cursor.should_not be_nil
+      if cursor
+        offset = scroller.offset
+        cursor.should be >= offset
+        cursor.should be < offset + 15
+      end
     end
 
     it "keeps the cursor within the visible window after wheel-up at the top edge" do
@@ -104,10 +107,13 @@ describe TUI::ListView do
 
       10.times { list.handle_key(TUI::KeyEvent.new(TUI::Key::MouseWheelUp), ctl) }
 
-      cursor = list.selected_index.not_nil!
-      offset = scroller.offset
-      cursor.should be >= offset
-      cursor.should be < offset + 15
+      cursor = list.selected_index
+      cursor.should_not be_nil
+      if cursor
+        offset = scroller.offset
+        cursor.should be >= offset
+        cursor.should be < offset + 15
+      end
     end
   end
 
