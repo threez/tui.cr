@@ -1,0 +1,2923 @@
+---
+packages:
+- name: imagemagick
+  version: 15.4.9
+  size_mb: 102.3
+  installed: false
+  origin: graphics/ImageMagick7
+  license: BSD-3-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A modern XML plugin for FreeBSD, providing robust handling of UDP workloads.
+- name: ripgrep
+  version: 8.6.7
+  size_mb: 69.6
+  installed: true
+  origin: textproc/ripgrep
+  license: GPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A modular system scheduler for FreeBSD, providing concurrent handling
+    of JavaScript workloads.
+- name: postgresql
+  version: 4.3.5
+  size_mb: 25.9
+  installed: true
+  origin: databases/postgresql16-server
+  license: BSD-2-Clause
+  maintainer: sunpoet@FreeBSD.org
+  description: A modular FTP indexer for FreeBSD, providing advanced handling of HTTP
+    workloads.
+- name: neovim
+  version: 3.5.0
+  size_mb: 64.5
+  installed: true
+  origin: editors/neovim
+  license: GPL-3.0
+  maintainer: tobik@FreeBSD.org
+  description: A secure memory engine for FreeBSD, providing advanced handling of
+    DNS workloads.
+- name: jq
+  version: 15.4.5
+  size_mb: 97.2
+  installed: true
+  origin: textproc/jq
+  license: ISC
+  maintainer: swills@FreeBSD.org
+  description: A cross-platform HTTP debugger for FreeBSD, providing minimal handling
+    of HTML workloads.
+- name: curl
+  version: 14.9.3
+  size_mb: 99.4
+  installed: true
+  origin: ftp/curl
+  license: MPL-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A modern JSON broker for FreeBSD, providing portable handling of PDF
+    workloads.
+- name: git
+  version: 16.5.3
+  size_mb: 31.0
+  installed: false
+  origin: devel/git
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A distributed Markdown driver for FreeBSD, providing extensible handling
+    of TLS workloads.
+- name: vim
+  version: 16.5.1
+  size_mb: 21.8
+  installed: false
+  origin: editors/vim
+  license: BSD-2-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A concurrent HTML analyzer for FreeBSD, providing concurrent handling
+    of GraphQL workloads.
+- name: openssl
+  version: 9.8.4
+  size_mb: 39.2
+  installed: false
+  origin: security/openssl
+  license: MIT
+  maintainer: novel@FreeBSD.org
+  description: A secure process bridge for FreeBSD, providing pure handling of pipe
+    workloads.
+- name: zlib
+  version: 6.6.7
+  size_mb: 90.6
+  installed: true
+  origin: archivers/zlib
+  license: ISC
+  maintainer: novel@FreeBSD.org
+  description: A extensible system debugger for FreeBSD, providing modular handling
+    of HTML workloads.
+- name: sqlite3
+  version: 1.4.2
+  size_mb: 78.8
+  installed: true
+  origin: databases/sqlite3
+  license: MPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A cross-platform IMAP parser for FreeBSD, providing modern handling
+    of binary workloads.
+- name: python311
+  version: 12.4.2
+  size_mb: 113.4
+  installed: false
+  origin: lang/python311
+  license: BSD-3-Clause
+  maintainer: swills@FreeBSD.org
+  description: A high-performance binary queue for FreeBSD, providing async handling
+    of socket workloads.
+- name: node
+  version: 10.7.5
+  size_mb: 38.3
+  installed: true
+  origin: www/node
+  license: Apache-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A cross-platform HTML linter for FreeBSD, providing advanced handling
+    of socket workloads.
+- name: go
+  version: 14.7.3
+  size_mb: 37.9
+  installed: false
+  origin: lang/go
+  license: ISC
+  maintainer: swills@FreeBSD.org
+  description: A portable thread wrapper for FreeBSD, providing portable handling
+    of process workloads.
+- name: rust
+  version: 15.3.1
+  size_mb: 108.4
+  installed: true
+  origin: lang/rust
+  license: ISC
+  maintainer: vanilla@FreeBSD.org
+  description: A modern FTP balancer for FreeBSD, providing simple handling of JSON
+    workloads.
+- name: tmux
+  version: 3.2.9
+  size_mb: 44.6
+  installed: true
+  origin: sysutils/tmux
+  license: GPL-3.0
+  maintainer: novel@FreeBSD.org
+  description: A scriptable gRPC driver for FreeBSD, providing secure handling of
+    text workloads.
+- name: htop
+  version: 3.2.9
+  size_mb: 74.2
+  installed: false
+  origin: sysutils/htop
+  license: ISC
+  maintainer: mfechner@FreeBSD.org
+  description: A robust UDP bridge for FreeBSD, providing modern handling of CSS workloads.
+- name: wget
+  version: 12.0.6
+  size_mb: 59.2
+  installed: false
+  origin: ftp/wget
+  license: GPL-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A secure memory codec for FreeBSD, providing advanced handling of GraphQL
+    workloads.
+- name: nginx
+  version: 8.1.2
+  size_mb: 64.9
+  installed: true
+  origin: www/nginx
+  license: BSD-2-Clause
+  maintainer: tobik@FreeBSD.org
+  description: A simple memory broker for FreeBSD, providing distributed handling
+    of PDF workloads.
+- name: redis
+  version: 1.7.1
+  size_mb: 83.5
+  installed: false
+  origin: databases/redis
+  license: BSD-3-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A advanced UDP toolkit for FreeBSD, providing scriptable handling of
+    pipe workloads.
+- name: extensible-generator
+  version: 11.18.4
+  size_mb: 59.9
+  installed: true
+  origin: cad/extensiblegenerator
+  license: MIT
+  maintainer: tobik@FreeBSD.org
+  description: A extensible IMAP generator for FreeBSD, offering simple support for
+    IMAP generators in cad workflows.
+- name: cross-platform-server
+  version: 21.6.15
+  size_mb: 90.7
+  installed: false
+  origin: textproc/crossplatformserver
+  license: Apache-2.0
+  maintainer: novel@FreeBSD.org
+  description: A cross-platform audio server for FreeBSD, offering portable support
+    for audio servers in textproc workflows.
+- name: flexible-database
+  version: 15.0.15
+  size_mb: 248.4
+  installed: false
+  origin: finance/flexibledatabase
+  license: MIT
+  maintainer: novel@FreeBSD.org
+  description: A flexible image database for FreeBSD, offering native support for
+    image databases in finance workflows.
+- name: distributed-daemon
+  version: 8.7.26
+  size_mb: 73.7
+  installed: true
+  origin: archivers/distributeddaemon
+  license: ISC
+  maintainer: mfechner@FreeBSD.org
+  description: A distributed network daemon for FreeBSD, offering minimal support
+    for network daemons in archivers workflows.
+- name: portable-adapter
+  version: 0.3.5
+  size_mb: 243.3
+  installed: false
+  origin: audio/portableadapter
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A portable HTTP adapter for FreeBSD, offering minimal support for HTTP
+    adapters in audio workflows.
+- name: modular-validator
+  version: 6.7.35
+  size_mb: 42.9
+  installed: true
+  origin: www/modularvalidator
+  license: MPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A modular font validator for FreeBSD, offering minimal support for
+    font validators in www workflows.
+- name: robust-toolkit
+  version: 12.22.9
+  size_mb: 127.3
+  installed: false
+  origin: python/robusttoolkit
+  license: GPL-3.0
+  maintainer: mfechner@FreeBSD.org
+  description: A robust CSS toolkit for FreeBSD, offering portable support for CSS
+    toolkits in python workflows.
+- name: cross-platform-adapter
+  version: 24.3.34
+  size_mb: 159.0
+  installed: true
+  origin: games/crossplatformadapter
+  license: MPL-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A cross-platform NoSQL adapter for FreeBSD, offering high-performance
+    support for NoSQL adapters in games workflows.
+- name: concurrent-cache
+  version: 3.12.28
+  size_mb: 94.8
+  installed: true
+  origin: audio/concurrentcache
+  license: BSD-3-Clause
+  maintainer: swills@FreeBSD.org
+  description: A concurrent PDF cache for FreeBSD, offering pure support for PDF caches
+    in audio workflows.
+- name: pure-debugger
+  version: 6.2.16
+  size_mb: 4.5
+  installed: false
+  origin: shells/puredebugger
+  license: GPL-3.0
+  maintainer: mfechner@FreeBSD.org
+  description: A pure TLS debugger for FreeBSD, offering robust support for TLS debuggers
+    in shells workflows.
+- name: embeddable-library
+  version: 25.7.8
+  size_mb: 47.4
+  installed: false
+  origin: net/embeddablelibrary
+  license: Apache-2.0
+  maintainer: ports@FreeBSD.org
+  description: A embeddable socket library for FreeBSD, offering cross-platform support
+    for socket librarys in net workflows.
+- name: fast-utility
+  version: 4.16.30
+  size_mb: 107.2
+  installed: true
+  origin: archivers/fastutility
+  license: GPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A fast config utility for FreeBSD, offering pure support for config
+    utilitys in archivers workflows.
+- name: modern-server
+  version: 7.1.26
+  size_mb: 166.9
+  installed: false
+  origin: x11-clocks/modernserver
+  license: Apache-2.0
+  maintainer: swills@FreeBSD.org
+  description: A modern stream server for FreeBSD, offering async support for stream
+    servers in x11-clocks workflows.
+- name: async-balancer
+  version: 17.27.25
+  size_mb: 37.7
+  installed: false
+  origin: mail/asyncbalancer
+  license: BSD-2-Clause
+  maintainer: mfechner@FreeBSD.org
+  description: A async DNS balancer for FreeBSD, offering extensible support for DNS
+    balancers in mail workflows.
+- name: embeddable-gateway
+  version: 20.20.8
+  size_mb: 232.4
+  installed: false
+  origin: net-p2p/embeddablegateway
+  license: MIT
+  maintainer: swills@FreeBSD.org
+  description: A embeddable TCP gateway for FreeBSD, offering fast support for TCP
+    gateways in net-p2p workflows.
+- name: robust-cluster
+  version: 21.13.22
+  size_mb: 63.8
+  installed: true
+  origin: biology/robustcluster
+  license: MIT
+  maintainer: vanilla@FreeBSD.org
+  description: A robust image cluster for FreeBSD, offering embeddable support for
+    image clusters in biology workflows.
+- name: modern-validator
+  version: 1.22.14
+  size_mb: 113.7
+  installed: false
+  origin: finance/modernvalidator
+  license: GPL-3.0
+  maintainer: ports@FreeBSD.org
+  description: A modern font validator for FreeBSD, offering modular support for font
+    validators in finance workflows.
+- name: minimal-driver
+  version: 15.17.38
+  size_mb: 144.1
+  installed: false
+  origin: accessibility/minimaldriver
+  license: GPL-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A minimal binary driver for FreeBSD, offering async support for binary
+    drivers in accessibility workflows.
+- name: modern-balancer
+  version: 1.12.24
+  size_mb: 63.8
+  installed: false
+  origin: editors/modernbalancer
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A modern TLS balancer for FreeBSD, offering portable support for TLS
+    balancers in editors workflows.
+- name: extensible-broker
+  version: 5.0.15
+  size_mb: 206.2
+  installed: true
+  origin: ports-mgmt/extensiblebroker
+  license: MIT
+  maintainer: vanilla@FreeBSD.org
+  description: A extensible image broker for FreeBSD, offering high-performance support
+    for image brokers in ports-mgmt workflows.
+- name: flexible-client
+  version: 8.15.9
+  size_mb: 115.2
+  installed: false
+  origin: www/flexibleclient
+  license: GPL-3.0
+  maintainer: core@FreeBSD.org
+  description: A flexible thread client for FreeBSD, offering distributed support
+    for thread clients in www workflows.
+- name: fast-utility2
+  version: 25.29.4
+  size_mb: 136.6
+  installed: true
+  origin: converters/fastutility2
+  license: BSD-3-Clause
+  maintainer: sunpoet@FreeBSD.org
+  description: A fast thread utility for FreeBSD, offering high-performance support
+    for thread utilitys in converters workflows.
+- name: flexible-renderer
+  version: 5.10.30
+  size_mb: 91.0
+  installed: true
+  origin: finance/flexiblerenderer
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A flexible config renderer for FreeBSD, offering modular support for
+    config renderers in finance workflows.
+- name: embeddable-utility
+  version: 16.6.15
+  size_mb: 120.1
+  installed: false
+  origin: hebrew/embeddableutility
+  license: ISC
+  maintainer: tobik@FreeBSD.org
+  description: A embeddable Markdown utility for FreeBSD, offering portable support
+    for Markdown utilitys in hebrew workflows.
+- name: modular-database
+  version: 14.15.34
+  size_mb: 156.5
+  installed: true
+  origin: editors/modulardatabase
+  license: BSD-3-Clause
+  maintainer: vanilla@FreeBSD.org
+  description: A modular UDP database for FreeBSD, offering modern support for UDP
+    databases in editors workflows.
+- name: concurrent-wrapper
+  version: 19.10.31
+  size_mb: 85.3
+  installed: true
+  origin: accessibility/concurrentwrapper
+  license: ISC
+  maintainer: core@FreeBSD.org
+  description: A concurrent TCP wrapper for FreeBSD, offering scriptable support for
+    TCP wrappers in accessibility workflows.
+- name: secure-scheduler
+  version: 22.26.6
+  size_mb: 171.1
+  installed: true
+  origin: x11-fm/securescheduler
+  license: BSD-2-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A secure memory scheduler for FreeBSD, offering flexible support for
+    memory schedulers in x11-fm workflows.
+- name: native-client
+  version: 14.18.27
+  size_mb: 108.1
+  installed: false
+  origin: ukrainian/nativeclient
+  license: Apache-2.0
+  maintainer: swills@FreeBSD.org
+  description: A native NoSQL client for FreeBSD, offering modular support for NoSQL
+    clients in ukrainian workflows.
+- name: scriptable-library
+  version: 21.0.4
+  size_mb: 203.9
+  installed: true
+  origin: net-mgmt/scriptablelibrary
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A scriptable process library for FreeBSD, offering robust support for
+    process librarys in net-mgmt workflows.
+- name: pure-cluster
+  version: 13.16.8
+  size_mb: 63.7
+  installed: true
+  origin: mail/purecluster
+  license: GPL-3.0
+  maintainer: ports@FreeBSD.org
+  description: A pure PDF cluster for FreeBSD, offering fast support for PDF clusters
+    in mail workflows.
+- name: lightweight-adapter
+  version: 18.12.3
+  size_mb: 207.7
+  installed: true
+  origin: cad/lightweightadapter
+  license: Apache-2.0
+  maintainer: swills@FreeBSD.org
+  description: A lightweight font adapter for FreeBSD, offering portable support for
+    font adapters in cad workflows.
+- name: modular-module
+  version: 12.15.33
+  size_mb: 249.8
+  installed: false
+  origin: ftp/modularmodule
+  license: GPL-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A modular XML module for FreeBSD, offering embeddable support for XML
+    modules in ftp workflows.
+- name: modular-wrapper
+  version: 11.10.6
+  size_mb: 52.2
+  installed: false
+  origin: deskutils/modularwrapper
+  license: MPL-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A modular file wrapper for FreeBSD, offering simple support for file
+    wrappers in deskutils workflows.
+- name: secure-indexer
+  version: 16.7.28
+  size_mb: 218.8
+  installed: true
+  origin: shells/secureindexer
+  license: Apache-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A secure TCP indexer for FreeBSD, offering distributed support for
+    TCP indexers in shells workflows.
+- name: advanced-compiler
+  version: 25.6.34
+  size_mb: 135.9
+  installed: false
+  origin: accessibility/advancedcompiler
+  license: GPL-3.0
+  maintainer: swills@FreeBSD.org
+  description: A advanced HTML compiler for FreeBSD, offering advanced support for
+    HTML compilers in accessibility workflows.
+- name: minimal-generator
+  version: 14.7.6
+  size_mb: 10.4
+  installed: true
+  origin: x11/minimalgenerator
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A minimal JSON generator for FreeBSD, offering high-performance support
+    for JSON generators in x11 workflows.
+- name: async-linter
+  version: 0.30.12
+  size_mb: 207.4
+  installed: true
+  origin: databases/asynclinter
+  license: BSD-3-Clause
+  maintainer: vanilla@FreeBSD.org
+  description: A async gRPC linter for FreeBSD, offering robust support for gRPC linters
+    in databases workflows.
+- name: async-proxy
+  version: 0.24.1
+  size_mb: 49.4
+  installed: true
+  origin: x11-drivers/asyncproxy
+  license: BSD-3-Clause
+  maintainer: mfechner@FreeBSD.org
+  description: A async PDF proxy for FreeBSD, offering minimal support for PDF proxys
+    in x11-drivers workflows.
+- name: cross-platform-linter
+  version: 8.29.18
+  size_mb: 172.0
+  installed: false
+  origin: x11-clocks/crossplatformlinter
+  license: MPL-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A cross-platform JSON linter for FreeBSD, offering distributed support
+    for JSON linters in x11-clocks workflows.
+- name: native-database
+  version: 4.3.23
+  size_mb: 89.1
+  installed: true
+  origin: security/nativedatabase
+  license: ISC
+  maintainer: vanilla@FreeBSD.org
+  description: A native GraphQL database for FreeBSD, offering distributed support
+    for GraphQL databases in security workflows.
+- name: flexible-validator
+  version: 24.3.6
+  size_mb: 131.4
+  installed: false
+  origin: dns/flexiblevalidator
+  license: MIT
+  maintainer: sunpoet@FreeBSD.org
+  description: A flexible gRPC validator for FreeBSD, offering modular support for
+    gRPC validators in dns workflows.
+- name: minimal-framework
+  version: 21.24.16
+  size_mb: 89.9
+  installed: true
+  origin: ftp/minimalframework
+  license: BSD-3-Clause
+  maintainer: sunpoet@FreeBSD.org
+  description: A minimal image framework for FreeBSD, offering cross-platform support
+    for image frameworks in ftp workflows.
+- name: extensible-profiler
+  version: 2.5.28
+  size_mb: 165.8
+  installed: false
+  origin: palm/extensibleprofiler
+  license: BSD-2-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A extensible config profiler for FreeBSD, offering advanced support
+    for config profilers in palm workflows.
+- name: modern-linter
+  version: 2.28.35
+  size_mb: 176.3
+  installed: true
+  origin: www/modernlinter
+  license: GPL-3.0
+  maintainer: novel@FreeBSD.org
+  description: A modern UDP linter for FreeBSD, offering extensible support for UDP
+    linters in www workflows.
+- name: simple-engine
+  version: 12.2.32
+  size_mb: 168.3
+  installed: false
+  origin: korean/simpleengine
+  license: GPL-3.0
+  maintainer: novel@FreeBSD.org
+  description: A simple thread engine for FreeBSD, offering lightweight support for
+    thread engines in korean workflows.
+- name: fast-library
+  version: 20.23.6
+  size_mb: 77.1
+  installed: false
+  origin: palm/fastlibrary
+  license: MPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A fast XML library for FreeBSD, offering extensible support for XML
+    librarys in palm workflows.
+- name: async-analyzer
+  version: 14.23.34
+  size_mb: 157.2
+  installed: false
+  origin: python/asyncanalyzer
+  license: BSD-3-Clause
+  maintainer: core@FreeBSD.org
+  description: A async TLS analyzer for FreeBSD, offering modular support for TLS
+    analyzers in python workflows.
+- name: advanced-balancer
+  version: 18.29.35
+  size_mb: 221.2
+  installed: true
+  origin: archivers/advancedbalancer
+  license: Apache-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A advanced system balancer for FreeBSD, offering scriptable support
+    for system balancers in archivers workflows.
+- name: advanced-engine
+  version: 6.2.38
+  size_mb: 56.8
+  installed: false
+  origin: multimedia/advancedengine
+  license: MIT
+  maintainer: vanilla@FreeBSD.org
+  description: A advanced memory engine for FreeBSD, offering modular support for
+    memory engines in multimedia workflows.
+- name: flexible-database2
+  version: 16.27.6
+  size_mb: 192.3
+  installed: false
+  origin: x11-themes/flexibledatabase2
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A flexible thread database for FreeBSD, offering extensible support
+    for thread databases in x11-themes workflows.
+- name: robust-client
+  version: 9.27.37
+  size_mb: 56.3
+  installed: true
+  origin: irc/robustclient
+  license: Apache-2.0
+  maintainer: novel@FreeBSD.org
+  description: A robust socket client for FreeBSD, offering cross-platform support
+    for socket clients in irc workflows.
+- name: distributed-formatter
+  version: 16.21.25
+  size_mb: 132.4
+  installed: false
+  origin: security/distributedformatter
+  license: BSD-3-Clause
+  maintainer: tobik@FreeBSD.org
+  description: A distributed PDF formatter for FreeBSD, offering secure support for
+    PDF formatters in security workflows.
+- name: native-bridge
+  version: 1.7.9
+  size_mb: 189.4
+  installed: true
+  origin: deskutils/nativebridge
+  license: GPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A native buffer bridge for FreeBSD, offering portable support for buffer
+    bridges in deskutils workflows.
+- name: native-daemon
+  version: 6.17.35
+  size_mb: 2.4
+  installed: false
+  origin: science/nativedaemon
+  license: BSD-3-Clause
+  maintainer: vanilla@FreeBSD.org
+  description: A native DNS daemon for FreeBSD, offering distributed support for DNS
+    daemons in science workflows.
+- name: robust-cluster2
+  version: 3.21.30
+  size_mb: 193.0
+  installed: false
+  origin: graphics/robustcluster2
+  license: ISC
+  maintainer: core@FreeBSD.org
+  description: A robust config cluster for FreeBSD, offering modern support for config
+    clusters in graphics workflows.
+- name: minimal-server
+  version: 23.11.2
+  size_mb: 200.0
+  installed: true
+  origin: finance/minimalserver
+  license: Apache-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A minimal HTTP server for FreeBSD, offering lightweight support for
+    HTTP servers in finance workflows.
+- name: extensible-profiler2
+  version: 7.29.0
+  size_mb: 1.2
+  installed: false
+  origin: x11-themes/extensibleprofiler2
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A extensible video profiler for FreeBSD, offering lightweight support
+    for video profilers in x11-themes workflows.
+- name: lightweight-renderer
+  version: 7.20.30
+  size_mb: 15.2
+  installed: true
+  origin: cad/lightweightrenderer
+  license: BSD-3-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A lightweight SSH renderer for FreeBSD, offering native support for
+    SSH renderers in cad workflows.
+- name: pure-validator
+  version: 11.10.15
+  size_mb: 158.4
+  installed: false
+  origin: hebrew/purevalidator
+  license: BSD-3-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A pure file validator for FreeBSD, offering minimal support for file
+    validators in hebrew workflows.
+- name: cross-platform-wrapper
+  version: 12.17.5
+  size_mb: 146.8
+  installed: true
+  origin: security/crossplatformwrapper
+  license: MPL-2.0
+  maintainer: swills@FreeBSD.org
+  description: A cross-platform stream wrapper for FreeBSD, offering pure support
+    for stream wrappers in security workflows.
+- name: portable-codec
+  version: 20.19.8
+  size_mb: 203.6
+  installed: false
+  origin: x11-drivers/portablecodec
+  license: ISC
+  maintainer: tobik@FreeBSD.org
+  description: A portable JavaScript codec for FreeBSD, offering concurrent support
+    for JavaScript codecs in x11-drivers workflows.
+- name: async-cache
+  version: 23.16.29
+  size_mb: 155.7
+  installed: true
+  origin: games/asynccache
+  license: MIT
+  maintainer: tobik@FreeBSD.org
+  description: A async buffer cache for FreeBSD, offering modular support for buffer
+    caches in games workflows.
+- name: distributed-broker
+  version: 18.9.8
+  size_mb: 176.0
+  installed: false
+  origin: arabic/distributedbroker
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A distributed CSV broker for FreeBSD, offering secure support for CSV
+    brokers in arabic workflows.
+- name: pure-engine
+  version: 11.18.35
+  size_mb: 22.5
+  installed: true
+  origin: accessibility/pureengine
+  license: Apache-2.0
+  maintainer: novel@FreeBSD.org
+  description: A pure HTTP engine for FreeBSD, offering secure support for HTTP engines
+    in accessibility workflows.
+- name: concurrent-toolkit
+  version: 20.28.6
+  size_mb: 16.7
+  installed: false
+  origin: print/concurrenttoolkit
+  license: GPL-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A concurrent file toolkit for FreeBSD, offering embeddable support
+    for file toolkits in print workflows.
+- name: cross-platform-bridge
+  version: 3.16.28
+  size_mb: 128.5
+  installed: true
+  origin: security/crossplatformbridge
+  license: ISC
+  maintainer: adamw@FreeBSD.org
+  description: A cross-platform HTTP bridge for FreeBSD, offering flexible support
+    for HTTP bridges in security workflows.
+- name: fast-gateway
+  version: 6.10.38
+  size_mb: 206.6
+  installed: false
+  origin: emulators/fastgateway
+  license: MIT
+  maintainer: tobik@FreeBSD.org
+  description: A fast GraphQL gateway for FreeBSD, offering simple support for GraphQL
+    gateways in emulators workflows.
+- name: robust-engine
+  version: 18.11.39
+  size_mb: 170.3
+  installed: false
+  origin: devel/robustengine
+  license: MIT
+  maintainer: ports@FreeBSD.org
+  description: A robust CSV engine for FreeBSD, offering scriptable support for CSV
+    engines in devel workflows.
+- name: portable-bridge
+  version: 3.25.9
+  size_mb: 188.3
+  installed: true
+  origin: portuguese/portablebridge
+  license: BSD-3-Clause
+  maintainer: swills@FreeBSD.org
+  description: A portable log bridge for FreeBSD, offering modern support for log
+    bridges in portuguese workflows.
+- name: lightweight-utility
+  version: 1.24.26
+  size_mb: 45.3
+  installed: false
+  origin: finance/lightweightutility
+  license: BSD-3-Clause
+  maintainer: sunpoet@FreeBSD.org
+  description: A lightweight image utility for FreeBSD, offering simple support for
+    image utilitys in finance workflows.
+- name: pure-scheduler
+  version: 11.26.35
+  size_mb: 231.0
+  installed: false
+  origin: ukrainian/purescheduler
+  license: MIT
+  maintainer: sunpoet@FreeBSD.org
+  description: A pure CSS scheduler for FreeBSD, offering embeddable support for CSS
+    schedulers in ukrainian workflows.
+- name: native-framework
+  version: 12.25.23
+  size_mb: 233.2
+  installed: false
+  origin: biology/nativeframework
+  license: BSD-3-Clause
+  maintainer: core@FreeBSD.org
+  description: A native UDP framework for FreeBSD, offering modular support for UDP
+    frameworks in biology workflows.
+- name: async-plugin
+  version: 24.13.22
+  size_mb: 192.7
+  installed: false
+  origin: games/asyncplugin
+  license: ISC
+  maintainer: sunpoet@FreeBSD.org
+  description: A async log plugin for FreeBSD, offering fast support for log plugins
+    in games workflows.
+- name: fast-utility3
+  version: 4.7.25
+  size_mb: 230.8
+  installed: true
+  origin: net-p2p/fastutility3
+  license: GPL-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A fast UDP utility for FreeBSD, offering modular support for UDP utilitys
+    in net-p2p workflows.
+- name: modern-queue
+  version: 2.26.4
+  size_mb: 161.2
+  installed: false
+  origin: print/modernqueue
+  license: ISC
+  maintainer: swills@FreeBSD.org
+  description: A modern audio queue for FreeBSD, offering scriptable support for audio
+    queues in print workflows.
+- name: robust-database
+  version: 25.19.3
+  size_mb: 249.7
+  installed: true
+  origin: lang/robustdatabase
+  license: ISC
+  maintainer: swills@FreeBSD.org
+  description: A robust text database for FreeBSD, offering cross-platform support
+    for text databases in lang workflows.
+- name: async-balancer2
+  version: 6.29.16
+  size_mb: 246.3
+  installed: false
+  origin: astro/asyncbalancer2
+  license: GPL-3.0
+  maintainer: novel@FreeBSD.org
+  description: A async TCP balancer for FreeBSD, offering fast support for TCP balancers
+    in astro workflows.
+- name: minimal-driver2
+  version: 13.5.13
+  size_mb: 20.7
+  installed: true
+  origin: emulators/minimaldriver2
+  license: BSD-2-Clause
+  maintainer: swills@FreeBSD.org
+  description: A minimal system driver for FreeBSD, offering pure support for system
+    drivers in emulators workflows.
+- name: modular-broker
+  version: 1.30.22
+  size_mb: 188.2
+  installed: false
+  origin: converters/modularbroker
+  license: GPL-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A modular HTML broker for FreeBSD, offering simple support for HTML
+    brokers in converters workflows.
+- name: flexible-adapter
+  version: 25.11.12
+  size_mb: 249.3
+  installed: false
+  origin: sysutils/flexibleadapter
+  license: GPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A flexible HTML adapter for FreeBSD, offering async support for HTML
+    adapters in sysutils workflows.
+- name: minimal-adapter
+  version: 20.29.24
+  size_mb: 122.0
+  installed: false
+  origin: x11-toolkits/minimaladapter
+  license: MPL-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A minimal HTML adapter for FreeBSD, offering secure support for HTML
+    adapters in x11-toolkits workflows.
+- name: portable-store
+  version: 22.22.19
+  size_mb: 119.5
+  installed: false
+  origin: x11-fonts/portablestore
+  license: BSD-3-Clause
+  maintainer: mfechner@FreeBSD.org
+  description: A portable CSS store for FreeBSD, offering embeddable support for CSS
+    stores in x11-fonts workflows.
+- name: extensible-extension
+  version: 23.0.4
+  size_mb: 187.3
+  installed: false
+  origin: palm/extensibleextension
+  license: MPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A extensible TCP extension for FreeBSD, offering minimal support for
+    TCP extensions in palm workflows.
+- name: pure-database
+  version: 0.27.22
+  size_mb: 137.7
+  installed: false
+  origin: x11-fm/puredatabase
+  license: Apache-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A pure stream database for FreeBSD, offering advanced support for stream
+    databases in x11-fm workflows.
+- name: lightweight-formatter
+  version: 20.2.2
+  size_mb: 39.5
+  installed: false
+  origin: dns/lightweightformatter
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A lightweight Unicode formatter for FreeBSD, offering minimal support
+    for Unicode formatters in dns workflows.
+- name: fast-interpreter
+  version: 24.11.21
+  size_mb: 130.2
+  installed: true
+  origin: x11-drivers/fastinterpreter
+  license: BSD-2-Clause
+  maintainer: tobik@FreeBSD.org
+  description: A fast FTP interpreter for FreeBSD, offering simple support for FTP
+    interpreters in x11-drivers workflows.
+- name: async-balancer3
+  version: 12.20.29
+  size_mb: 247.6
+  installed: false
+  origin: japanese/asyncbalancer3
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A async JSON balancer for FreeBSD, offering flexible support for JSON
+    balancers in japanese workflows.
+- name: high-performance-database
+  version: 4.2.21
+  size_mb: 156.8
+  installed: false
+  origin: german/highperformancedatabase
+  license: GPL-3.0
+  maintainer: swills@FreeBSD.org
+  description: A high-performance SSH database for FreeBSD, offering embeddable support
+    for SSH databases in german workflows.
+- name: native-cache
+  version: 7.0.13
+  size_mb: 112.9
+  installed: false
+  origin: russian/nativecache
+  license: BSD-2-Clause
+  maintainer: vanilla@FreeBSD.org
+  description: A native Unicode cache for FreeBSD, offering scriptable support for
+    Unicode caches in russian workflows.
+- name: fast-indexer
+  version: 21.0.33
+  size_mb: 237.6
+  installed: true
+  origin: editors/fastindexer
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A fast file indexer for FreeBSD, offering pure support for file indexers
+    in editors workflows.
+- name: robust-module
+  version: 3.17.0
+  size_mb: 91.3
+  installed: false
+  origin: hungarian/robustmodule
+  license: GPL-3.0
+  maintainer: novel@FreeBSD.org
+  description: A robust SQL module for FreeBSD, offering extensible support for SQL
+    modules in hungarian workflows.
+- name: distributed-scheduler
+  version: 24.28.10
+  size_mb: 204.8
+  installed: false
+  origin: x11-drivers/distributedscheduler
+  license: GPL-2.0
+  maintainer: vanilla@FreeBSD.org
+  description: A distributed UDP scheduler for FreeBSD, offering cross-platform support
+    for UDP schedulers in x11-drivers workflows.
+- name: flexible-compiler
+  version: 9.3.22
+  size_mb: 145.4
+  installed: false
+  origin: math/flexiblecompiler
+  license: BSD-2-Clause
+  maintainer: novel@FreeBSD.org
+  description: A flexible UDP compiler for FreeBSD, offering high-performance support
+    for UDP compilers in math workflows.
+- name: native-framework2
+  version: 2.20.24
+  size_mb: 199.2
+  installed: false
+  origin: portuguese/nativeframework2
+  license: Apache-2.0
+  maintainer: novel@FreeBSD.org
+  description: A native stream framework for FreeBSD, offering modular support for
+    stream frameworks in portuguese workflows.
+- name: portable-bridge2
+  version: 3.6.16
+  size_mb: 38.3
+  installed: true
+  origin: polish/portablebridge2
+  license: ISC
+  maintainer: core@FreeBSD.org
+  description: A portable HTML bridge for FreeBSD, offering flexible support for HTML
+    bridges in polish workflows.
+- name: simple-framework
+  version: 22.7.30
+  size_mb: 220.1
+  installed: true
+  origin: french/simpleframework
+  license: GPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A simple Unicode framework for FreeBSD, offering cross-platform support
+    for Unicode frameworks in french workflows.
+- name: modular-scheduler
+  version: 0.26.26
+  size_mb: 33.0
+  installed: false
+  origin: vietnamese/modularscheduler
+  license: GPL-3.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A modular thread scheduler for FreeBSD, offering lightweight support
+    for thread schedulers in vietnamese workflows.
+- name: high-performance-library
+  version: 23.28.28
+  size_mb: 21.2
+  installed: false
+  origin: comms/highperformancelibrary
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A high-performance TCP library for FreeBSD, offering embeddable support
+    for TCP librarys in comms workflows.
+- name: scriptable-wrapper
+  version: 19.11.22
+  size_mb: 76.9
+  installed: true
+  origin: chinese/scriptablewrapper
+  license: GPL-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A scriptable regex wrapper for FreeBSD, offering modular support for
+    regex wrappers in chinese workflows.
+- name: fast-profiler
+  version: 24.17.4
+  size_mb: 66.3
+  installed: false
+  origin: arabic/fastprofiler
+  license: ISC
+  maintainer: adamw@FreeBSD.org
+  description: A fast Markdown profiler for FreeBSD, offering advanced support for
+    Markdown profilers in arabic workflows.
+- name: scriptable-cache
+  version: 11.14.8
+  size_mb: 26.4
+  installed: false
+  origin: sysutils/scriptablecache
+  license: ISC
+  maintainer: adamw@FreeBSD.org
+  description: A scriptable network cache for FreeBSD, offering fast support for network
+    caches in sysutils workflows.
+- name: concurrent-queue
+  version: 4.29.29
+  size_mb: 54.2
+  installed: false
+  origin: astro/concurrentqueue
+  license: ISC
+  maintainer: tobik@FreeBSD.org
+  description: A concurrent GraphQL queue for FreeBSD, offering extensible support
+    for GraphQL queues in astro workflows.
+- name: high-performance-server
+  version: 4.13.15
+  size_mb: 166.5
+  installed: false
+  origin: www/highperformanceserver
+  license: BSD-2-Clause
+  maintainer: sunpoet@FreeBSD.org
+  description: A high-performance buffer server for FreeBSD, offering robust support
+    for buffer servers in www workflows.
+- name: lightweight-daemon
+  version: 13.12.18
+  size_mb: 117.1
+  installed: false
+  origin: vietnamese/lightweightdaemon
+  license: Apache-2.0
+  maintainer: vanilla@FreeBSD.org
+  description: A lightweight stream daemon for FreeBSD, offering modular support for
+    stream daemons in vietnamese workflows.
+- name: pure-codec
+  version: 14.26.29
+  size_mb: 195.4
+  installed: false
+  origin: java/purecodec
+  license: GPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A pure GraphQL codec for FreeBSD, offering extensible support for GraphQL
+    codecs in java workflows.
+- name: secure-extension
+  version: 6.28.18
+  size_mb: 58.5
+  installed: false
+  origin: graphics/secureextension
+  license: GPL-3.0
+  maintainer: tobik@FreeBSD.org
+  description: A secure text extension for FreeBSD, offering simple support for text
+    extensions in graphics workflows.
+- name: flexible-router
+  version: 1.7.10
+  size_mb: 180.4
+  installed: false
+  origin: graphics/flexiblerouter
+  license: Apache-2.0
+  maintainer: swills@FreeBSD.org
+  description: A flexible regex router for FreeBSD, offering native support for regex
+    routers in graphics workflows.
+- name: fast-profiler2
+  version: 21.14.23
+  size_mb: 16.1
+  installed: false
+  origin: ports-mgmt/fastprofiler2
+  license: GPL-3.0
+  maintainer: adamw@FreeBSD.org
+  description: A fast CSS profiler for FreeBSD, offering async support for CSS profilers
+    in ports-mgmt workflows.
+- name: cross-platform-parser
+  version: 6.25.22
+  size_mb: 246.9
+  installed: false
+  origin: cad/crossplatformparser
+  license: ISC
+  maintainer: ports@FreeBSD.org
+  description: A cross-platform HTTP parser for FreeBSD, offering advanced support
+    for HTTP parsers in cad workflows.
+- name: async-engine
+  version: 22.2.24
+  size_mb: 57.8
+  installed: false
+  origin: irc/asyncengine
+  license: GPL-3.0
+  maintainer: novel@FreeBSD.org
+  description: A async FTP engine for FreeBSD, offering high-performance support for
+    FTP engines in irc workflows.
+- name: pure-server
+  version: 17.12.25
+  size_mb: 199.1
+  installed: false
+  origin: arabic/pureserver
+  license: ISC
+  maintainer: core@FreeBSD.org
+  description: A pure thread server for FreeBSD, offering robust support for thread
+    servers in arabic workflows.
+- name: portable-indexer
+  version: 6.19.21
+  size_mb: 172.1
+  installed: true
+  origin: textproc/portableindexer
+  license: Apache-2.0
+  maintainer: vanilla@FreeBSD.org
+  description: A portable HTML indexer for FreeBSD, offering concurrent support for
+    HTML indexers in textproc workflows.
+- name: embeddable-compiler
+  version: 16.12.31
+  size_mb: 100.0
+  installed: true
+  origin: ftp/embeddablecompiler
+  license: GPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A embeddable memory compiler for FreeBSD, offering modern support for
+    memory compilers in ftp workflows.
+- name: high-performance-formatter
+  version: 0.10.16
+  size_mb: 35.7
+  installed: false
+  origin: mail/highperformanceformatter
+  license: BSD-2-Clause
+  maintainer: tobik@FreeBSD.org
+  description: A high-performance SQL formatter for FreeBSD, offering native support
+    for SQL formatters in mail workflows.
+- name: minimal-extension
+  version: 10.24.5
+  size_mb: 190.0
+  installed: true
+  origin: security/minimalextension
+  license: GPL-3.0
+  maintainer: core@FreeBSD.org
+  description: A minimal JavaScript extension for FreeBSD, offering minimal support
+    for JavaScript extensions in security workflows.
+- name: modern-toolkit
+  version: 9.4.4
+  size_mb: 226.0
+  installed: true
+  origin: security/moderntoolkit
+  license: MPL-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A modern process toolkit for FreeBSD, offering minimal support for
+    process toolkits in security workflows.
+- name: fast-indexer2
+  version: 23.16.17
+  size_mb: 90.6
+  installed: false
+  origin: audio/fastindexer2
+  license: BSD-3-Clause
+  maintainer: ports@FreeBSD.org
+  description: A fast socket indexer for FreeBSD, offering native support for socket
+    indexers in audio workflows.
+- name: portable-extension
+  version: 23.21.16
+  size_mb: 246.3
+  installed: true
+  origin: x11-themes/portableextension
+  license: GPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A portable IMAP extension for FreeBSD, offering lightweight support
+    for IMAP extensions in x11-themes workflows.
+- name: embeddable-parser
+  version: 22.19.7
+  size_mb: 80.7
+  installed: false
+  origin: net-im/embeddableparser
+  license: Apache-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A embeddable video parser for FreeBSD, offering modular support for
+    video parsers in net-im workflows.
+- name: lightweight-cluster
+  version: 25.29.39
+  size_mb: 83.6
+  installed: true
+  origin: irc/lightweightcluster
+  license: ISC
+  maintainer: mfechner@FreeBSD.org
+  description: A lightweight IMAP cluster for FreeBSD, offering distributed support
+    for IMAP clusters in irc workflows.
+- name: portable-profiler
+  version: 16.14.21
+  size_mb: 34.6
+  installed: true
+  origin: portuguese/portableprofiler
+  license: GPL-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A portable JavaScript profiler for FreeBSD, offering extensible support
+    for JavaScript profilers in portuguese workflows.
+- name: minimal-gateway
+  version: 23.8.27
+  size_mb: 221.3
+  installed: true
+  origin: graphics/minimalgateway
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A minimal stream gateway for FreeBSD, offering cross-platform support
+    for stream gateways in graphics workflows.
+- name: flexible-engine
+  version: 1.25.40
+  size_mb: 178.3
+  installed: false
+  origin: x11-themes/flexibleengine
+  license: MIT
+  maintainer: ports@FreeBSD.org
+  description: A flexible pipe engine for FreeBSD, offering modern support for pipe
+    engines in x11-themes workflows.
+- name: minimal-database
+  version: 4.4.30
+  size_mb: 188.0
+  installed: false
+  origin: x11-fm/minimaldatabase
+  license: Apache-2.0
+  maintainer: core@FreeBSD.org
+  description: A minimal font database for FreeBSD, offering minimal support for font
+    databases in x11-fm workflows.
+- name: high-performance-formatter2
+  version: 0.15.9
+  size_mb: 101.6
+  installed: false
+  origin: math/highperformanceformatter2
+  license: MIT
+  maintainer: ports@FreeBSD.org
+  description: A high-performance pipe formatter for FreeBSD, offering native support
+    for pipe formatters in math workflows.
+- name: secure-interpreter
+  version: 16.27.25
+  size_mb: 90.3
+  installed: false
+  origin: polish/secureinterpreter
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A secure UDP interpreter for FreeBSD, offering async support for UDP
+    interpreters in polish workflows.
+- name: portable-scheduler
+  version: 8.11.19
+  size_mb: 132.0
+  installed: false
+  origin: x11-drivers/portablescheduler
+  license: GPL-2.0
+  maintainer: vanilla@FreeBSD.org
+  description: A portable JSON scheduler for FreeBSD, offering lightweight support
+    for JSON schedulers in x11-drivers workflows.
+- name: embeddable-renderer
+  version: 21.14.0
+  size_mb: 184.0
+  installed: false
+  origin: www/embeddablerenderer
+  license: ISC
+  maintainer: mfechner@FreeBSD.org
+  description: A embeddable pipe renderer for FreeBSD, offering advanced support for
+    pipe renderers in www workflows.
+- name: secure-toolkit
+  version: 11.23.14
+  size_mb: 80.8
+  installed: true
+  origin: math/securetoolkit
+  license: BSD-2-Clause
+  maintainer: mfechner@FreeBSD.org
+  description: A secure stream toolkit for FreeBSD, offering secure support for stream
+    toolkits in math workflows.
+- name: portable-toolkit
+  version: 12.16.4
+  size_mb: 111.1
+  installed: false
+  origin: misc/portabletoolkit
+  license: GPL-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A portable FTP toolkit for FreeBSD, offering robust support for FTP
+    toolkits in misc workflows.
+- name: robust-codec
+  version: 1.0.32
+  size_mb: 39.4
+  installed: true
+  origin: net-p2p/robustcodec
+  license: BSD-3-Clause
+  maintainer: sunpoet@FreeBSD.org
+  description: A robust regex codec for FreeBSD, offering simple support for regex
+    codecs in net-p2p workflows.
+- name: modern-toolkit2
+  version: 3.22.10
+  size_mb: 227.9
+  installed: true
+  origin: multimedia/moderntoolkit2
+  license: GPL-2.0
+  maintainer: swills@FreeBSD.org
+  description: A modern buffer toolkit for FreeBSD, offering advanced support for
+    buffer toolkits in multimedia workflows.
+- name: portable-debugger
+  version: 18.10.22
+  size_mb: 74.1
+  installed: false
+  origin: accessibility/portabledebugger
+  license: GPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A portable XML debugger for FreeBSD, offering advanced support for
+    XML debuggers in accessibility workflows.
+- name: modular-framework
+  version: 7.7.15
+  size_mb: 217.1
+  installed: false
+  origin: devel/modularframework
+  license: MPL-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A modular XML framework for FreeBSD, offering cross-platform support
+    for XML frameworks in devel workflows.
+- name: fast-store
+  version: 12.24.25
+  size_mb: 150.0
+  installed: false
+  origin: dns/faststore
+  license: BSD-3-Clause
+  maintainer: mfechner@FreeBSD.org
+  description: A fast IMAP store for FreeBSD, offering flexible support for IMAP stores
+    in dns workflows.
+- name: scriptable-gateway
+  version: 3.12.15
+  size_mb: 75.6
+  installed: false
+  origin: ftp/scriptablegateway
+  license: BSD-2-Clause
+  maintainer: ports@FreeBSD.org
+  description: A scriptable PDF gateway for FreeBSD, offering cross-platform support
+    for PDF gateways in ftp workflows.
+- name: extensible-toolkit
+  version: 9.6.28
+  size_mb: 48.5
+  installed: false
+  origin: x11-themes/extensibletoolkit
+  license: MIT
+  maintainer: vanilla@FreeBSD.org
+  description: A extensible text toolkit for FreeBSD, offering distributed support
+    for text toolkits in x11-themes workflows.
+- name: minimal-parser
+  version: 13.4.33
+  size_mb: 242.5
+  installed: false
+  origin: biology/minimalparser
+  license: BSD-3-Clause
+  maintainer: tobik@FreeBSD.org
+  description: A minimal NoSQL parser for FreeBSD, offering pure support for NoSQL
+    parsers in biology workflows.
+- name: native-linter
+  version: 25.0.23
+  size_mb: 28.9
+  installed: false
+  origin: accessibility/nativelinter
+  license: GPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A native XML linter for FreeBSD, offering scriptable support for XML
+    linters in accessibility workflows.
+- name: embeddable-validator
+  version: 17.3.29
+  size_mb: 192.9
+  installed: false
+  origin: ftp/embeddablevalidator
+  license: Apache-2.0
+  maintainer: core@FreeBSD.org
+  description: A embeddable SSH validator for FreeBSD, offering portable support for
+    SSH validators in ftp workflows.
+- name: modern-queue2
+  version: 11.6.26
+  size_mb: 128.4
+  installed: false
+  origin: cad/modernqueue2
+  license: GPL-2.0
+  maintainer: swills@FreeBSD.org
+  description: A modern Unicode queue for FreeBSD, offering simple support for Unicode
+    queues in cad workflows.
+- name: fast-gateway2
+  version: 4.26.11
+  size_mb: 121.9
+  installed: true
+  origin: astro/fastgateway2
+  license: MPL-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A fast thread gateway for FreeBSD, offering embeddable support for
+    thread gateways in astro workflows.
+- name: fast-library2
+  version: 9.12.15
+  size_mb: 29.5
+  installed: true
+  origin: x11-drivers/fastlibrary2
+  license: Apache-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A fast file library for FreeBSD, offering extensible support for file
+    librarys in x11-drivers workflows.
+- name: portable-server
+  version: 12.28.12
+  size_mb: 73.6
+  installed: false
+  origin: cad/portableserver
+  license: BSD-2-Clause
+  maintainer: sunpoet@FreeBSD.org
+  description: A portable CSV server for FreeBSD, offering distributed support for
+    CSV servers in cad workflows.
+- name: robust-daemon
+  version: 3.28.29
+  size_mb: 162.0
+  installed: false
+  origin: german/robustdaemon
+  license: BSD-2-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A robust TLS daemon for FreeBSD, offering advanced support for TLS
+    daemons in german workflows.
+- name: minimal-framework2
+  version: 11.20.13
+  size_mb: 151.6
+  installed: false
+  origin: korean/minimalframework2
+  license: GPL-3.0
+  maintainer: novel@FreeBSD.org
+  description: A minimal CSV framework for FreeBSD, offering flexible support for
+    CSV frameworks in korean workflows.
+- name: concurrent-engine
+  version: 13.21.13
+  size_mb: 27.6
+  installed: false
+  origin: finance/concurrentengine
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A concurrent SSH engine for FreeBSD, offering flexible support for
+    SSH engines in finance workflows.
+- name: simple-compiler
+  version: 22.25.20
+  size_mb: 51.8
+  installed: false
+  origin: multimedia/simplecompiler
+  license: GPL-3.0
+  maintainer: tobik@FreeBSD.org
+  description: A simple thread compiler for FreeBSD, offering scriptable support for
+    thread compilers in multimedia workflows.
+- name: secure-broker
+  version: 7.14.20
+  size_mb: 84.0
+  installed: false
+  origin: finance/securebroker
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A secure HTML broker for FreeBSD, offering distributed support for
+    HTML brokers in finance workflows.
+- name: cross-platform-broker
+  version: 13.20.38
+  size_mb: 143.6
+  installed: false
+  origin: editors/crossplatformbroker
+  license: BSD-3-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A cross-platform network broker for FreeBSD, offering concurrent support
+    for network brokers in editors workflows.
+- name: async-server
+  version: 16.30.23
+  size_mb: 83.9
+  installed: false
+  origin: polish/asyncserver
+  license: MPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A async CSV server for FreeBSD, offering advanced support for CSV servers
+    in polish workflows.
+- name: native-broker
+  version: 15.7.22
+  size_mb: 201.8
+  installed: true
+  origin: portuguese/nativebroker
+  license: Apache-2.0
+  maintainer: ports@FreeBSD.org
+  description: A native JavaScript broker for FreeBSD, offering high-performance support
+    for JavaScript brokers in portuguese workflows.
+- name: modular-interpreter
+  version: 7.12.33
+  size_mb: 21.4
+  installed: true
+  origin: comms/modularinterpreter
+  license: BSD-2-Clause
+  maintainer: mfechner@FreeBSD.org
+  description: A modular socket interpreter for FreeBSD, offering fast support for
+    socket interpreters in comms workflows.
+- name: distributed-framework
+  version: 20.5.11
+  size_mb: 17.3
+  installed: false
+  origin: comms/distributedframework
+  license: MIT
+  maintainer: ports@FreeBSD.org
+  description: A distributed YAML framework for FreeBSD, offering concurrent support
+    for YAML frameworks in comms workflows.
+- name: modern-store
+  version: 25.13.40
+  size_mb: 139.2
+  installed: false
+  origin: security/modernstore
+  license: Apache-2.0
+  maintainer: novel@FreeBSD.org
+  description: A modern socket store for FreeBSD, offering advanced support for socket
+    stores in security workflows.
+- name: modular-debugger
+  version: 20.29.17
+  size_mb: 52.0
+  installed: true
+  origin: hebrew/modulardebugger
+  license: GPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A modular audio debugger for FreeBSD, offering fast support for audio
+    debuggers in hebrew workflows.
+- name: modular-renderer
+  version: 24.9.17
+  size_mb: 207.4
+  installed: false
+  origin: korean/modularrenderer
+  license: ISC
+  maintainer: tobik@FreeBSD.org
+  description: A modular pipe renderer for FreeBSD, offering pure support for pipe
+    renderers in korean workflows.
+- name: fast-broker
+  version: 11.23.4
+  size_mb: 142.4
+  installed: true
+  origin: finance/fastbroker
+  license: MIT
+  maintainer: sunpoet@FreeBSD.org
+  description: A fast CSV broker for FreeBSD, offering concurrent support for CSV
+    brokers in finance workflows.
+- name: robust-tunnel
+  version: 23.22.21
+  size_mb: 215.3
+  installed: true
+  origin: security/robusttunnel
+  license: BSD-3-Clause
+  maintainer: novel@FreeBSD.org
+  description: A robust TLS tunnel for FreeBSD, offering embeddable support for TLS
+    tunnels in security workflows.
+- name: distributed-parser
+  version: 20.14.0
+  size_mb: 114.8
+  installed: false
+  origin: benchmarks/distributedparser
+  license: BSD-2-Clause
+  maintainer: vanilla@FreeBSD.org
+  description: A distributed regex parser for FreeBSD, offering async support for
+    regex parsers in benchmarks workflows.
+- name: concurrent-toolkit2
+  version: 4.16.31
+  size_mb: 69.0
+  installed: true
+  origin: news/concurrenttoolkit2
+  license: GPL-3.0
+  maintainer: swills@FreeBSD.org
+  description: A concurrent SSH toolkit for FreeBSD, offering lightweight support
+    for SSH toolkits in news workflows.
+- name: lightweight-proxy
+  version: 15.27.33
+  size_mb: 93.1
+  installed: true
+  origin: finance/lightweightproxy
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A lightweight Unicode proxy for FreeBSD, offering modern support for
+    Unicode proxys in finance workflows.
+- name: concurrent-cluster
+  version: 3.9.18
+  size_mb: 160.4
+  installed: false
+  origin: net-mgmt/concurrentcluster
+  license: Apache-2.0
+  maintainer: novel@FreeBSD.org
+  description: A concurrent socket cluster for FreeBSD, offering fast support for
+    socket clusters in net-mgmt workflows.
+- name: distributed-generator
+  version: 18.3.34
+  size_mb: 164.0
+  installed: true
+  origin: ukrainian/distributedgenerator
+  license: GPL-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A distributed GraphQL generator for FreeBSD, offering secure support
+    for GraphQL generators in ukrainian workflows.
+- name: high-performance-utility
+  version: 25.26.8
+  size_mb: 205.0
+  installed: false
+  origin: news/highperformanceutility
+  license: MIT
+  maintainer: sunpoet@FreeBSD.org
+  description: A high-performance HTML utility for FreeBSD, offering native support
+    for HTML utilitys in news workflows.
+- name: flexible-generator
+  version: 7.28.6
+  size_mb: 210.9
+  installed: true
+  origin: irc/flexiblegenerator
+  license: MPL-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A flexible GraphQL generator for FreeBSD, offering extensible support
+    for GraphQL generators in irc workflows.
+- name: fast-store2
+  version: 0.28.20
+  size_mb: 7.3
+  installed: true
+  origin: x11-wm/faststore2
+  license: BSD-2-Clause
+  maintainer: ports@FreeBSD.org
+  description: A fast Unicode store for FreeBSD, offering simple support for Unicode
+    stores in x11-wm workflows.
+- name: modular-cluster
+  version: 12.28.34
+  size_mb: 244.0
+  installed: true
+  origin: textproc/modularcluster
+  license: Apache-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A modular gRPC cluster for FreeBSD, offering modular support for gRPC
+    clusters in textproc workflows.
+- name: embeddable-daemon
+  version: 19.25.40
+  size_mb: 184.9
+  installed: false
+  origin: irc/embeddabledaemon
+  license: MPL-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A embeddable CSS daemon for FreeBSD, offering high-performance support
+    for CSS daemons in irc workflows.
+- name: robust-engine2
+  version: 24.24.29
+  size_mb: 5.3
+  installed: false
+  origin: portuguese/robustengine2
+  license: GPL-3.0
+  maintainer: tobik@FreeBSD.org
+  description: A robust image engine for FreeBSD, offering lightweight support for
+    image engines in portuguese workflows.
+- name: lightweight-framework
+  version: 17.5.2
+  size_mb: 46.5
+  installed: true
+  origin: graphics/lightweightframework
+  license: BSD-3-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A lightweight JavaScript framework for FreeBSD, offering lightweight
+    support for JavaScript frameworks in graphics workflows.
+- name: modular-adapter
+  version: 4.11.24
+  size_mb: 249.4
+  installed: false
+  origin: chinese/modularadapter
+  license: MPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A modular network adapter for FreeBSD, offering concurrent support
+    for network adapters in chinese workflows.
+- name: cross-platform-generator
+  version: 12.1.28
+  size_mb: 68.6
+  installed: true
+  origin: irc/crossplatformgenerator
+  license: BSD-3-Clause
+  maintainer: mfechner@FreeBSD.org
+  description: A cross-platform config generator for FreeBSD, offering extensible
+    support for config generators in irc workflows.
+- name: advanced-analyzer
+  version: 7.18.35
+  size_mb: 79.1
+  installed: true
+  origin: math/advancedanalyzer
+  license: MIT
+  maintainer: sunpoet@FreeBSD.org
+  description: A advanced network analyzer for FreeBSD, offering robust support for
+    network analyzers in math workflows.
+- name: simple-gateway
+  version: 5.23.24
+  size_mb: 188.3
+  installed: true
+  origin: polish/simplegateway
+  license: GPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A simple file gateway for FreeBSD, offering fast support for file gateways
+    in polish workflows.
+- name: async-client
+  version: 23.15.15
+  size_mb: 129.5
+  installed: false
+  origin: x11-servers/asyncclient
+  license: MPL-2.0
+  maintainer: swills@FreeBSD.org
+  description: A async HTML client for FreeBSD, offering scriptable support for HTML
+    clients in x11-servers workflows.
+- name: pure-extension
+  version: 23.6.12
+  size_mb: 50.7
+  installed: false
+  origin: math/pureextension
+  license: Apache-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A pure YAML extension for FreeBSD, offering fast support for YAML extensions
+    in math workflows.
+- name: native-profiler
+  version: 11.4.32
+  size_mb: 77.5
+  installed: false
+  origin: x11-clocks/nativeprofiler
+  license: MPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A native SQL profiler for FreeBSD, offering cross-platform support
+    for SQL profilers in x11-clocks workflows.
+- name: high-performance-debugger
+  version: 25.10.5
+  size_mb: 87.3
+  installed: true
+  origin: benchmarks/highperformancedebugger
+  license: ISC
+  maintainer: ports@FreeBSD.org
+  description: A high-performance HTML debugger for FreeBSD, offering embeddable support
+    for HTML debuggers in benchmarks workflows.
+- name: cross-platform-balancer
+  version: 6.12.31
+  size_mb: 113.8
+  installed: false
+  origin: ukrainian/crossplatformbalancer
+  license: BSD-3-Clause
+  maintainer: ports@FreeBSD.org
+  description: A cross-platform UDP balancer for FreeBSD, offering modern support
+    for UDP balancers in ukrainian workflows.
+- name: native-codec
+  version: 11.9.11
+  size_mb: 29.0
+  installed: false
+  origin: net-p2p/nativecodec
+  license: Apache-2.0
+  maintainer: novel@FreeBSD.org
+  description: A native log codec for FreeBSD, offering robust support for log codecs
+    in net-p2p workflows.
+- name: cross-platform-server2
+  version: 18.10.15
+  size_mb: 227.8
+  installed: false
+  origin: math/crossplatformserver2
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A cross-platform IMAP server for FreeBSD, offering modular support
+    for IMAP servers in math workflows.
+- name: extensible-queue
+  version: 4.20.33
+  size_mb: 150.8
+  installed: false
+  origin: databases/extensiblequeue
+  license: GPL-3.0
+  maintainer: swills@FreeBSD.org
+  description: A extensible TLS queue for FreeBSD, offering robust support for TLS
+    queues in databases workflows.
+- name: secure-utility
+  version: 13.20.16
+  size_mb: 102.5
+  installed: false
+  origin: net-mgmt/secureutility
+  license: GPL-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A secure config utility for FreeBSD, offering modular support for config
+    utilitys in net-mgmt workflows.
+- name: flexible-analyzer
+  version: 22.25.0
+  size_mb: 126.6
+  installed: false
+  origin: biology/flexibleanalyzer
+  license: BSD-3-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A flexible CSS analyzer for FreeBSD, offering modular support for CSS
+    analyzers in biology workflows.
+- name: secure-bridge
+  version: 9.4.34
+  size_mb: 246.8
+  installed: true
+  origin: net-p2p/securebridge
+  license: ISC
+  maintainer: novel@FreeBSD.org
+  description: A secure regex bridge for FreeBSD, offering portable support for regex
+    bridges in net-p2p workflows.
+- name: modern-client
+  version: 7.12.3
+  size_mb: 159.0
+  installed: false
+  origin: japanese/modernclient
+  license: GPL-3.0
+  maintainer: vanilla@FreeBSD.org
+  description: A modern SSH client for FreeBSD, offering robust support for SSH clients
+    in japanese workflows.
+- name: minimal-cluster
+  version: 20.11.26
+  size_mb: 36.2
+  installed: false
+  origin: security/minimalcluster
+  license: BSD-3-Clause
+  maintainer: tobik@FreeBSD.org
+  description: A minimal JSON cluster for FreeBSD, offering extensible support for
+    JSON clusters in security workflows.
+- name: concurrent-framework
+  version: 6.4.17
+  size_mb: 153.4
+  installed: false
+  origin: chinese/concurrentframework
+  license: MPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A concurrent TCP framework for FreeBSD, offering scriptable support
+    for TCP frameworks in chinese workflows.
+- name: lightweight-bridge
+  version: 12.11.8
+  size_mb: 165.5
+  installed: false
+  origin: audio/lightweightbridge
+  license: GPL-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A lightweight image bridge for FreeBSD, offering cross-platform support
+    for image bridges in audio workflows.
+- name: native-analyzer
+  version: 17.12.3
+  size_mb: 131.6
+  installed: false
+  origin: comms/nativeanalyzer
+  license: GPL-3.0
+  maintainer: swills@FreeBSD.org
+  description: A native Markdown analyzer for FreeBSD, offering high-performance support
+    for Markdown analyzers in comms workflows.
+- name: native-server
+  version: 1.6.0
+  size_mb: 197.1
+  installed: true
+  origin: dns/nativeserver
+  license: GPL-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A native CSV server for FreeBSD, offering lightweight support for CSV
+    servers in dns workflows.
+- name: advanced-bridge
+  version: 6.14.39
+  size_mb: 56.8
+  installed: false
+  origin: audio/advancedbridge
+  license: MIT
+  maintainer: ports@FreeBSD.org
+  description: A advanced CSV bridge for FreeBSD, offering scriptable support for
+    CSV bridges in audio workflows.
+- name: secure-library
+  version: 6.20.22
+  size_mb: 163.9
+  installed: false
+  origin: x11-fonts/securelibrary
+  license: ISC
+  maintainer: sunpoet@FreeBSD.org
+  description: A secure stream library for FreeBSD, offering high-performance support
+    for stream librarys in x11-fonts workflows.
+- name: high-performance-daemon
+  version: 3.20.15
+  size_mb: 56.2
+  installed: true
+  origin: science/highperformancedaemon
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A high-performance XML daemon for FreeBSD, offering concurrent support
+    for XML daemons in science workflows.
+- name: concurrent-wrapper2
+  version: 7.9.6
+  size_mb: 180.8
+  installed: false
+  origin: textproc/concurrentwrapper2
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A concurrent network wrapper for FreeBSD, offering robust support for
+    network wrappers in textproc workflows.
+- name: pure-server2
+  version: 24.23.9
+  size_mb: 160.7
+  installed: false
+  origin: graphics/pureserver2
+  license: MIT
+  maintainer: novel@FreeBSD.org
+  description: A pure memory server for FreeBSD, offering native support for memory
+    servers in graphics workflows.
+- name: fast-extension
+  version: 0.21.7
+  size_mb: 63.0
+  installed: false
+  origin: benchmarks/fastextension
+  license: GPL-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A fast Unicode extension for FreeBSD, offering minimal support for
+    Unicode extensions in benchmarks workflows.
+- name: portable-toolkit2
+  version: 9.2.17
+  size_mb: 114.1
+  installed: false
+  origin: comms/portabletoolkit2
+  license: Apache-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A portable font toolkit for FreeBSD, offering cross-platform support
+    for font toolkits in comms workflows.
+- name: advanced-wrapper
+  version: 23.30.11
+  size_mb: 6.9
+  installed: false
+  origin: converters/advancedwrapper
+  license: Apache-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A advanced memory wrapper for FreeBSD, offering high-performance support
+    for memory wrappers in converters workflows.
+- name: extensible-framework
+  version: 24.23.29
+  size_mb: 33.8
+  installed: true
+  origin: hebrew/extensibleframework
+  license: Apache-2.0
+  maintainer: core@FreeBSD.org
+  description: A extensible thread framework for FreeBSD, offering simple support
+    for thread frameworks in hebrew workflows.
+- name: robust-server
+  version: 0.28.13
+  size_mb: 201.4
+  installed: true
+  origin: x11-servers/robustserver
+  license: BSD-2-Clause
+  maintainer: novel@FreeBSD.org
+  description: A robust socket server for FreeBSD, offering cross-platform support
+    for socket servers in x11-servers workflows.
+- name: embeddable-indexer
+  version: 20.28.16
+  size_mb: 109.6
+  installed: false
+  origin: security/embeddableindexer
+  license: Apache-2.0
+  maintainer: vanilla@FreeBSD.org
+  description: A embeddable audio indexer for FreeBSD, offering scriptable support
+    for audio indexers in security workflows.
+- name: minimal-module
+  version: 15.7.0
+  size_mb: 38.2
+  installed: true
+  origin: polish/minimalmodule
+  license: MPL-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A minimal socket module for FreeBSD, offering minimal support for socket
+    modules in polish workflows.
+- name: flexible-extension
+  version: 11.8.13
+  size_mb: 223.1
+  installed: true
+  origin: audio/flexibleextension
+  license: Apache-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A flexible XML extension for FreeBSD, offering pure support for XML
+    extensions in audio workflows.
+- name: portable-generator
+  version: 24.29.23
+  size_mb: 25.9
+  installed: false
+  origin: archivers/portablegenerator
+  license: ISC
+  maintainer: ports@FreeBSD.org
+  description: A portable video generator for FreeBSD, offering distributed support
+    for video generators in archivers workflows.
+- name: cross-platform-cluster
+  version: 15.13.10
+  size_mb: 197.2
+  installed: true
+  origin: x11-themes/crossplatformcluster
+  license: Apache-2.0
+  maintainer: vanilla@FreeBSD.org
+  description: A cross-platform YAML cluster for FreeBSD, offering pure support for
+    YAML clusters in x11-themes workflows.
+- name: cross-platform-formatter
+  version: 4.8.36
+  size_mb: 68.1
+  installed: true
+  origin: misc/crossplatformformatter
+  license: MPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A cross-platform GraphQL formatter for FreeBSD, offering distributed
+    support for GraphQL formatters in misc workflows.
+- name: lightweight-interpreter
+  version: 7.23.31
+  size_mb: 213.9
+  installed: true
+  origin: shells/lightweightinterpreter
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A lightweight file interpreter for FreeBSD, offering lightweight support
+    for file interpreters in shells workflows.
+- name: extensible-module
+  version: 21.12.8
+  size_mb: 222.6
+  installed: false
+  origin: polish/extensiblemodule
+  license: BSD-2-Clause
+  maintainer: tobik@FreeBSD.org
+  description: A extensible binary module for FreeBSD, offering scriptable support
+    for binary modules in polish workflows.
+- name: extensible-module2
+  version: 15.5.11
+  size_mb: 129.5
+  installed: false
+  origin: x11-drivers/extensiblemodule2
+  license: GPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A extensible XML module for FreeBSD, offering cross-platform support
+    for XML modules in x11-drivers workflows.
+- name: distributed-gateway
+  version: 13.4.26
+  size_mb: 13.5
+  installed: false
+  origin: net-im/distributedgateway
+  license: GPL-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A distributed stream gateway for FreeBSD, offering async support for
+    stream gateways in net-im workflows.
+- name: portable-cache
+  version: 0.15.40
+  size_mb: 7.3
+  installed: true
+  origin: russian/portablecache
+  license: MPL-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A portable pipe cache for FreeBSD, offering secure support for pipe
+    caches in russian workflows.
+- name: pure-balancer
+  version: 12.7.9
+  size_mb: 61.5
+  installed: false
+  origin: sysutils/purebalancer
+  license: BSD-2-Clause
+  maintainer: novel@FreeBSD.org
+  description: A pure GraphQL balancer for FreeBSD, offering robust support for GraphQL
+    balancers in sysutils workflows.
+- name: robust-module2
+  version: 20.22.13
+  size_mb: 16.9
+  installed: true
+  origin: archivers/robustmodule2
+  license: MPL-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A robust memory module for FreeBSD, offering minimal support for memory
+    modules in archivers workflows.
+- name: simple-plugin
+  version: 15.16.32
+  size_mb: 37.1
+  installed: true
+  origin: lang/simpleplugin
+  license: GPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A simple text plugin for FreeBSD, offering modern support for text
+    plugins in lang workflows.
+- name: lightweight-utility2
+  version: 23.17.32
+  size_mb: 112.3
+  installed: true
+  origin: irc/lightweightutility2
+  license: GPL-3.0
+  maintainer: mfechner@FreeBSD.org
+  description: A lightweight thread utility for FreeBSD, offering modern support for
+    thread utilitys in irc workflows.
+- name: distributed-utility
+  version: 21.11.16
+  size_mb: 155.4
+  installed: true
+  origin: security/distributedutility
+  license: BSD-2-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A distributed YAML utility for FreeBSD, offering native support for
+    YAML utilitys in security workflows.
+- name: fast-formatter
+  version: 13.1.12
+  size_mb: 60.9
+  installed: true
+  origin: ftp/fastformatter
+  license: MPL-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A fast binary formatter for FreeBSD, offering concurrent support for
+    binary formatters in ftp workflows.
+- name: extensible-driver
+  version: 17.6.32
+  size_mb: 169.1
+  installed: false
+  origin: net/extensibledriver
+  license: ISC
+  maintainer: tobik@FreeBSD.org
+  description: A extensible process driver for FreeBSD, offering native support for
+    process drivers in net workflows.
+- name: high-performance-daemon2
+  version: 5.2.36
+  size_mb: 8.5
+  installed: true
+  origin: palm/highperformancedaemon2
+  license: GPL-3.0
+  maintainer: swills@FreeBSD.org
+  description: A high-performance PDF daemon for FreeBSD, offering scriptable support
+    for PDF daemons in palm workflows.
+- name: concurrent-utility
+  version: 4.4.27
+  size_mb: 240.2
+  installed: true
+  origin: emulators/concurrentutility
+  license: MIT
+  maintainer: novel@FreeBSD.org
+  description: A concurrent network utility for FreeBSD, offering pure support for
+    network utilitys in emulators workflows.
+- name: robust-plugin
+  version: 1.25.19
+  size_mb: 31.5
+  installed: true
+  origin: x11-clocks/robustplugin
+  license: Apache-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A robust IMAP plugin for FreeBSD, offering pure support for IMAP plugins
+    in x11-clocks workflows.
+- name: lightweight-utility3
+  version: 3.7.3
+  size_mb: 135.8
+  installed: false
+  origin: hungarian/lightweightutility3
+  license: Apache-2.0
+  maintainer: novel@FreeBSD.org
+  description: A lightweight UDP utility for FreeBSD, offering flexible support for
+    UDP utilitys in hungarian workflows.
+- name: async-framework
+  version: 3.30.14
+  size_mb: 16.5
+  installed: false
+  origin: java/asyncframework
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A async YAML framework for FreeBSD, offering extensible support for
+    YAML frameworks in java workflows.
+- name: secure-cluster
+  version: 5.18.10
+  size_mb: 169.9
+  installed: true
+  origin: benchmarks/securecluster
+  license: Apache-2.0
+  maintainer: vanilla@FreeBSD.org
+  description: A secure XML cluster for FreeBSD, offering flexible support for XML
+    clusters in benchmarks workflows.
+- name: async-indexer
+  version: 13.1.5
+  size_mb: 107.5
+  installed: false
+  origin: textproc/asyncindexer
+  license: ISC
+  maintainer: sunpoet@FreeBSD.org
+  description: A async HTML indexer for FreeBSD, offering scriptable support for HTML
+    indexers in textproc workflows.
+- name: modern-database
+  version: 11.20.13
+  size_mb: 179.6
+  installed: true
+  origin: math/moderndatabase
+  license: Apache-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A modern stream database for FreeBSD, offering scriptable support for
+    stream databases in math workflows.
+- name: concurrent-generator
+  version: 2.24.27
+  size_mb: 143.3
+  installed: true
+  origin: polish/concurrentgenerator
+  license: MIT
+  maintainer: ports@FreeBSD.org
+  description: A concurrent Markdown generator for FreeBSD, offering lightweight support
+    for Markdown generators in polish workflows.
+- name: distributed-renderer
+  version: 13.16.7
+  size_mb: 81.8
+  installed: false
+  origin: x11-drivers/distributedrenderer
+  license: BSD-2-Clause
+  maintainer: core@FreeBSD.org
+  description: A distributed YAML renderer for FreeBSD, offering scriptable support
+    for YAML renderers in x11-drivers workflows.
+- name: fast-linter
+  version: 22.7.2
+  size_mb: 93.5
+  installed: false
+  origin: astro/fastlinter
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A fast system linter for FreeBSD, offering async support for system
+    linters in astro workflows.
+- name: pure-balancer2
+  version: 25.2.24
+  size_mb: 73.4
+  installed: true
+  origin: net-im/purebalancer2
+  license: BSD-3-Clause
+  maintainer: novel@FreeBSD.org
+  description: A pure Markdown balancer for FreeBSD, offering high-performance support
+    for Markdown balancers in net-im workflows.
+- name: embeddable-balancer
+  version: 6.19.2
+  size_mb: 215.8
+  installed: true
+  origin: databases/embeddablebalancer
+  license: Apache-2.0
+  maintainer: swills@FreeBSD.org
+  description: A embeddable GraphQL balancer for FreeBSD, offering portable support
+    for GraphQL balancers in databases workflows.
+- name: advanced-bridge2
+  version: 13.14.19
+  size_mb: 195.0
+  installed: true
+  origin: x11-themes/advancedbridge2
+  license: GPL-3.0
+  maintainer: ports@FreeBSD.org
+  description: A advanced XML bridge for FreeBSD, offering cross-platform support
+    for XML bridges in x11-themes workflows.
+- name: minimal-validator
+  version: 5.4.6
+  size_mb: 44.7
+  installed: false
+  origin: polish/minimalvalidator
+  license: BSD-3-Clause
+  maintainer: swills@FreeBSD.org
+  description: A minimal thread validator for FreeBSD, offering modern support for
+    thread validators in polish workflows.
+- name: extensible-bridge
+  version: 17.11.7
+  size_mb: 94.4
+  installed: false
+  origin: portuguese/extensiblebridge
+  license: ISC
+  maintainer: core@FreeBSD.org
+  description: A extensible HTML bridge for FreeBSD, offering async support for HTML
+    bridges in portuguese workflows.
+- name: fast-database
+  version: 25.24.36
+  size_mb: 65.9
+  installed: false
+  origin: net-mgmt/fastdatabase
+  license: MPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A fast TLS database for FreeBSD, offering native support for TLS databases
+    in net-mgmt workflows.
+- name: high-performance-router
+  version: 18.8.9
+  size_mb: 216.0
+  installed: false
+  origin: accessibility/highperformancerouter
+  license: BSD-3-Clause
+  maintainer: core@FreeBSD.org
+  description: A high-performance TLS router for FreeBSD, offering modern support
+    for TLS routers in accessibility workflows.
+- name: portable-profiler2
+  version: 16.19.38
+  size_mb: 191.3
+  installed: false
+  origin: editors/portableprofiler2
+  license: BSD-3-Clause
+  maintainer: vanilla@FreeBSD.org
+  description: A portable system profiler for FreeBSD, offering portable support for
+    system profilers in editors workflows.
+- name: async-compiler
+  version: 7.11.17
+  size_mb: 123.2
+  installed: false
+  origin: x11-fm/asynccompiler
+  license: BSD-2-Clause
+  maintainer: sunpoet@FreeBSD.org
+  description: A async memory compiler for FreeBSD, offering async support for memory
+    compilers in x11-fm workflows.
+- name: embeddable-extension
+  version: 22.0.24
+  size_mb: 80.9
+  installed: false
+  origin: net/embeddableextension
+  license: BSD-2-Clause
+  maintainer: sunpoet@FreeBSD.org
+  description: A embeddable binary extension for FreeBSD, offering high-performance
+    support for binary extensions in net workflows.
+- name: secure-renderer
+  version: 16.21.9
+  size_mb: 161.1
+  installed: true
+  origin: math/securerenderer
+  license: BSD-2-Clause
+  maintainer: core@FreeBSD.org
+  description: A secure PDF renderer for FreeBSD, offering modular support for PDF
+    renderers in math workflows.
+- name: robust-toolkit2
+  version: 12.9.20
+  size_mb: 204.0
+  installed: true
+  origin: ftp/robusttoolkit2
+  license: BSD-2-Clause
+  maintainer: tobik@FreeBSD.org
+  description: A robust CSV toolkit for FreeBSD, offering concurrent support for CSV
+    toolkits in ftp workflows.
+- name: scriptable-generator
+  version: 20.13.14
+  size_mb: 83.7
+  installed: true
+  origin: print/scriptablegenerator
+  license: BSD-2-Clause
+  maintainer: tobik@FreeBSD.org
+  description: A scriptable SQL generator for FreeBSD, offering scriptable support
+    for SQL generators in print workflows.
+- name: minimal-database2
+  version: 25.30.30
+  size_mb: 185.5
+  installed: false
+  origin: net-p2p/minimaldatabase2
+  license: ISC
+  maintainer: swills@FreeBSD.org
+  description: A minimal JSON database for FreeBSD, offering scriptable support for
+    JSON databases in net-p2p workflows.
+- name: flexible-client2
+  version: 18.18.35
+  size_mb: 170.6
+  installed: false
+  origin: french/flexibleclient2
+  license: GPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A flexible regex client for FreeBSD, offering secure support for regex
+    clients in french workflows.
+- name: minimal-proxy
+  version: 11.0.22
+  size_mb: 113.6
+  installed: true
+  origin: x11-wm/minimalproxy
+  license: BSD-3-Clause
+  maintainer: vanilla@FreeBSD.org
+  description: A minimal DNS proxy for FreeBSD, offering secure support for DNS proxys
+    in x11-wm workflows.
+- name: pure-balancer3
+  version: 2.19.15
+  size_mb: 202.1
+  installed: false
+  origin: www/purebalancer3
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A pure config balancer for FreeBSD, offering minimal support for config
+    balancers in www workflows.
+- name: async-daemon
+  version: 14.19.36
+  size_mb: 119.7
+  installed: true
+  origin: japanese/asyncdaemon
+  license: GPL-3.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A async config daemon for FreeBSD, offering lightweight support for
+    config daemons in japanese workflows.
+- name: async-balancer4
+  version: 4.25.26
+  size_mb: 157.2
+  installed: false
+  origin: irc/asyncbalancer4
+  license: GPL-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A async UDP balancer for FreeBSD, offering cross-platform support for
+    UDP balancers in irc workflows.
+- name: minimal-library
+  version: 9.27.0
+  size_mb: 138.3
+  installed: false
+  origin: python/minimallibrary
+  license: GPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A minimal IMAP library for FreeBSD, offering native support for IMAP
+    librarys in python workflows.
+- name: scriptable-codec
+  version: 18.11.37
+  size_mb: 165.3
+  installed: false
+  origin: ftp/scriptablecodec
+  license: BSD-3-Clause
+  maintainer: vanilla@FreeBSD.org
+  description: A scriptable JavaScript codec for FreeBSD, offering fast support for
+    JavaScript codecs in ftp workflows.
+- name: minimal-cache
+  version: 18.6.18
+  size_mb: 157.7
+  installed: false
+  origin: x11-servers/minimalcache
+  license: GPL-3.0
+  maintainer: mfechner@FreeBSD.org
+  description: A minimal PDF cache for FreeBSD, offering simple support for PDF caches
+    in x11-servers workflows.
+- name: extensible-extension2
+  version: 8.16.27
+  size_mb: 74.1
+  installed: false
+  origin: databases/extensibleextension2
+  license: MIT
+  maintainer: swills@FreeBSD.org
+  description: A extensible video extension for FreeBSD, offering modular support
+    for video extensions in databases workflows.
+- name: async-analyzer2
+  version: 6.21.24
+  size_mb: 136.9
+  installed: false
+  origin: net-im/asyncanalyzer2
+  license: BSD-3-Clause
+  maintainer: ports@FreeBSD.org
+  description: A async TCP analyzer for FreeBSD, offering distributed support for
+    TCP analyzers in net-im workflows.
+- name: pure-parser
+  version: 21.27.23
+  size_mb: 149.3
+  installed: false
+  origin: games/pureparser
+  license: MIT
+  maintainer: swills@FreeBSD.org
+  description: A pure process parser for FreeBSD, offering distributed support for
+    process parsers in games workflows.
+- name: modular-generator
+  version: 23.0.3
+  size_mb: 182.9
+  installed: true
+  origin: net-im/modulargenerator
+  license: MIT
+  maintainer: sunpoet@FreeBSD.org
+  description: A modular DNS generator for FreeBSD, offering pure support for DNS
+    generators in net-im workflows.
+- name: flexible-codec
+  version: 0.30.28
+  size_mb: 60.2
+  installed: true
+  origin: finance/flexiblecodec
+  license: MPL-2.0
+  maintainer: swills@FreeBSD.org
+  description: A flexible DNS codec for FreeBSD, offering fast support for DNS codecs
+    in finance workflows.
+- name: advanced-extension
+  version: 7.28.17
+  size_mb: 177.0
+  installed: false
+  origin: palm/advancedextension
+  license: ISC
+  maintainer: tobik@FreeBSD.org
+  description: A advanced UDP extension for FreeBSD, offering secure support for UDP
+    extensions in palm workflows.
+- name: modular-parser
+  version: 14.8.29
+  size_mb: 56.8
+  installed: false
+  origin: x11-themes/modularparser
+  license: GPL-3.0
+  maintainer: novel@FreeBSD.org
+  description: A modular text parser for FreeBSD, offering concurrent support for
+    text parsers in x11-themes workflows.
+- name: fast-cache
+  version: 13.10.34
+  size_mb: 10.3
+  installed: false
+  origin: ports-mgmt/fastcache
+  license: BSD-3-Clause
+  maintainer: novel@FreeBSD.org
+  description: A fast TCP cache for FreeBSD, offering concurrent support for TCP caches
+    in ports-mgmt workflows.
+- name: embeddable-library2
+  version: 1.14.34
+  size_mb: 249.0
+  installed: false
+  origin: textproc/embeddablelibrary2
+  license: GPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A embeddable HTTP library for FreeBSD, offering native support for
+    HTTP librarys in textproc workflows.
+- name: cross-platform-bridge2
+  version: 11.1.0
+  size_mb: 189.4
+  installed: true
+  origin: x11-toolkits/crossplatformbridge2
+  license: MPL-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A cross-platform Markdown bridge for FreeBSD, offering simple support
+    for Markdown bridges in x11-toolkits workflows.
+- name: concurrent-profiler
+  version: 16.9.18
+  size_mb: 58.5
+  installed: true
+  origin: python/concurrentprofiler
+  license: Apache-2.0
+  maintainer: swills@FreeBSD.org
+  description: A concurrent audio profiler for FreeBSD, offering fast support for
+    audio profilers in python workflows.
+- name: native-framework3
+  version: 25.21.10
+  size_mb: 185.7
+  installed: true
+  origin: archivers/nativeframework3
+  license: GPL-2.0
+  maintainer: novel@FreeBSD.org
+  description: A native memory framework for FreeBSD, offering modular support for
+    memory frameworks in archivers workflows.
+- name: modern-linter2
+  version: 2.3.5
+  size_mb: 121.7
+  installed: false
+  origin: polish/modernlinter2
+  license: ISC
+  maintainer: sunpoet@FreeBSD.org
+  description: A modern CSS linter for FreeBSD, offering simple support for CSS linters
+    in polish workflows.
+- name: simple-codec
+  version: 3.21.35
+  size_mb: 226.2
+  installed: false
+  origin: german/simplecodec
+  license: Apache-2.0
+  maintainer: ports@FreeBSD.org
+  description: A simple memory codec for FreeBSD, offering concurrent support for
+    memory codecs in german workflows.
+- name: portable-codec2
+  version: 1.21.11
+  size_mb: 149.1
+  installed: true
+  origin: x11-toolkits/portablecodec2
+  license: BSD-2-Clause
+  maintainer: adamw@FreeBSD.org
+  description: A portable CSV codec for FreeBSD, offering cross-platform support for
+    CSV codecs in x11-toolkits workflows.
+- name: flexible-bridge
+  version: 8.12.29
+  size_mb: 210.5
+  installed: true
+  origin: java/flexiblebridge
+  license: GPL-3.0
+  maintainer: vanilla@FreeBSD.org
+  description: A flexible font bridge for FreeBSD, offering native support for font
+    bridges in java workflows.
+- name: minimal-toolkit
+  version: 15.18.21
+  size_mb: 72.1
+  installed: false
+  origin: dns/minimaltoolkit
+  license: GPL-3.0
+  maintainer: core@FreeBSD.org
+  description: A minimal regex toolkit for FreeBSD, offering modular support for regex
+    toolkits in dns workflows.
+- name: flexible-daemon
+  version: 5.22.16
+  size_mb: 130.6
+  installed: false
+  origin: irc/flexibledaemon
+  license: MPL-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A flexible system daemon for FreeBSD, offering simple support for system
+    daemons in irc workflows.
+- name: advanced-framework
+  version: 5.17.18
+  size_mb: 113.0
+  installed: false
+  origin: security/advancedframework
+  license: GPL-3.0
+  maintainer: adamw@FreeBSD.org
+  description: A advanced TLS framework for FreeBSD, offering minimal support for
+    TLS frameworks in security workflows.
+- name: modern-codec
+  version: 4.10.6
+  size_mb: 141.5
+  installed: false
+  origin: japanese/moderncodec
+  license: ISC
+  maintainer: mfechner@FreeBSD.org
+  description: A modern binary codec for FreeBSD, offering high-performance support
+    for binary codecs in japanese workflows.
+- name: extensible-database
+  version: 18.20.27
+  size_mb: 178.4
+  installed: false
+  origin: news/extensibledatabase
+  license: Apache-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A extensible UDP database for FreeBSD, offering secure support for
+    UDP databases in news workflows.
+- name: secure-generator
+  version: 8.22.27
+  size_mb: 32.5
+  installed: true
+  origin: devel/securegenerator
+  license: GPL-2.0
+  maintainer: swills@FreeBSD.org
+  description: A secure JSON generator for FreeBSD, offering modular support for JSON
+    generators in devel workflows.
+- name: modern-server2
+  version: 5.2.9
+  size_mb: 58.9
+  installed: false
+  origin: german/modernserver2
+  license: BSD-2-Clause
+  maintainer: vanilla@FreeBSD.org
+  description: A modern gRPC server for FreeBSD, offering simple support for gRPC
+    servers in german workflows.
+- name: distributed-interpreter
+  version: 3.11.39
+  size_mb: 9.0
+  installed: false
+  origin: hungarian/distributedinterpreter
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A distributed config interpreter for FreeBSD, offering concurrent support
+    for config interpreters in hungarian workflows.
+- name: flexible-proxy
+  version: 22.8.17
+  size_mb: 210.3
+  installed: true
+  origin: emulators/flexibleproxy
+  license: MPL-2.0
+  maintainer: tobik@FreeBSD.org
+  description: A flexible pipe proxy for FreeBSD, offering embeddable support for
+    pipe proxys in emulators workflows.
+- name: extensible-linter
+  version: 20.21.23
+  size_mb: 90.6
+  installed: true
+  origin: irc/extensiblelinter
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A extensible Markdown linter for FreeBSD, offering pure support for
+    Markdown linters in irc workflows.
+- name: advanced-analyzer2
+  version: 17.5.13
+  size_mb: 43.9
+  installed: false
+  origin: net/advancedanalyzer2
+  license: GPL-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A advanced stream analyzer for FreeBSD, offering scriptable support
+    for stream analyzers in net workflows.
+- name: minimal-tunnel
+  version: 22.26.13
+  size_mb: 145.0
+  installed: true
+  origin: french/minimaltunnel
+  license: BSD-3-Clause
+  maintainer: core@FreeBSD.org
+  description: A minimal SSH tunnel for FreeBSD, offering high-performance support
+    for SSH tunnels in french workflows.
+- name: simple-parser
+  version: 23.3.1
+  size_mb: 236.8
+  installed: false
+  origin: devel/simpleparser
+  license: Apache-2.0
+  maintainer: swills@FreeBSD.org
+  description: A simple TCP parser for FreeBSD, offering concurrent support for TCP
+    parsers in devel workflows.
+- name: simple-cache
+  version: 15.22.27
+  size_mb: 91.9
+  installed: true
+  origin: mail/simplecache
+  license: BSD-3-Clause
+  maintainer: ports@FreeBSD.org
+  description: A simple stream cache for FreeBSD, offering secure support for stream
+    caches in mail workflows.
+- name: modular-client
+  version: 20.21.24
+  size_mb: 176.6
+  installed: true
+  origin: dns/modularclient
+  license: MIT
+  maintainer: vanilla@FreeBSD.org
+  description: A modular regex client for FreeBSD, offering robust support for regex
+    clients in dns workflows.
+- name: lightweight-balancer
+  version: 5.8.25
+  size_mb: 102.7
+  installed: false
+  origin: science/lightweightbalancer
+  license: GPL-3.0
+  maintainer: core@FreeBSD.org
+  description: A lightweight video balancer for FreeBSD, offering cross-platform support
+    for video balancers in science workflows.
+- name: advanced-renderer
+  version: 18.14.3
+  size_mb: 198.2
+  installed: true
+  origin: french/advancedrenderer
+  license: MIT
+  maintainer: core@FreeBSD.org
+  description: A advanced Unicode renderer for FreeBSD, offering high-performance
+    support for Unicode renderers in french workflows.
+- name: high-performance-module
+  version: 6.10.5
+  size_mb: 61.1
+  installed: true
+  origin: biology/highperformancemodule
+  license: GPL-2.0
+  maintainer: core@FreeBSD.org
+  description: A high-performance SQL module for FreeBSD, offering embeddable support
+    for SQL modules in biology workflows.
+- name: concurrent-database
+  version: 14.7.14
+  size_mb: 53.6
+  installed: false
+  origin: japanese/concurrentdatabase
+  license: GPL-3.0
+  maintainer: mfechner@FreeBSD.org
+  description: A concurrent XML database for FreeBSD, offering robust support for
+    XML databases in japanese workflows.
+- name: minimal-tunnel2
+  version: 25.4.7
+  size_mb: 175.9
+  installed: true
+  origin: textproc/minimaltunnel2
+  license: BSD-2-Clause
+  maintainer: novel@FreeBSD.org
+  description: A minimal text tunnel for FreeBSD, offering embeddable support for
+    text tunnels in textproc workflows.
+- name: simple-interpreter
+  version: 6.8.34
+  size_mb: 169.5
+  installed: true
+  origin: vietnamese/simpleinterpreter
+  license: Apache-2.0
+  maintainer: sunpoet@FreeBSD.org
+  description: A simple CSV interpreter for FreeBSD, offering fast support for CSV
+    interpreters in vietnamese workflows.
+- name: advanced-broker
+  version: 3.16.39
+  size_mb: 59.2
+  installed: false
+  origin: x11-drivers/advancedbroker
+  license: BSD-3-Clause
+  maintainer: ports@FreeBSD.org
+  description: A advanced system broker for FreeBSD, offering modern support for system
+    brokers in x11-drivers workflows.
+- name: minimal-wrapper
+  version: 7.21.17
+  size_mb: 218.2
+  installed: false
+  origin: vietnamese/minimalwrapper
+  license: GPL-3.0
+  maintainer: mfechner@FreeBSD.org
+  description: A minimal thread wrapper for FreeBSD, offering high-performance support
+    for thread wrappers in vietnamese workflows.
+- name: robust-queue
+  version: 18.23.8
+  size_mb: 85.1
+  installed: false
+  origin: misc/robustqueue
+  license: BSD-3-Clause
+  maintainer: mfechner@FreeBSD.org
+  description: A robust CSV queue for FreeBSD, offering embeddable support for CSV
+    queues in misc workflows.
+- name: advanced-cluster
+  version: 21.29.3
+  size_mb: 108.1
+  installed: false
+  origin: python/advancedcluster
+  license: Apache-2.0
+  maintainer: adamw@FreeBSD.org
+  description: A advanced system cluster for FreeBSD, offering modular support for
+    system clusters in python workflows.
+- name: modern-daemon
+  version: 0.29.10
+  size_mb: 164.1
+  installed: true
+  origin: databases/moderndaemon
+  license: Apache-2.0
+  maintainer: mfechner@FreeBSD.org
+  description: A modern NoSQL daemon for FreeBSD, offering simple support for NoSQL
+    daemons in databases workflows.
+- name: advanced-tunnel
+  version: 6.29.14
+  size_mb: 114.4
+  installed: true
+  origin: editors/advancedtunnel
+  license: MPL-2.0
+  maintainer: ports@FreeBSD.org
+  description: A advanced system tunnel for FreeBSD, offering cross-platform support
+    for system tunnels in editors workflows.
+- name: concurrent-router
+  version: 8.0.7
+  size_mb: 58.1
+  installed: true
+  origin: graphics/concurrentrouter
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A concurrent video router for FreeBSD, offering advanced support for
+    video routers in graphics workflows.
+- name: native-module
+  version: 20.22.31
+  size_mb: 220.6
+  installed: false
+  origin: astro/nativemodule
+  license: ISC
+  maintainer: tobik@FreeBSD.org
+  description: A native regex module for FreeBSD, offering modular support for regex
+    modules in astro workflows.
+- name: high-performance-wrapper
+  version: 4.10.36
+  size_mb: 2.0
+  installed: false
+  origin: vietnamese/highperformancewrapper
+  license: BSD-3-Clause
+  maintainer: swills@FreeBSD.org
+  description: A high-performance regex wrapper for FreeBSD, offering robust support
+    for regex wrappers in vietnamese workflows.
+- name: portable-adapter2
+  version: 24.4.39
+  size_mb: 139.0
+  installed: false
+  origin: deskutils/portableadapter2
+  license: MIT
+  maintainer: adamw@FreeBSD.org
+  description: A portable HTML adapter for FreeBSD, offering async support for HTML
+    adapters in deskutils workflows.
+formulas:
+- name: openssl
+  dependents: 42
+- name: zlib
+  dependents: 38
+- name: readline
+  dependents: 21
+- name: sqlite
+  dependents: 14
+- name: libffi
+  dependents: 9
+- name: pcre2
+  dependents: 27
+- name: gettext-runtime
+  dependents: 33
+- name: libiconv
+  dependents: 19
+- name: ncurses
+  dependents: 24
+- name: expat
+  dependents: 12
+- name: libxml2
+  dependents: 17
+- name: cmake
+  dependents: 8
+- name: pkgconf
+  dependents: 45
+pkg_origin_options:
+- graphics/ImageMagick7
+- textproc/ripgrep
+- databases/postgresql16-server
+- editors/neovim
+- textproc/jq
+- ftp/curl
+- devel/git
+- editors/vim
+- security/openssl
+- archivers/zlib
+- databases/sqlite3
+- lang/python311
+- www/node
+- lang/go
+- lang/rust
