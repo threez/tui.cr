@@ -65,9 +65,22 @@ describe TUI::Term do
       TUI::Term.apply(TUI::Style.new(underline: true), "hi").should eq("\e[4mhi\e[0m")
     end
 
+    it "applies strikethrough" do
+      TUI::Term.apply(TUI::Style.new(strikethrough: true), "hi").should eq("\e[9mhi\e[0m")
+    end
+
+    it "applies blink" do
+      TUI::Term.apply(TUI::Style.new(blink: true), "hi").should eq("\e[5mhi\e[0m")
+    end
+
     it "combines bold, italic, underline, and a foreground color in SGR-conventional order" do
       style = TUI::Style.new(bold: true, italic: true, underline: true, fg: TUI.color(:red))
       TUI::Term.apply(style, "hi").should eq("\e[1;3;4;31mhi\e[0m")
+    end
+
+    it "combines underline, blink, strikethrough, and reverse in SGR-conventional order" do
+      style = TUI::Style.new(underline: true, blink: true, strikethrough: true, reverse: true)
+      TUI::Term.apply(style, "hi").should eq("\e[4;5;7;9mhi\e[0m")
     end
   end
 
@@ -88,6 +101,11 @@ describe TUI::Term do
     it "matches the single-attribute constants for italic/underline" do
       TUI::Term.escape(TUI::Style.new(italic: true)).should eq(TUI::Term::ITALIC)
       TUI::Term.escape(TUI::Style.new(underline: true)).should eq(TUI::Term::UNDERLINE)
+    end
+
+    it "matches the single-attribute constants for strikethrough/blink" do
+      TUI::Term.escape(TUI::Style.new(strikethrough: true)).should eq(TUI::Term::STRIKETHROUGH)
+      TUI::Term.escape(TUI::Style.new(blink: true)).should eq(TUI::Term::BLINK)
     end
   end
 

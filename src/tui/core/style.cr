@@ -1,7 +1,8 @@
 module TUI
   # A composable set of SGR attributes — weight (bold/dim), italic,
-  # underline, reverse-video, and foreground/background color — applied
-  # together via Term.apply. Replaces ad-hoc, manually-nested
+  # underline, strikethrough, blink, reverse-video, and foreground/
+  # background color — applied together via Term.apply. Replaces ad-hoc,
+  # manually-nested
   # `Term.fg(:red, Term.bold(s))`-style calls scattered through widget
   # render methods with one value every widget can expose as a named,
   # overridable style property (e.g. TableView#header_style,
@@ -19,6 +20,8 @@ module TUI
     dim : Bool = false,
     italic : Bool = false,
     underline : Bool = false,
+    strikethrough : Bool = false,
+    blink : Bool = false,
     reverse : Bool = false,
     fg : Color? = nil,
     bg : Color? = nil
