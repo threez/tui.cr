@@ -25,6 +25,58 @@ describe TUI::Keys do
       read_from("\e[A".to_slice).key.should eq(TUI::Key::Up)
     end
 
+    it "parses SS3-encoded arrow/Home/End keys (application cursor key mode)" do
+      read_from("\eOA".to_slice).key.should eq(TUI::Key::Up)
+      read_from("\eOB".to_slice).key.should eq(TUI::Key::Down)
+      read_from("\eOC".to_slice).key.should eq(TUI::Key::Right)
+      read_from("\eOD".to_slice).key.should eq(TUI::Key::Left)
+      read_from("\eOH".to_slice).key.should eq(TUI::Key::Home)
+      read_from("\eOF".to_slice).key.should eq(TUI::Key::End)
+    end
+
+    it "does not leak the SS3 letter into the next read as a stray Char" do
+      reader, writer = IO.pipe
+      writer.write("\eOBx".to_slice)
+      writer.close
+
+      first = TUI::Keys.read(reader)
+      second = TUI::Keys.read(reader)
+
+      first.key.should eq(TUI::Key::Down)
+      second.key.should eq(TUI::Key::Char)
+      second.char.should eq('x')
+    ensure
+      reader.try &.close
+    end
+
+    it "parses repeated back-to-back single-letter CSI keys without desyncing" do
+      # Regression: read_csi_seq used to keep consuming bytes looking for
+      # a terminator even after `first` (e.g. "B") was already a complete
+      # single-letter sequence on its own, swallowing the next
+      # keypress(es) in the process — only every ~3rd repeated arrow-key
+      # press would parse correctly, the rest turned into stray Char
+      # events for whatever letter got eaten.
+      reader, writer = IO.pipe
+      writer.write("\e[B\e[B\e[B\e[B\e[B".to_slice)
+      writer.close
+
+      keys = 5.times.map { TUI::Keys.read(reader) }.map(&.key).to_a
+      keys.should eq([TUI::Key::Down] * 5)
+    ensure
+      reader.try &.close
+    end
+
+    it "parses a mix of single-letter and multi-char CSI keys back-to-back without desyncing" do
+      reader, writer = IO.pipe
+      writer.write("\e[B\e[5~\e[B\e[1;3D\e[B".to_slice)
+      writer.close
+
+      keys = 5.times.map { TUI::Keys.read(reader) }.map(&.key).to_a
+      keys.should eq([TUI::Key::Down, TUI::Key::PageUp, TUI::Key::Down, TUI::Key::WordLeft, TUI::Key::Down])
+    ensure
+      reader.try &.close
+    end
+
     it "parses SGR mouse wheel-up (button code 64)" do
       read_from("\e[<64;12;5M".to_slice).key.should eq(TUI::Key::MouseWheelUp)
     end

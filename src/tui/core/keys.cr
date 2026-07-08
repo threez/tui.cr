@@ -103,6 +103,8 @@ module TUI
       case next_byte.chr
       when '['
         parse_csi(io)
+      when 'O'
+        parse_ss3(io)
       when 'Z'
         KeyEvent.new(Key::ShiftTab)
       when '', '\b'
@@ -113,6 +115,35 @@ module TUI
         KeyEvent.new(Key::WordBackspace)
       else
         KeyEvent.new(Key::Esc)
+      end
+    end
+
+    # SS3-prefixed sequences (`\eO` + a single letter) — the alternate
+    # encoding several terminals/multiplexers (tmux, and any terminal in
+    # "application cursor keys" / DECCKM mode) use for the arrow keys and
+    # Home/End instead of the CSI (`\e[`) form #parse_csi handles. Uses
+    # the same letter-to-Key mapping as #csi_key for the letters both
+    # encodings share (SS3 never carries PageUp/PageDown/Delete's `~`
+    # forms, so this only needs the single-letter subset). Reading and
+    # consuming the byte here — rather than falling through to the bare
+    # Key::Esc case, which left it unconsumed — is the actual fix: an
+    # unhandled 'O' used to return Key::Esc while leaving the following
+    # letter (e.g. 'B') sitting in the input stream to be picked up by
+    # the *next* #read call as a stray Key::Char, which is what made
+    # pressing an arrow key in application-cursor-key mode look like a
+    # random letter being typed.
+    private def self.parse_ss3(io : IO) : KeyEvent
+      next_byte = read_byte_timeout(io)
+      return KeyEvent.new(Key::Esc) if next_byte.nil?
+
+      case next_byte.chr
+      when 'A' then KeyEvent.new(Key::Up)
+      when 'B' then KeyEvent.new(Key::Down)
+      when 'C' then KeyEvent.new(Key::Right)
+      when 'D' then KeyEvent.new(Key::Left)
+      when 'H' then KeyEvent.new(Key::Home)
+      when 'F' then KeyEvent.new(Key::End)
+      else          KeyEvent.new(Key::Unknown)
       end
     end
 
@@ -130,6 +161,14 @@ module TUI
     private def self.read_csi_seq(io : IO, first : Char) : String
       seq = String::Builder.new
       seq << first
+      # A single-letter CSI sequence (arrow keys, Home/End: "A"-"D", "F",
+      # "H") is already complete after `first` — without this check, the
+      # loop below would keep reading and swallow the *next* keypress's
+      # bytes looking for a terminator that already arrived, corrupting
+      # every following key while it hunted for one (reproduced by
+      # sending repeated `\e[B` back-to-back: only every ~3rd Down press
+      # would parse correctly, the rest desynced into stray "B" chars).
+      return seq.to_s if first >= '@' && first <= '~'
       7.times do
         b = read_byte_timeout(io)
         break if b.nil?
