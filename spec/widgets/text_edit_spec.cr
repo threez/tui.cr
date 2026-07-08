@@ -265,6 +265,58 @@ describe TUI::TextEdit do
     end
   end
 
+  describe "#highlighter" do
+    it "renders every line in one flat style when unset (default, unchanged from before the hook existed)" do
+      editor = TUI::TextEdit.new("hi")
+      buffer = TUI::Buffer.new(20, 5)
+      editor.render_content(buffer, scroll)
+
+      buffer.cell(0, 0).style.should eq("")
+      buffer.cell(0, 1).style.should eq("")
+    end
+
+    it "renders each Cell's own style over its own character range" do
+      editor = TUI::TextEdit.new("hello world")
+      editor.highlighter = ->(line : String) {
+        [TUI::Cell.new("hello", TUI::Style.new(bold: true)), TUI::Cell.new(" world", TUI::Style.new)]
+      }
+      buffer = TUI::Buffer.new(20, 3)
+      editor.render_content(buffer, scroll)
+
+      (0...5).each { |c| buffer.cell(0, c).style.should contain("1") }
+      (5...11).each { |c| buffer.cell(0, c).style.should eq("") }
+    end
+
+    it "splits a styled span across a wrap boundary, preserving each side's own style" do
+      editor = TUI::TextEdit.new("abcdefghij")
+      editor.highlighter = ->(line : String) {
+        [TUI::Cell.new("abcde", TUI::Style.new(bold: true)), TUI::Cell.new("fghij", TUI::Style.new(fg: TUI.color(:red)))]
+      }
+      buffer = TUI::Buffer.new(7, 5)
+      editor.render_content(buffer, scroll(5))
+
+      (0...5).each { |c| buffer.cell(0, c).style.should contain("1") }
+      buffer.cell(0, 5).style.should contain("31")
+      (0...4).each { |c| buffer.cell(1, c).style.should contain("31") }
+    end
+
+    it "keeps the highlighter's styling on both sides of the cursor's reverse-video cell" do
+      editor = TUI::TextEdit.new("hello world")
+      editor.highlighter = ->(line : String) {
+        [TUI::Cell.new("hello", TUI::Style.new(bold: true)), TUI::Cell.new(" world", TUI::Style.new)]
+      }
+      editor.focus_if(true)
+      3.times { editor.handle_key(TUI::KeyEvent.new(TUI::Key::Right), scroll) }
+      buffer = TUI::Buffer.new(20, 3)
+      editor.render_content(buffer, scroll)
+
+      buffer.cell(0, 3).style.should contain("7") # cursor cell, reverse-video
+      buffer.cell(0, 0).style.should contain("1") # before cursor, still bold
+      buffer.cell(0, 4).style.should contain("1") # after cursor, still bold
+      buffer.cell(0, 5).style.should eq("")       # past "hello", back to plain
+    end
+  end
+
   describe "in a Window" do
     it "shows no scrollbar when content fits" do
       screen = TUI::Screen.new
