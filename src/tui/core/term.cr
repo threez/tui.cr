@@ -6,10 +6,12 @@ module TUI
   end
 
   module Term
-    RESET   = "\e[0m"
-    BOLD    = "\e[1m"
-    DIM     = "\e[2m"
-    REVERSE = "\e[7m"
+    RESET     = "\e[0m"
+    BOLD      = "\e[1m"
+    DIM       = "\e[2m"
+    ITALIC    = "\e[3m"
+    UNDERLINE = "\e[4m"
+    REVERSE   = "\e[7m"
 
     # Box-drawing characters. Corners are rounded (matching lazygit's
     # border style); T-junctions/cross stay square, which is standard even
@@ -132,6 +134,8 @@ module TUI
       parts = [] of String
       parts << "1" if style.bold
       parts << "2" if style.dim
+      parts << "3" if style.italic
+      parts << "4" if style.underline
       parts << "7" if style.reverse
       if fg = style.fg
         parts << fg_code(fg)

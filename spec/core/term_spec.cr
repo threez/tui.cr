@@ -56,6 +56,19 @@ describe TUI::Term do
       style = TUI::Style.new(bold: true, fg: TUI.color(208), bg: TUI.color(235))
       TUI::Term.apply(style, "hi").should eq("\e[1;38;5;208;48;5;235mhi\e[0m")
     end
+
+    it "applies italic" do
+      TUI::Term.apply(TUI::Style.new(italic: true), "hi").should eq("\e[3mhi\e[0m")
+    end
+
+    it "applies underline" do
+      TUI::Term.apply(TUI::Style.new(underline: true), "hi").should eq("\e[4mhi\e[0m")
+    end
+
+    it "combines bold, italic, underline, and a foreground color in SGR-conventional order" do
+      style = TUI::Style.new(bold: true, italic: true, underline: true, fg: TUI.color(:red))
+      TUI::Term.apply(style, "hi").should eq("\e[1;3;4;31mhi\e[0m")
+    end
   end
 
   describe ".escape" do
@@ -70,6 +83,11 @@ describe TUI::Term do
 
     it "renders a 256-color-only style as a 256-color escape sequence" do
       TUI::Term.escape(TUI::Style.new(fg: TUI.color(196))).should eq("\e[38;5;196m")
+    end
+
+    it "matches the single-attribute constants for italic/underline" do
+      TUI::Term.escape(TUI::Style.new(italic: true)).should eq(TUI::Term::ITALIC)
+      TUI::Term.escape(TUI::Style.new(underline: true)).should eq(TUI::Term::UNDERLINE)
     end
   end
 
