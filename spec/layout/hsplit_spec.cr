@@ -147,6 +147,69 @@ describe TUI::HSplit do
     right.focused?.should be_true
   end
 
+  describe "#left_ratio" do
+    it "splits proportionally to the given ratio instead of an absolute column count" do
+      left = StubWidget.new(0, 0, 1, 1, "L")
+      right = StubWidget.new(0, 0, 1, 1, "R")
+      split = TUI::HSplit.new(1, 1, 30, 3, left, right, left_ratio: 0.3)
+
+      split.left_ratio.should eq(0.3)
+      split.left_width.should eq(9) # (0.3 * 30).round
+      split.right.width.should eq(30 - 9 - 1)
+    end
+
+    it "re-derives left_width from the ratio on every layout, staying proportional across resizes" do
+      left = StubWidget.new(0, 0, 1, 1, "L")
+      right = StubWidget.new(0, 0, 1, 1, "R")
+      split = TUI::HSplit.new(1, 1, 30, 3, left, right, left_ratio: 0.5)
+      screen = TUI::Screen.new
+
+      split.left_width.should eq(15)
+
+      split.width = 40
+      split.composite(screen)
+
+      split.left_width.should eq(20)
+      split.right.width.should eq(40 - 20 - 1)
+    end
+
+    it "clamps ratio 0.0 and 1.0 so one pane collapses to zero width instead of going negative" do
+      left = StubWidget.new(0, 0, 1, 1, "L")
+      right = StubWidget.new(0, 0, 1, 1, "R")
+
+      zero_split = TUI::HSplit.new(1, 1, 20, 3, left, right, left_ratio: 0.0)
+      zero_split.left_width.should eq(0)
+      zero_split.right.width.should eq(19)
+
+      full_split = TUI::HSplit.new(1, 1, 20, 3, StubWidget.new(0, 0, 1, 1, "L"), StubWidget.new(0, 0, 1, 1, "R"), left_ratio: 1.0)
+      full_split.left_width.should eq(20)
+      full_split.right.width.should eq(0)
+    end
+
+    it "left_ratio= re-splits immediately" do
+      left = StubWidget.new(0, 0, 1, 1, "L")
+      right = StubWidget.new(0, 0, 1, 1, "R")
+      split = TUI::HSplit.new(1, 1, 20, 3, left, right, left_width: 5)
+
+      split.left_ratio = 0.25
+      split.left_width.should eq(5) # (0.25 * 20).round
+      split.right.width.should eq(20 - 5 - 1)
+    end
+
+    it "left_width= switches back to fixed mode, clearing the ratio" do
+      left = StubWidget.new(0, 0, 1, 1, "L")
+      right = StubWidget.new(0, 0, 1, 1, "R")
+      split = TUI::HSplit.new(1, 1, 20, 3, left, right, left_ratio: 0.5)
+
+      split.left_width = 8
+      split.left_ratio.should be_nil
+
+      split.width = 40
+      split.composite(TUI::Screen.new)
+      split.left_width.should eq(8) # unchanged by resize now that ratio mode is off
+    end
+  end
+
   describe ".full_screen" do
     it "sizes and positions to fill the screen below the status bar row, split evenly by default" do
       screen = TUI::Screen.new
