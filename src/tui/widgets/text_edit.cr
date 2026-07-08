@@ -95,6 +95,37 @@ module TUI
         handle_horizontal_key(ev.key)
         scroll.reveal(cursor_visual_row)
         true
+      when Key::CtrlA
+        handle_horizontal_key(Key::Home)
+        scroll.reveal(cursor_visual_row)
+        true
+      when Key::CtrlE
+        handle_horizontal_key(Key::End)
+        scroll.reveal(cursor_visual_row)
+        true
+      when Key::WordLeft
+        @text_row, @text_col = word_left_pos
+        scroll.reveal(cursor_visual_row)
+        true
+      when Key::WordRight
+        @text_row, @text_col = word_right_pos
+        scroll.reveal(cursor_visual_row)
+        true
+      when Key::WordBackspace
+        delete_word_backward
+        ensure_layout(@layout_width)
+        scroll.reveal(cursor_visual_row)
+        true
+      when Key::WordDelete
+        delete_word_forward
+        ensure_layout(@layout_width)
+        scroll.reveal(cursor_visual_row)
+        true
+      when Key::Paste
+        handle_paste(ev.text || "")
+        ensure_layout(@layout_width)
+        scroll.reveal(cursor_visual_row)
+        true
       when Key::Up
         move_visual_row(-1)
         scroll.reveal(cursor_visual_row)
@@ -130,7 +161,7 @@ module TUI
     end
 
     def status_hint : String
-      " type to edit  ↑↓/PgUp/PgDn:scroll"
+      " type to edit  ^A/^E:line  Alt+←→:word  ↑↓/PgUp/PgDn:scroll"
     end
 
     private def ensure_layout(width : Int32) : Nil
@@ -253,6 +284,116 @@ module TUI
       when Key::End
         @text_col = @text_lines[@text_row].size
       end
+    end
+
+    # Target {row, col} for word-left (Alt/Ctrl+Left): skip any whitespace
+    # immediately before the cursor, then skip backward through
+    # non-whitespace to the start of that run — the same "stop at the
+    # start of the previous word" convention readline/most terminal
+    # editors use for Alt-B. Wraps to the end of the previous line at
+    # column 0, mirroring plain Left's line-wrap.
+    private def word_left_pos : {Int32, Int32}
+      row, col = @text_row, @text_col
+      if col == 0
+        return {row, col} if row == 0
+        return {row - 1, @text_lines[row - 1].size}
+      end
+
+      line = @text_lines[row]
+      while col > 0 && line[col - 1].whitespace?
+        col -= 1
+      end
+      while col > 0 && !line[col - 1].whitespace?
+        col -= 1
+      end
+      {row, col}
+    end
+
+    # Target {row, col} for word-right (Alt/Ctrl+Right): skip forward
+    # through the current word (non-whitespace), then skip forward
+    # through trailing whitespace, landing at the start of the next word
+    # — the Alt-F counterpart to #word_left_pos. Wraps to the start of the
+    # next line at end-of-line, mirroring plain Right's line-wrap.
+    private def word_right_pos : {Int32, Int32}
+      row, col = @text_row, @text_col
+      line = @text_lines[row]
+      if col >= line.size
+        return {row, col} if row >= @text_lines.size - 1
+        return {row + 1, 0}
+      end
+
+      size = line.size
+      while col < size && !line[col].whitespace?
+        col += 1
+      end
+      while col < size && line[col].whitespace?
+        col += 1
+      end
+      {row, col}
+    end
+
+    # Deletes from the cursor back to #word_left_pos in one edit op
+    # (Alt/Option+Backspace) — falls back to plain Backspace's
+    # merge-with-previous-line behavior when the target lands on a
+    # different row (there's no "word" to delete across a line break,
+    # just the break itself).
+    private def delete_word_backward : Nil
+      target_row, target_col = word_left_pos
+      if target_row != @text_row
+        handle_edit_key(KeyEvent.new(Key::Backspace))
+        return
+      end
+
+      line = @text_lines[@text_row]
+      @text_lines[@text_row] = line[0...target_col] + line[@text_col..]
+      @text_col = target_col
+      @layout_dirty = true
+    end
+
+    # Deletes from the cursor forward to #word_right_pos in one edit op
+    # (Alt/Option+Delete) — falls back to plain Delete's
+    # merge-with-next-line behavior when the target lands on a different
+    # row, same rationale as #delete_word_backward.
+    private def delete_word_forward : Nil
+      target_row, target_col = word_right_pos
+      if target_row != @text_row
+        handle_edit_key(KeyEvent.new(Key::Delete))
+        return
+      end
+
+      line = @text_lines[@text_row]
+      @text_lines[@text_row] = line[0...@text_col] + line[target_col..]
+      @layout_dirty = true
+    end
+
+    # Inserts pasted text at the cursor in one edit op instead of one
+    # Key::Char insert per character — splits `text` on newlines, splices
+    # the first segment into the current line, and inserts any remaining
+    # segments as whole new lines, leaving the cursor at the end of the
+    # last inserted segment (matching where a real Enter+Char sequence
+    # would land, without the flood of KeyEvents that would imply).
+    private def handle_paste(text : String) : Nil
+      return if text.empty?
+      parts = text.split('\n')
+
+      line = @text_lines[@text_row]
+      before = line[0...@text_col]
+      after = line[@text_col..]
+
+      if parts.size == 1
+        @text_lines[@text_row] = before + parts[0] + after
+        @text_col += parts[0].size
+      else
+        @text_lines[@text_row] = before + parts[0]
+        parts[1...-1].each_with_index do |part, i|
+          @text_lines.insert(@text_row + 1 + i, part)
+        end
+        last_index = @text_row + parts.size - 1
+        @text_lines.insert(last_index, parts.last + after)
+        @text_row = last_index
+        @text_col = parts.last.size
+      end
+      @layout_dirty = true
     end
   end
 end

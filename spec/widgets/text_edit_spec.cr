@@ -67,6 +67,110 @@ describe TUI::TextEdit do
     end
   end
 
+  describe "line-start/end shortcuts" do
+    it "Ctrl-A moves to the start of the line" do
+      editor = TUI::TextEdit.new("hello world")
+      5.times { editor.handle_key(TUI::KeyEvent.new(TUI::Key::Right), scroll) }
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::CtrlA), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Char, 'X'), scroll)
+      editor.value.should eq("Xhello world")
+    end
+
+    it "Ctrl-E moves to the end of the line" do
+      editor = TUI::TextEdit.new("hello world")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::CtrlE), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Char, '!'), scroll)
+      editor.value.should eq("hello world!")
+    end
+  end
+
+  describe "word motion" do
+    it "WordLeft moves to the start of the previous word" do
+      editor = TUI::TextEdit.new("the quick brown fox")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::CtrlE), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::WordLeft), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Char, '|'), scroll)
+      editor.value.should eq("the quick brown |fox")
+    end
+
+    it "WordRight moves to the start of the next word" do
+      editor = TUI::TextEdit.new("the quick brown fox")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::WordRight), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Char, '|'), scroll)
+      editor.value.should eq("the |quick brown fox")
+    end
+
+    it "WordLeft at column 0 wraps to the end of the previous line" do
+      editor = TUI::TextEdit.new("ab\ncd")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Down), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Home), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::WordLeft), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Char, '|'), scroll)
+      editor.value.should eq("ab|\ncd")
+    end
+
+    it "WordRight at end of line wraps to the start of the next line" do
+      editor = TUI::TextEdit.new("ab\ncd")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::End), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::WordRight), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Char, '|'), scroll)
+      editor.value.should eq("ab\n|cd")
+    end
+  end
+
+  describe "word delete" do
+    it "WordBackspace deletes the previous word" do
+      editor = TUI::TextEdit.new("the quick brown fox")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::CtrlE), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::WordBackspace), scroll)
+      editor.value.should eq("the quick brown ")
+    end
+
+    it "WordDelete deletes the next word" do
+      editor = TUI::TextEdit.new("the quick brown fox")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::WordDelete), scroll)
+      editor.value.should eq("quick brown fox")
+    end
+
+    it "WordBackspace at column 0 merges with the previous line" do
+      editor = TUI::TextEdit.new("ab\ncd")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Down), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Home), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::WordBackspace), scroll)
+      editor.value.should eq("abcd")
+    end
+  end
+
+  describe "paste" do
+    it "inserts single-line pasted text at the cursor in one operation" do
+      editor = TUI::TextEdit.new("ab")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Right), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Paste, text: "XY"), scroll)
+      editor.value.should eq("aXYb")
+    end
+
+    it "splits multi-line pasted text across new lines, splicing the tail onto the last one" do
+      editor = TUI::TextEdit.new("ab")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Right), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Paste, text: "1\n2\n3"), scroll)
+      editor.value.split('\n').should eq(["a1", "2", "3b"])
+    end
+
+    it "leaves the cursor at the end of the pasted content" do
+      editor = TUI::TextEdit.new("ab")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Right), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Paste, text: "1\n22"), scroll)
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Char, '|'), scroll)
+      editor.value.split('\n').should eq(["a1", "22|b"])
+    end
+
+    it "ignores an empty paste" do
+      editor = TUI::TextEdit.new("ab")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Paste, text: ""), scroll)
+      editor.value.should eq("ab")
+    end
+  end
+
   describe "#content_size" do
     it "equals the logical line count when nothing wraps" do
       editor = TUI::TextEdit.new("one\ntwo\nthree")
