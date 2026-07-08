@@ -72,6 +72,21 @@ module TUI
       "\e[?1000l\e[?1006l"
     end
 
+    # Bracketed paste mode (mode 2004): the terminal wraps a pasted block
+    # in `\e[200~`/`\e[201~` markers instead of sending it as ordinary
+    # keystrokes, so Keys.parse_bracketed_paste can recognize it as one
+    # paste operation. This is the only paste-related signal a terminal
+    # app can actually receive — there's no way to intercept a native
+    # clipboard shortcut (e.g. Cmd-V) itself, since the terminal emulator
+    # handles that before the app ever sees any bytes.
+    def self.enter_bracketed_paste : String
+      "\e[?2004h"
+    end
+
+    def self.leave_bracketed_paste : String
+      "\e[?2004l"
+    end
+
     def self.bold(s : String) : String
       "#{BOLD}#{s}#{RESET}"
     end

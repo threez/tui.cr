@@ -51,5 +51,59 @@ describe TUI::Keys do
     it "ignores non-left SGR mouse buttons" do
       read_from("\e[<1;1;1M".to_slice).key.should eq(TUI::Key::Unknown)
     end
+
+    it "parses Ctrl-A" do
+      read_from("".to_slice).key.should eq(TUI::Key::CtrlA)
+    end
+
+    it "parses Ctrl-E" do
+      read_from("".to_slice).key.should eq(TUI::Key::CtrlE)
+    end
+
+    it "parses Ctrl-Right and Alt-Right as word-right" do
+      read_from("\e[1;5C".to_slice).key.should eq(TUI::Key::WordRight)
+      read_from("\e[1;3C".to_slice).key.should eq(TUI::Key::WordRight)
+    end
+
+    it "parses Ctrl-Left and Alt-Left as word-left" do
+      read_from("\e[1;5D".to_slice).key.should eq(TUI::Key::WordLeft)
+      read_from("\e[1;3D".to_slice).key.should eq(TUI::Key::WordLeft)
+    end
+
+    it "parses Alt-Backspace (bare ESC + DEL) as word-backspace" do
+      read_from("\e".to_slice).key.should eq(TUI::Key::WordBackspace)
+    end
+
+    it "parses Alt-Delete (CSI 3;3~) as word-delete" do
+      read_from("\e[3;3~".to_slice).key.should eq(TUI::Key::WordDelete)
+    end
+
+    it "parses a bracketed-paste block into one Paste event carrying the content" do
+      ev = read_from("\e[200~hello\nworld\e[201~".to_slice)
+      ev.key.should eq(TUI::Key::Paste)
+      ev.text.should eq("hello\nworld")
+    end
+
+    it "does not interpret escape-like bytes inside pasted content" do
+      ev = read_from("\e[200~a\eb\e[Xc\e[201~".to_slice)
+      ev.key.should eq(TUI::Key::Paste)
+      ev.text.should eq("a\eb\e[Xc")
+    end
+
+    it "leaves the stream positioned right after the paste terminator" do
+      reader, writer = IO.pipe
+      writer.write("\e[200~abc\e[201~x".to_slice)
+      writer.close
+
+      first = TUI::Keys.read(reader)
+      second = TUI::Keys.read(reader)
+
+      first.key.should eq(TUI::Key::Paste)
+      first.text.should eq("abc")
+      second.key.should eq(TUI::Key::Char)
+      second.char.should eq('x')
+    ensure
+      reader.try &.close
+    end
   end
 end

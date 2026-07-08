@@ -25,6 +25,7 @@ module TUI
       at_exit do
         print Term.show_cursor
         print Term.leave_mouse
+        print Term.leave_bracketed_paste
         print Term.leave_alt_screen
         STDOUT.flush
         Term.exit_raw
@@ -33,6 +34,7 @@ module TUI
       print Term.enter_alt_screen
       print Term.hide_cursor
       print Term.enter_mouse
+      print Term.enter_bracketed_paste
       STDOUT.flush
       Term.enter_raw
 

@@ -17,6 +17,13 @@ module TUI
     CtrlC
     CtrlD
     CtrlX
+    CtrlA
+    CtrlE
+    WordLeft
+    WordRight
+    WordBackspace
+    WordDelete
+    Paste
     Char
     MouseWheelUp
     MouseWheelDown
@@ -28,8 +35,10 @@ module TUI
   # `key == Key::Char` (the literal typed character); `row`/`col` are only
   # set for `Key::MouseClick` (1-based terminal coordinates — see
   # Keys.parse_sgr_mouse) and nil for every other kind, including the
-  # wheel events, which carry no position.
-  record KeyEvent, key : Key, char : Char = '\0', row : Int32? = nil, col : Int32? = nil
+  # wheel events, which carry no position; `text` is only set for
+  # `Key::Paste` (the full pasted content between bracketed-paste markers
+  # — see Keys.parse_bracketed_paste), nil otherwise.
+  record KeyEvent, key : Key, char : Char = '\0', row : Int32? = nil, col : Int32? = nil, text : String? = nil
 
   module Keys
     # How long .read_byte_timeout waits for a follow-up byte after a bare
@@ -56,6 +65,10 @@ module TUI
         KeyEvent.new(Key::CtrlD)
       when ''
         KeyEvent.new(Key::CtrlX)
+      when '\u0001'
+        KeyEvent.new(Key::CtrlA)
+      when '\u0005'
+        KeyEvent.new(Key::CtrlE)
       when '\e'
         parse_escape(io)
       else
@@ -92,6 +105,12 @@ module TUI
         parse_csi(io)
       when 'Z'
         KeyEvent.new(Key::ShiftTab)
+      when '', '\b'
+        # Alt+Backspace: terminals commonly send this as a bare ESC
+        # followed by the same byte a plain Backspace sends (DEL/0x7f or
+        # BS/0x08), rather than a CSI sequence — the word-delete
+        # counterpart to Key::WordLeft/WordRight's CSI-based detection.
+        KeyEvent.new(Key::WordBackspace)
       else
         KeyEvent.new(Key::Esc)
       end
@@ -102,7 +121,10 @@ module TUI
       return KeyEvent.new(Key::Unknown) if first.nil?
       return parse_sgr_mouse(io) if first.chr == '<'
 
-      csi_key(read_csi_seq(io, first.chr))
+      seq = read_csi_seq(io, first.chr)
+      return parse_bracketed_paste(io) if seq == "200~"
+
+      csi_key(seq)
     end
 
     private def self.read_csi_seq(io : IO, first : Char) : String
@@ -118,18 +140,53 @@ module TUI
       seq.to_s
     end
 
+    # Bracketed paste (enabled via Term.enter_bracketed_paste): everything
+    # between the `\e[200~` start marker (already consumed by the time
+    # this is called — see #parse_csi) and the literal `\e[201~` end
+    # marker is raw pasted content, read byte-for-byte and matched against
+    # the terminator as plain bytes rather than re-entering the escape
+    # parser — pasted text can itself contain characters that would
+    # otherwise look like the start of an escape sequence, and those must
+    # never be interpreted, only captured.
+    private def self.parse_bracketed_paste(io : IO) : KeyEvent
+      terminator = "\e[201~"
+      buf = [] of Char
+      terminated = false
+
+      loop do
+        b = read_byte_timeout(io)
+        break if b.nil?
+        buf << b.chr
+        if buf.size >= terminator.size && buf.last(terminator.size).join == terminator
+          terminated = true
+          break
+        end
+      end
+
+      buf = buf[0...-terminator.size] if terminated
+      KeyEvent.new(Key::Paste, text: buf.join)
+    end
+
     private def self.csi_key(seq : String) : KeyEvent
       case seq
-      when "A"  then KeyEvent.new(Key::Up)
-      when "B"  then KeyEvent.new(Key::Down)
-      when "C"  then KeyEvent.new(Key::Right)
-      when "D"  then KeyEvent.new(Key::Left)
-      when "H"  then KeyEvent.new(Key::Home)
-      when "F"  then KeyEvent.new(Key::End)
-      when "5~" then KeyEvent.new(Key::PageUp)
-      when "6~" then KeyEvent.new(Key::PageDown)
-      when "3~" then KeyEvent.new(Key::Delete)
-      else           KeyEvent.new(Key::Unknown)
+      when "A"            then KeyEvent.new(Key::Up)
+      when "B"            then KeyEvent.new(Key::Down)
+      when "C"            then KeyEvent.new(Key::Right)
+      when "D"            then KeyEvent.new(Key::Left)
+      when "H"            then KeyEvent.new(Key::Home)
+      when "F"            then KeyEvent.new(Key::End)
+      when "5~"           then KeyEvent.new(Key::PageUp)
+      when "6~"           then KeyEvent.new(Key::PageDown)
+      when "3~"           then KeyEvent.new(Key::Delete)
+      when "1;3C", "1;5C" then KeyEvent.new(Key::WordRight) # Alt / Ctrl +Right
+      when "1;3D", "1;5D" then KeyEvent.new(Key::WordLeft)  # Alt / Ctrl +Left
+      # Alt+Delete (word-delete-forward): "3;3~" is the xterm modifier
+      # form some terminals use, unlike Alt+Backspace's bare-ESC form
+      # (see #parse_escape) — there's no single universal sequence for
+      # this the way there is for word-left/right, so support is
+      # inherently best-effort/terminal-dependent, not a gap here.
+      when "3;3~" then KeyEvent.new(Key::WordDelete)
+      else             KeyEvent.new(Key::Unknown)
       end
     end
 
