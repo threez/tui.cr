@@ -19,7 +19,7 @@ private def sample_fields : Array(TUI::Form::FieldSpec(Widget))
   [
     TUI::Form::FieldSpec(Widget).new("Name",
       get: ->(m : Widget) { m.name }, set: ->(m : Widget, v : String) { m.name = v; nil },
-      build: -> { TUI::TextField.new.as(TUI::FormField) },
+      build: -> { TUI::InputField.new.as(TUI::FormField) },
       validator: ->(v : String) { !v.empty? }, error_message: "Name required"),
     TUI::Form::FieldSpec(Widget).new("Active",
       get: ->(m : Widget) { m.active }, set: ->(m : Widget, v : String) { m.active = v; nil },
@@ -46,7 +46,7 @@ describe TUI::Form::Host do
     host = TUI::Form::Host(Widget).new(1, 1, screen.cols, screen.rows - 1, sample_fields, model, wiring[:popup])
 
     host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter)) # start editing "Name"
-    host.handle_key(TUI::KeyEvent.new(TUI::Key::Esc))   # TextField commits on Esc unchanged
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Esc))   # InputField commits on Esc unchanged
 
     model.name.should eq("bolt")
   end
@@ -79,7 +79,21 @@ describe TUI::Form::Host do
     host.status_hint.should contain("commit") # still mid-edit, not back to nav hint
   end
 
-  it "navigates focus with Up/Down and toggles a BoolField in place" do
+  it "navigates focus with Tab and toggles a BoolField in place" do
+    screen = TUI::Screen.new
+    model = Widget.new("bolt", "false", "red")
+    wiring = sample_popup(screen)
+    host = TUI::Form::Host(Widget).new(1, 1, screen.cols, screen.rows - 1, sample_fields, model, wiring[:popup])
+
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Tab)) # focus -> "Active"
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter))
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Char, ' '))
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter)) # BoolField commits on Enter
+
+    model.active.should eq("true")
+  end
+
+  it "also navigates focus with Down/Up, like before Grid existed" do
     screen = TUI::Screen.new
     model = Widget.new("bolt", "false", "red")
     wiring = sample_popup(screen)
@@ -89,8 +103,39 @@ describe TUI::Form::Host do
     host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter))
     host.handle_key(TUI::KeyEvent.new(TUI::Key::Char, ' '))
     host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter)) # BoolField commits on Enter
-
     model.active.should eq("true")
+
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Up)) # back to "Name"
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter))
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Char, 'x'))
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Esc))
+    model.name.should eq("boltx")
+  end
+
+  it "does not let Down/Up leak into an actively-editing ScrollableField, only move its cursor" do
+    screen = TUI::Screen.new
+    model = Widget.new("bolt", "false", "red")
+    fields = [
+      TUI::Form::FieldSpec(Widget).new("Name",
+        get: ->(m : Widget) { m.name }, set: ->(m : Widget, v : String) { m.name = v; nil },
+        build: -> { TUI::ScrollableField(TUI::TextEdit).new(->(s : String) { TUI::TextEdit.new(s) }).as(TUI::FormField) },
+        rows: 3),
+      TUI::Form::FieldSpec(Widget).new("Active",
+        get: ->(m : Widget) { m.active }, set: ->(m : Widget, v : String) { m.active = v; nil },
+        build: -> { TUI::BoolField.new.as(TUI::FormField) }),
+    ] of TUI::Form::FieldSpec(Widget)
+    popup = TUI::Form::PopupHost.new(screen: screen, push: ->(_w : TUI::Widget) { nil }, pop: -> { nil })
+    host = TUI::Form::Host(Widget).new(1, 1, screen.cols, screen.rows - 1, fields, model, popup)
+
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter)) # start editing multi-line "Name"
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Char, 'x'))
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter)) # newline, not commit
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Char, 'y'))
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Up))  # must move the field's own cursor, not Grid focus
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Esc)) # commits back to "Name"
+
+    model.name.should eq("x\nybolt")
+    model.active.should eq("false") # never toggled — focus never reached "Active"
   end
 
   it "pushes a dropdown popup through the PopupHost for a dropdown_options field" do
@@ -102,8 +147,8 @@ describe TUI::Form::Host do
       pop: -> { nil })
     host = TUI::Form::Host(Widget).new(1, 1, screen.cols, screen.rows - 1, sample_fields, model, popup)
 
-    host.handle_key(TUI::KeyEvent.new(TUI::Key::Down)) # "Active"
-    host.handle_key(TUI::KeyEvent.new(TUI::Key::Down)) # "Color"
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Tab)) # "Active"
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Tab)) # "Color"
     host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter))
 
     pushed.size.should eq(1)

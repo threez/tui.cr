@@ -1,13 +1,17 @@
 # DSL mode
 
+See [architecture.md](architecture.md) for how this fits into the
+overall layering, and [widgets.md](widgets.md) for the underlying
+widgets/classes each DSL generates.
+
 `tui.cr` ships three macro-based DSLs that generate the exact same
 objects its plain declarative API already produces — `TUI::Form::FieldSpec(M)`
 arrays, `TUI::ArrayTableSource(T)` instances, and `TUI::ArrayDetailSource(T)`
 instances — from a terser block syntax. All three are purely additive
 sugar: nothing about `FieldSpec`, `Form::Host`, `ArrayTableSource`,
 `ArrayDetailSource`, `TableView`, `DetailView`, etc. changes, and every
-plain constructor call documented in [ARCHITECTURE.md](ARCHITECTURE.md)
-still works unmodified. Reach for the DSL when a form, table source, or
+plain constructor call documented in [widgets.md](widgets.md) still
+works unmodified. Reach for the DSL when a form, table source, or
 detail source is declared once, by hand, at a fixed shape (the common
 case); keep hand-writing `FieldSpec.new(...)`/`ArrayTableSource.new(...)`/
 `ArrayDetailSource.new(...)` directly for anything built dynamically or
@@ -25,7 +29,7 @@ with no block/DSL syntax needed (`Window`, `SplitWindow`, `HSplit`,
 call site (e.g. `example/menu_page.cr`'s one static menu widget, or
 `widget_browser.cr`'s one `Runtime`/`NavStack` wiring block) would add
 unused surface area for its own sake — see this library's own stated
-design principle in [ARCHITECTURE.md](ARCHITECTURE.md). `Picker(W)`
+design principle in [architecture.md](architecture.md). `Picker(W)`
 specifically has zero usages anywhere in this repo and stays undemonstrated
 for that reason (see the README's Example section).
 
@@ -59,9 +63,9 @@ from).
 ### `field` kwargs
 
 Each `field :prop, ...` call maps 1:1 onto an existing `FieldSpec`
-constructor argument or picks one of the four existing `FormField`
-subclasses — the DSL invents no new runtime behavior, only a terser way
-to spell the same constructor calls.
+constructor argument or picks one of the `FormField` subclasses — the
+DSL invents no new runtime behavior, only a terser way to spell the
+same constructor calls.
 
 | kwarg | Meaning | Maps to |
 |---|---|---|
@@ -71,16 +75,26 @@ to spell the same constructor calls.
 | `options:` | an `Array(FormEnumOption)` for an in-place single-select preview | `build: -> { EnumField.new(options) }` |
 | `options:` + `flags: true` | an in-place multi-select preview | `build: -> { FlagsField.new(options) }` |
 | `bool: true` | a yes/no toggle | `build: -> { BoolField.new }` |
-| (none of the above) | plain single/multi-line text | `build: -> { TextField.new }` (the default) |
+| `edit: true` | a scrolling, multi-line text editor (see [widgets.md](widgets.md#widget-catalog)) | `build: -> { ScrollableField(TextEdit).new(...) }` |
+| `markdown_edit: true` | same, with Markdown syntax highlighting | `build: -> { ScrollableField(MarkdownEdit).new(...) }` |
+| (none of the above) | plain single-line text | `build: -> { InputField.new }` (the default) |
 | `validate: :float \| :time \| :int \| :decimal` | reject a commit that fails `TUI::Validation.valid_xxx?` | `validator: ->TUI::Validation.valid_xxx?(String)` |
 | `validate:` (a `Proc(String, Bool)` literal) | a custom validator, escape hatch | `validator:` passed through verbatim |
 | `error:` | the message shown when `validate:` rejects a commit | `error_message:` (default `"Invalid value"`) |
 | `dropdown:` | an `Array(FormEnumOption)` driven via a `TUI::DropdownPicker` popup instead of an in-place editor | `dropdown_options:` |
 | `dropdown:` + `multi: true` | a popup multi-select, confirmed as a set | `dropdown_options:` + `dropdown_multi: true` |
 
-`options:` and `dropdown:` are mutually exclusive on the same `field`
-call — combining them is a **compile-time error** (`{% raise %}` inside
-the macro), not a silent "one wins."
+`options:`/`flags:`/`bool:`/`dropdown:` are mutually exclusive with
+`edit:`/`markdown_edit:` on the same `field` call, and `options:` and
+`dropdown:` are mutually exclusive with each other — combining either
+pair is a **compile-time error** (`{% raise %}` inside the macro), not
+a silent "one wins." Likewise, `rows: N` with `N > 1` and none of
+`edit:`/`markdown_edit:`/`options:`/`flags:`/`dropdown:` is also a
+compile-time error: `InputField` (the default) is single-line only, so
+a multi-row field must explicitly opt into `edit:`/`markdown_edit:` (or
+one of the picker kinds, which use `rows:` for their own option-list
+height) rather than silently building a field that can't use the extra
+rows it asked for.
 
 ### Why `get`/`set` are safe even though they're generated
 

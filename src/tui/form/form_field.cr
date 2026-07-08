@@ -13,19 +13,20 @@ module TUI
   # flags — a widget owns at most one FormField at a time, and "is
   # something being edited" is simply `editor != nil`.
   #
-  # Text/Bool/Enum/Flags share almost no mechanics (Text owns
-  # cursor/scroll/line-edit state, Bool a single toggle flag, Enum/Flags
-  # an options list with different selection semantics), so each kind is
-  # its own concrete subclass rather than one class branching on an enum
-  # — mirrors this library's ListDataSource/DetailDataSource convention
-  # of an abstract protocol implemented independently per concern, not a
-  # deep shared hierarchy.
+  # InputField/Bool/Enum/Flags/ScrollableField share almost no mechanics
+  # (InputField owns single-line cursor/scroll state, Bool a single
+  # toggle flag, Enum/Flags an options list with different selection
+  # semantics, ScrollableField wraps a whole Scrollable widget), so each
+  # kind is its own concrete subclass rather than one class branching on
+  # an enum — mirrors this library's ListDataSource/DetailDataSource
+  # convention of an abstract protocol implemented independently per
+  # concern, not a deep shared hierarchy.
   #
   # Esc semantics intentionally differ by kind, matching the source
-  # pattern this generalizes: Text and Bool edits commit on Esc (there is
-  # no discard-in-place gesture for them); Enum and Flags pickers cancel
-  # on Esc without writing back, since a picker with nothing selected yet
-  # has no sensible "commit" value.
+  # pattern this generalizes: InputField, Bool, and ScrollableField edits
+  # commit on Esc (there is no discard-in-place gesture for them); Enum
+  # and Flags pickers cancel on Esc without writing back, since a picker
+  # with nothing selected yet has no sensible "commit" value.
   abstract class FormField
     # Loads a persisted wire-value string into this field's edit state.
     abstract def start(current_value : String) : Nil
@@ -52,7 +53,8 @@ module TUI
   end
 end
 
-require "./text_field"
+require "./input_field"
 require "./bool_field"
 require "./enum_field"
 require "./flags_field"
+require "./scrollable_field"

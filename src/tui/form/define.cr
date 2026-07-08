@@ -42,9 +42,17 @@ module TUI
               {% error_node = named.find { |arg| arg.name.id == "error".id } %}
               {% dropdown_node = named.find { |arg| arg.name.id == "dropdown".id } %}
               {% multi_node = named.find { |arg| arg.name.id == "multi".id } %}
+              {% edit_node = named.find { |arg| arg.name.id == "edit".id } %}
+              {% markdown_edit_node = named.find { |arg| arg.name.id == "markdown_edit".id } %}
 
               {% if options_node && dropdown_node %}
                 {% call.raise "field #{prop}: options: and dropdown: are mutually exclusive" %}
+              {% end %}
+              {% if (edit_node || markdown_edit_node) && (options_node || flags_node || bool_node || dropdown_node) %}
+                {% call.raise "field #{prop}: edit:/markdown_edit: are mutually exclusive with options:/flags:/bool:/dropdown:" %}
+              {% end %}
+              {% if rows_node && rows_node.value.is_a?(NumberLiteral) && rows_node.value > 1 && !edit_node && !markdown_edit_node && !options_node && !flags_node && !dropdown_node %}
+                {% call.raise "field #{prop}: rows: #{rows_node.value} needs edit: true or markdown_edit: true — InputField no longer supports multiline" %}
               {% end %}
 
               {% label_value = label_node ? label_node.value : prop.id.stringify.split('_').map(&.capitalize).join(" ") %}
@@ -71,8 +79,12 @@ module TUI
                   build: -> { ::TUI::EnumField.new({{ options_node.value }}).as(::TUI::FormField) },
                 {% elsif bool_node %}
                   build: -> { ::TUI::BoolField.new.as(::TUI::FormField) },
+                {% elsif markdown_edit_node %}
+                  build: -> { ::TUI::ScrollableField(::TUI::MarkdownEdit).new(->(s : String) { ::TUI::MarkdownEdit.new(s) }).as(::TUI::FormField) },
+                {% elsif edit_node %}
+                  build: -> { ::TUI::ScrollableField(::TUI::TextEdit).new(->(s : String) { ::TUI::TextEdit.new(s) }).as(::TUI::FormField) },
                 {% else %}
-                  build: -> { ::TUI::TextField.new(multiline: {{ rows_node ? (rows_node.value > 1) : false }}).as(::TUI::FormField) },
+                  build: -> { ::TUI::InputField.new.as(::TUI::FormField) },
                 {% end %}
               )
             {% end %}

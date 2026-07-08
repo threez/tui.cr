@@ -2,6 +2,27 @@ require "./term"
 require "./buffer"
 
 module TUI
+  # A rectangle, in the same 1-based coordinate convention as Widget#x/
+  # #y, that Screen#with_clip bounds #blit writes to. Exists so a
+  # container of independently-compositing children (see Grid,
+  # src/tui/layout/grid.cr) can bound where its children are allowed to
+  # draw without needing to intercept or redirect their #composite calls
+  # — every Widget#composite ever reaches the real screen through
+  # exactly one call, Screen#blit, so clipping there is sufficient no
+  # matter how deep the widget tree gets.
+  record ClipRect, row : Int32, col : Int32, height : Int32, width : Int32 do
+    # Narrows `self` to the overlap with `other` — used by #with_clip so
+    # a nested clip can only ever shrink the bound in effect, never
+    # widen past an outer container's own clip.
+    def intersect(other : ClipRect) : ClipRect
+      row1 = [row, other.row].max
+      col1 = [col, other.col].max
+      row2 = [row + height, other.row + other.height].min
+      col2 = [col + width, other.col + other.width].min
+      ClipRect.new(row: row1, col: col1, height: [row2 - row1, 0].max, width: [col2 - col1, 0].max)
+    end
+  end
+
   class Screen
     # Current terminal size in character cells, refreshed by #refresh_size
     # on resize. 0-based row/col math elsewhere in this class treats these
@@ -12,12 +33,29 @@ module TUI
     # Applied to the whole row drawn by #status_bar.
     property status_bar_style : Style = Style.new(reverse: true)
 
+    @clip : ClipRect? = nil
+
     def initialize
       size = Term.size
       @rows = size[:rows]
       @cols = size[:cols]
       @front = Buffer.new(@cols, @rows)
       @back = Buffer.new(@cols, @rows)
+    end
+
+    # Bounds every #blit inside `block` to `rect`, intersected with
+    # whatever clip is already active (so a clip can only narrow, never
+    # widen, no matter how many containers are nested). Always restores
+    # the previous clip afterward, even if `block` raises, so a
+    # container's own clip can never leak past its own #composite call.
+    # Default (`@clip` nil) is "no bound" — existing callers that never
+    # call #with_clip see zero behavior change.
+    def with_clip(rect : ClipRect, & : -> Nil) : Nil
+      previous = @clip
+      @clip = previous ? previous.intersect(rect) : rect
+      yield
+    ensure
+      @clip = previous
     end
 
     def refresh_size : Nil
@@ -46,10 +84,16 @@ module TUI
 
     # Composite a widget's local buffer onto the back buffer at (x, y).
     # x/y are 1-based terminal coordinates (matching Widget#x/#y convention).
+    # Cells landing outside the currently active #with_clip rect (if any)
+    # are silently dropped, same "out of bounds is a no-op, not an
+    # error" convention Buffer#set_cell already uses for the screen's own
+    # edges.
     def blit(x : Int32, y : Int32, buffer : Buffer) : Nil
       buffer.height.times do |row|
         buffer.width.times do |col|
-          @back.set_cell(y - 1 + row, x - 1 + col, buffer.cell(row, col))
+          abs_row, abs_col = y - 1 + row, x - 1 + col
+          next unless clip_allows?(abs_row, abs_col)
+          @back.set_cell(abs_row, abs_col, buffer.cell(row, col))
         end
       end
     end
@@ -111,6 +155,17 @@ module TUI
 
       @front, @back = @back, @front
       @back.clear
+    end
+
+    # `abs_row`/`abs_col` are 0-based (matching @back's own #set_cell
+    # convention, as used by #blit above); @clip is 1-based (matching
+    # Widget#x/#y, as used by every ClipRect built from a widget's own
+    # geometry) — the -1 below is the same convention translation #blit
+    # itself already does for x/y.
+    private def clip_allows?(abs_row : Int32, abs_col : Int32) : Bool
+      return true unless c = @clip
+      abs_row >= c.row - 1 && abs_row < c.row - 1 + c.height &&
+        abs_col >= c.col - 1 && abs_col < c.col - 1 + c.width
     end
   end
 end

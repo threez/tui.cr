@@ -59,7 +59,7 @@ DEPENDENT_OPTIONS = FAKE_PACKAGES.map { |pkg| TUI::FormEnumOption.new(pkg.name, 
 
 TUI::Form.define(FORM_FIELDS, PackageEdit) do
   field :name
-  field :description, rows: 4
+  field :description, rows: 4, edit: true
   field :category, options: CATEGORY_OPTIONS, rows: CATEGORY_OPTIONS.size
   field :tags, options: TAG_OPTIONS, flags: true, rows: TAG_OPTIONS.size
   field :size_mb, label: "Size (MB)", validate: :float, error: "Size must be a number"

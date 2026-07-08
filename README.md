@@ -5,9 +5,11 @@ composable widgets (lists, tables, detail views, scrollable panes, splits,
 modals), and an app-shell (`Runtime`) that owns terminal lifecycle and the
 render/read-key/dispatch loop.
 
-See [doc/ARCHITECTURE.md](doc/ARCHITECTURE.md) for the full layering,
-render/input pipelines, and widget catalog, and [doc/dsl.md](doc/dsl.md)
-for the macro-based DSL layer.
+See [doc/architecture.md](doc/architecture.md) for the layering
+overview, which links out to [doc/rendering.md](doc/rendering.md) (the
+render/input pipelines), [doc/widgets.md](doc/widgets.md) (the full
+widget catalog), [doc/app-shell.md](doc/app-shell.md) (`NavStack`/
+`Runtime`), and [doc/dsl.md](doc/dsl.md) (the macro-based DSL layer).
 
 ## Installation
 

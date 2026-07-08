@@ -9,14 +9,14 @@ module TUI
     # has zero runtime dependencies) — this recognizes the subset of
     # CommonMark/GFM documented as in-scope on MarkdownView.
     module Parser
-      HRULE = /^ {0,3}([-*_])( *\1){2,} *$/
-      ATX_HEADING = /^ {0,3}(\#{1,6})\s+(.*?)\s*\#*\s*$/
-      FENCE_OPEN = /^ {0,3}(```|~~~)\s*(\S*)\s*$/
-      BLOCKQUOTE = /^ {0,3}(>+)\s?(.*)$/
-      UNORDERED_ITEM = /^( *)([-*+])\s+(.*)$/
-      ORDERED_ITEM = /^( *)(\d+)[.)]\s+(.*)$/
-      TASK_PREFIX = /^\[([ xX])\]\s+(.*)$/
-      TABLE_ROW = /\|/
+      HRULE            = /^ {0,3}([-*_])( *\1){2,} *$/
+      ATX_HEADING      = /^ {0,3}(\#{1,6})\s+(.*?)\s*\#*\s*$/
+      FENCE_OPEN       = /^ {0,3}(```|~~~)\s*(\S*)\s*$/
+      BLOCKQUOTE       = /^ {0,3}(>+)\s?(.*)$/
+      UNORDERED_ITEM   = /^( *)([-*+])\s+(.*)$/
+      ORDERED_ITEM     = /^( *)(\d+)[.)]\s+(.*)$/
+      TASK_PREFIX      = /^\[([ xX])\]\s+(.*)$/
+      TABLE_ROW        = /\|/
       TABLE_DELIM_CELL = /^:?-+:?$/
 
       def self.parse(source : String, number_headings : Bool = true, inline_config : Inline::Config = Inline::Config.new) : Array(Block)

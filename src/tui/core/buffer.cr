@@ -92,13 +92,18 @@ module TUI
       set(y + h - 1, x + divider_at, Term.apply(style, Term::BJ))
     end
 
-    # Draws a vertical scrollbar in the right border column of a box.
-    # `fraction` is the 0.0 (top) to 1.0 (bottom) position of the viewport,
-    # `visible`/`total` size the thumb proportionally. `fraction` nil means
-    # no scrollbar (content fits entirely, nothing to indicate).
-    def scrollbar(y : Int32, x : Int32, h : Int32, fraction : Float64?, visible : Int32 = 0, total : Int32 = 0, style : Style = Style.new) : Nil
+    # Draws a vertical scrollbar in column `x`, `h` rows tall starting at
+    # `y`. `fraction` is the 0.0 (top) to 1.0 (bottom) position of the
+    # viewport, `visible`/`total` size the thumb proportionally.
+    # `fraction` nil means no scrollbar (content fits entirely, nothing
+    # to indicate). `inset` reserves that many rows off each end of `h`
+    # before drawing — the default of 1 matches the original use (a
+    # box's own top/bottom border rows straddle the track); pass `inset:
+    # 0` to span the full `h` rows, e.g. a borderless field with no
+    # border rows to skip (see ScrollableField#render).
+    def scrollbar(y : Int32, x : Int32, h : Int32, fraction : Float64?, visible : Int32 = 0, total : Int32 = 0, style : Style = Style.new, inset : Int32 = 1) : Nil
       return unless fraction
-      track_h = h - 2
+      track_h = h - 2 * inset
       return if track_h <= 0
 
       ratio = total > 0 ? visible / total.to_f : 1.0
@@ -112,7 +117,7 @@ module TUI
         # style) — reads as an accent on the border rather than a solid
         # block replacing it.
         ch = (row >= thumb_start && row < thumb_start + thumb_h) ? "▐" : Term::VL
-        set(y + 1 + row, x, Term.apply(style, ch))
+        set(y + inset + row, x, Term.apply(style, ch))
       end
     end
 

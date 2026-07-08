@@ -28,6 +28,8 @@ TUI::Form.define(DEFINE_FIELDS, DefineWidget) do
   field :color, dropdown: COLOR_OPTIONS
   field :tags, options: TAG_OPTIONS, flags: true, rows: 2
   field :age, label: "Age (custom)", validate: :float, error: "Age must be numeric"
+  field :name, label: "Notes", rows: 4, edit: true
+  field :name, label: "Notes (md)", rows: 4, markdown_edit: true
 end
 
 describe "TUI::Form.define" do
@@ -51,9 +53,21 @@ describe "TUI::Form.define" do
     model.name.should eq("imagemagick7")
   end
 
-  it "defaults to a TextField when no kind kwarg is given" do
+  it "defaults to an InputField when no kind kwarg is given" do
     field = DEFINE_FIELDS.find!(&.label.==("Name"))
-    field.build.try(&.call).should be_a(TUI::TextField)
+    field.build.try(&.call).should be_a(TUI::InputField)
+  end
+
+  it "edit: true produces a ScrollableField(TextEdit)" do
+    field = DEFINE_FIELDS.find!(&.label.==("Notes"))
+    field.build.try(&.call).should be_a(TUI::ScrollableField(TUI::TextEdit))
+    field.rows.should eq(4)
+  end
+
+  it "markdown_edit: true produces a ScrollableField(MarkdownEdit)" do
+    field = DEFINE_FIELDS.find!(&.label.==("Notes (md)"))
+    field.build.try(&.call).should be_a(TUI::ScrollableField(TUI::MarkdownEdit))
+    field.rows.should eq(4)
   end
 
   it "bool: true produces a BoolField" do
@@ -93,7 +107,7 @@ describe "TUI::Form.define" do
 
     model.name.should eq("boltx")
 
-    host.handle_key(TUI::KeyEvent.new(TUI::Key::Down)) # focus -> Active
+    host.handle_key(TUI::KeyEvent.new(TUI::Key::Tab)) # focus -> Active
     host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter))
     host.handle_key(TUI::KeyEvent.new(TUI::Key::Char, ' '))
     host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter))
@@ -110,7 +124,7 @@ describe "TUI::Form.define" do
       pop: -> { nil })
     host = TUI::Form::Host(DefineWidget).new(1, 1, screen.cols, screen.rows - 1, DEFINE_FIELDS, model, popup)
 
-    2.times { host.handle_key(TUI::KeyEvent.new(TUI::Key::Down)) } # Name -> Active -> Color
+    2.times { host.handle_key(TUI::KeyEvent.new(TUI::Key::Tab)) } # Name -> Active -> Color
     host.handle_key(TUI::KeyEvent.new(TUI::Key::Enter))
 
     pushed.size.should eq(1)
