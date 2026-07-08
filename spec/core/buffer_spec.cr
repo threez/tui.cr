@@ -20,6 +20,18 @@ describe TUI::Buffer do
 
       buffer.cell(0, 0).style.should eq("")
     end
+
+    it "does not raise when h/w are too small to fit a border (e.g. mid-resize)" do
+      buffer = TUI::Buffer.new(5, 5)
+      buffer.box(0, 0, 0, 0)
+      buffer.box(0, 0, 1, 1)
+      buffer.box(0, 0, 2, 2)
+    end
+
+    it "does not raise for negative h/w" do
+      buffer = TUI::Buffer.new(5, 5)
+      buffer.box(0, 0, -3, -3)
+    end
   end
 
   describe "#box_with_divider" do
@@ -68,6 +80,28 @@ describe TUI::Buffer do
       buffer.scrollbar(0, 19, 10, nil)
 
       buffer.cell(1, 19).char.should eq(" ")
+    end
+  end
+
+  describe "#hline" do
+    it "draws a separator spanning the given width" do
+      buffer = TUI::Buffer.new(20, 10)
+      buffer.hline(0, 0, 10)
+
+      buffer.cell(0, 0).char.should eq(TUI::Term::BL)
+      buffer.cell(0, 9).char.should eq(TUI::Term::BR)
+      buffer.cell(0, 5).char.should eq(TUI::Term::HL)
+    end
+
+    it "does not raise when w is too small to fit both joints (e.g. mid-resize)" do
+      buffer = TUI::Buffer.new(5, 5)
+      buffer.hline(0, 0, 0)
+      buffer.hline(0, 0, 1)
+    end
+
+    it "does not raise for negative w" do
+      buffer = TUI::Buffer.new(5, 5)
+      buffer.hline(0, 0, -2)
     end
   end
 end

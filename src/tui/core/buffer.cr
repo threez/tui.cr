@@ -61,7 +61,8 @@ module TUI
     # concern, e.g. ListView#title_style) so it doesn't inherit the
     # border's color.
     def box(y : Int32, x : Int32, h : Int32, w : Int32, title : String = "", style : Style = Style.new) : Nil
-      inner_w = w - 2
+      return if h < 1 || w < 1
+      inner_w = [w - 2, 0].max
       corner = ->(s : String) { Term.apply(style, s) }
       fill = Term.apply(style, Term::HL)
       top_fill = if title.empty?
@@ -118,9 +119,10 @@ module TUI
     # Draw a horizontal separator spanning w columns at (y, x).
     # left_join / right_join use ├ / ┤ instead of └ / ┘.
     def hline(y : Int32, x : Int32, w : Int32, left_join : Bool = false, right_join : Bool = false, style : Style = Style.new) : Nil
+      return if w < 1
       left = left_join ? Term::LJ : Term::BL
       right = right_join ? Term::RJ : Term::BR
-      set(y, x, Term.apply(style, "#{left}#{Term::HL * (w - 2)}#{right}"))
+      set(y, x, Term.apply(style, "#{left}#{Term::HL * [w - 2, 0].max}#{right}"))
     end
 
     # Draw a vertical line of h rows starting at (y, x), local coords.
