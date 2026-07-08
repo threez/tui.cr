@@ -21,6 +21,25 @@ describe TUI::Markdown::Inline do
       runs[0].style.italic.should be_true
     end
 
+    it "splits a strikethrough span into an InlineRun with strikethrough styling" do
+      runs = TUI::Markdown::Inline.parse("plain ~~struck~~ text")
+
+      runs.map(&.text).join.should eq("plain struck text")
+      struck_run = runs.find { |r| r.text == "struck" }.not_nil!
+      struck_run.style.strikethrough.should be_true
+    end
+
+    it "leaves an unterminated strikethrough delimiter as literal text instead of consuming the rest of the line" do
+      runs = TUI::Markdown::Inline.parse("a stray ~~ tilde with no match")
+      runs.map(&.text).join.should eq("a stray ~~ tilde with no match")
+    end
+
+    it "does not treat a single tilde as strikethrough syntax" do
+      runs = TUI::Markdown::Inline.parse("a~b tilde")
+      runs.map(&.text).join.should eq("a~b tilde")
+      runs.any?(&.style.strikethrough).should be_false
+    end
+
     it "styles inline code distinctly and preserves its literal text" do
       runs = TUI::Markdown::Inline.parse("use `puts x` here")
       code_run = runs.find { |r| r.text == "puts x" }.not_nil!
