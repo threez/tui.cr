@@ -6,6 +6,7 @@ require "./pages/table_page"
 require "./pages/split_page"
 require "./pages/hsplit_page"
 require "./pages/form_page"
+require "./pages/markdown_page"
 
 screen = TUI::Screen.new
 
@@ -17,7 +18,8 @@ menu = build_menu_page(screen, ->(index : Int32) {
          when 0 then build_table_page(screen, runtime)
          when 1 then build_split_page(screen)
          when 2 then build_hsplit_page(screen)
-         else        build_form_page(screen, nav)
+         when 3 then build_form_page(screen, nav)
+         else        build_markdown_page(screen)
          end
   runtime.push(page)
   nil
