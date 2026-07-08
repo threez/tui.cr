@@ -72,7 +72,7 @@ module TUI
                 {% elsif bool_node %}
                   build: -> { ::TUI::BoolField.new.as(::TUI::FormField) },
                 {% else %}
-                  build: -> { ::TUI::TextField.new.as(::TUI::FormField) },
+                  build: -> { ::TUI::TextField.new(multiline: {{ rows_node ? (rows_node.value > 1) : false }}).as(::TUI::FormField) },
                 {% end %}
               )
             {% end %}

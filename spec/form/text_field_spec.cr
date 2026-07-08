@@ -62,6 +62,33 @@ describe TUI::TextField do
     end
   end
 
+  describe "single-line mode (multiline: false)" do
+    it "commits on Enter instead of inserting a new line" do
+      editor = TUI::TextField.new(multiline: false)
+      editor.start("hello")
+
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Enter)).should eq(:commit)
+      editor.value.should eq("hello")
+      editor.cursor_offset.should eq({row: 0, col: 5})
+    end
+
+    it "commits the typed value intact when Enter is pressed" do
+      editor = TUI::TextField.new(multiline: false)
+      editor.start("")
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Char, 'h'))
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Char, 'i'))
+
+      editor.handle_key(TUI::KeyEvent.new(TUI::Key::Enter)).should eq(:commit)
+      editor.value.should eq("hi")
+    end
+
+    it "mentions Enter:commit in its status hint" do
+      editor = TUI::TextField.new(multiline: false)
+      editor.status_hint.should contain("Enter")
+      editor.status_hint.should contain("commit")
+    end
+  end
+
   describe "#render" do
     it "draws every line of a multi-line value" do
       editor = TUI::TextField.new

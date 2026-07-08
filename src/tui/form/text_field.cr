@@ -1,16 +1,21 @@
 require "./form_field"
 
 module TUI
-  # Multi-line text editor. Wire format is `@text_lines` joined with `\n`
-  # (see `#value`/`#start`), so a persisted value round-trips through
-  # plain newline-delimited text with no other escaping. Esc commits
-  # (there's no discard-in-place gesture, per FormField's stated Esc
-  # convention). Owns its own cursor/scroll state (`@text_row`,
-  # `@text_col`, `@text_row_offset`) because Runtime hides the native
-  # terminal cursor for the app's whole lifetime — see `#render` for how
-  # the cursor is instead drawn as a reverse-video cell.
+  # Text editor, single- or multi-line depending on `multiline`. Wire
+  # format is `@text_lines` joined with `\n` (see `#value`/`#start`), so a
+  # persisted value round-trips through plain newline-delimited text with
+  # no other escaping. Esc always commits (there's no discard-in-place
+  # gesture, per FormField's stated Esc convention); when `multiline` is
+  # false, Enter commits too, matching BoolField/EnumField's convention
+  # that Enter submits a field rather than editing it further — a
+  # single-line field has nowhere sensible to put a newline anyway,
+  # unlike the multi-line case where Enter must keep splitting lines.
+  # Owns its own cursor/scroll state (`@text_row`, `@text_col`,
+  # `@text_row_offset`) because Runtime hides the native terminal cursor
+  # for the app's whole lifetime — see `#render` for how the cursor is
+  # instead drawn as a reverse-video cell.
   class TextField < FormField
-    def initialize
+    def initialize(@multiline : Bool = true)
       @text_lines = [""]
       @text_row = 0
       @text_col = 0
@@ -28,7 +33,11 @@ module TUI
       case ev.key
       when Key::Esc
         :commit
-      when Key::Enter, Key::Backspace, Key::Delete, Key::Char
+      when Key::Enter
+        return :commit unless @multiline
+        handle_edit_key(ev)
+        nil
+      when Key::Backspace, Key::Delete, Key::Char
         handle_edit_key(ev)
         nil
       when Key::Left, Key::Right, Key::Up, Key::Down, Key::Home, Key::End
@@ -88,7 +97,7 @@ module TUI
     end
 
     def status_hint : String
-      " type to edit  Esc:commit"
+      @multiline ? " type to edit  Esc:commit" : " type to edit  Enter/Esc:commit"
     end
 
     # Reverse-videos the single character cell at `col` (or an appended
