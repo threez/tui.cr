@@ -22,13 +22,18 @@ module TUI
     getter left : Widget
     getter right : Widget
 
-    # Applied to the divider line drawn by #render.
+    # Applied to the divider line drawn by #render when #bordered? is true.
     property border_style : Style = Style.new(fg: TUI.color(:gray))
+
+    # Whether to draw the vertical divider between panes — false to leave
+    # the gap column blank, e.g. when each pane supplies its own visual
+    # separation. Mirrors Window#bordered?.
+    property? bordered : Bool
 
     @menu : KeyMenu
 
     def initialize(x : Int32, y : Int32, width : Int32, height : Int32,
-                   @left : Widget, @right : Widget, left_width : Int32)
+                   @left : Widget, @right : Widget, left_width : Int32, @bordered : Bool = true)
       super(x, y, width, height)
       @left_width = left_width
       @active = :left
@@ -39,8 +44,8 @@ module TUI
     # Sizes and positions an HSplit to fill the screen below the status
     # bar row — see Window.full_screen for the same reasoning.
     # `left_width` defaults to an even split.
-    def self.full_screen(screen : Screen, left : Widget, right : Widget, left_width : Int32? = nil) : HSplit
-      new(1, 1, screen.cols, screen.rows - 1, left, right, left_width || screen.cols // 2)
+    def self.full_screen(screen : Screen, left : Widget, right : Widget, left_width : Int32? = nil, bordered : Bool = true) : HSplit
+      new(1, 1, screen.cols, screen.rows - 1, left, right, left_width || screen.cols // 2, bordered)
     end
 
     # Convenience wrapper for the common case of two Scrollables placed
@@ -98,7 +103,7 @@ module TUI
     end
 
     def render : Nil
-      @buffer.vline(@left_width, 0, height, style: border_style)
+      @buffer.vline(@left_width, 0, height, style: border_style) if bordered?
     end
 
     def handle_key(ev : KeyEvent) : Bool
