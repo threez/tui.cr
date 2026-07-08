@@ -1,6 +1,6 @@
 require "../../src/tui"
 
-MENU_ENTRIES = ["Table view", "Split window", "H-split layout", "Edit package", "Markdown viewer"]
+MENU_ENTRIES = ["Table view", "Split window", "H-split layout", "Edit package", "Markdown viewer", "Text editor"]
 
 # Builds the root "Widget browser" menu: a static OptionListView over
 # MENU_ENTRIES, hosted in a Window for the border/scrollbar/highlight
