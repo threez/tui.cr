@@ -79,13 +79,18 @@ module TUI
         set(y + row_offset, x + w - 1, corner.call(Term::VL))
       end
 
-      set(y + h - 1, x, "#{corner.call(Term::BL)}#{fill * inner_w}#{corner.call(Term::BR)}")
+      set(y + h - 1, x, Term.border_line([inner_w], corner.call(Term::BL), fill, "", corner.call(Term::BR)))
     end
 
     # Draw a box like #box, but with a T-junction character injected into
     # the top and bottom border rows at local column `divider_at` — used
     # by SplitWindow to merge its internal pane divider into the outer
-    # border.
+    # border. This is a degenerate single-divider stamp (draw a plain
+    # box, then overwrite one cell per row) rather than a composed
+    # Term.border_line call — it doesn't contain segment/junction math to
+    # unify, and rebuilding it in those terms would risk changing how a
+    # title long enough to reach divider_at currently gets partially
+    # overwritten by the injected junction glyph.
     def box_with_divider(y : Int32, x : Int32, h : Int32, w : Int32, divider_at : Int32, title : String = "", style : Style = Style.new) : Nil
       box(y, x, h, w, title, style)
       set(y, x + divider_at, Term.apply(style, Term::TJ))
@@ -127,7 +132,8 @@ module TUI
       return if w < 1
       left = left_join ? Term::LJ : Term::BL
       right = right_join ? Term::RJ : Term::BR
-      set(y, x, Term.apply(style, "#{left}#{Term::HL * [w - 2, 0].max}#{right}"))
+      line = Term.border_line([[w - 2, 0].max], left, Term::HL, "", right)
+      set(y, x, Term.apply(style, line))
     end
 
     # Draw a vertical line of h rows starting at (y, x), local coords.

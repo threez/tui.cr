@@ -144,18 +144,15 @@ module TUI
         return if n == 0
 
         col_widths = compute_col_widths(table, width, config)
+        padded_widths = col_widths.map { |w| w + 2 }
 
-        rows << [InlineRun.new(border_line(col_widths, Term::TL, Term::HL, Term::TJ, Term::TR), config.table_border_style)]
+        rows << [InlineRun.new(Term.border_line(padded_widths, Term::TL, Term::HL, Term::TJ, Term::TR), config.table_border_style)]
         rows << table_row(table.header, table.aligns, col_widths, config.table_header_style, config)
-        rows << [InlineRun.new(border_line(col_widths, Term::LJ, Term::HL, Term::CJ, Term::RJ), config.table_border_style)]
+        rows << [InlineRun.new(Term.border_line(padded_widths, Term::LJ, Term::HL, Term::CJ, Term::RJ), config.table_border_style)]
         table.rows.each do |row|
           rows << table_row(row, table.aligns, col_widths, Style.new, config)
         end
-        rows << [InlineRun.new(border_line(col_widths, Term::BL, Term::HL, Term::BJ, Term::BR), config.table_border_style)]
-      end
-
-      private def self.border_line(col_widths : Array(Int32), left : String, fill : String, junction : String, right : String) : String
-        left + col_widths.map { |w| fill * (w + 2) }.join(junction) + right
+        rows << [InlineRun.new(Term.border_line(padded_widths, Term::BL, Term::HL, Term::BJ, Term::BR), config.table_border_style)]
       end
 
       private def self.table_row(cells : Array(Array(InlineRun)), aligns : Array(Align), col_widths : Array(Int32), cell_style : Style, config : Config) : Array(InlineRun)

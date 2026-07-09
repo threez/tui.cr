@@ -18,7 +18,13 @@ diff against the previous frame, which is what keeps it flicker-free.
   `Screen` diff `(char, style)` pairs per cell instead of re-emitting
   escape codes for every character. `Buffer` also owns box/line/scrollbar
   drawing (`box`, `box_with_divider`, `hline`, `vline`, `scrollbar`)
-  built from `Term`'s glyph constants. `scrollbar`'s `inset:` parameter
+  built from `Term`'s glyph constants. Horizontal border-row composition
+  (corner/junction-joined fill segments) is shared via
+  `Term.border_line`, the same function `Markdown::Layout` uses to draw
+  GFM table borders (see [widgets.md](widgets.md#markdownview)) — it's
+  style-agnostic so both a `Buffer`-writing caller (pre-styled glyphs)
+  and a text-row-producing caller (styled after the fact via
+  `InlineRun`) can use it. `scrollbar`'s `inset:` parameter
   (default `1`) reserves that many rows off each end of its track before
   drawing — the default assumes a bordered box's own top/bottom border
   rows straddle the track; pass `inset: 0` for a borderless caller with

@@ -22,6 +22,18 @@ module TUI
     HL = "─"; VL = "│"
     TJ = "┬"; BJ = "┴"; LJ = "├"; RJ = "┤"; CJ = "┼"
 
+    # Composes one horizontal border row: `left` + N segments of `fill`
+    # repeated to each width, joined by `junction`, + `right`. Segment
+    # widths are the caller's raw inner width per span — callers add
+    # their own padding conventions (e.g. markdown table cells add 2 for
+    # the space around cell text; Buffer's box/hline segments don't).
+    # Style-agnostic by design: callers either pre-apply style to the
+    # glyph args (Buffer) or wrap the plain result afterward (Markdown's
+    # InlineRun), so no Style parameter is added here.
+    def self.border_line(segment_widths : Array(Int32), left : String, fill : String, junction : String, right : String) : String
+      left + segment_widths.map { |w| fill * [w, 0].max }.join(junction) + right
+    end
+
     def self.enter_raw : Nil
       system("stty -echo -icanon min 1 time 0 2>/dev/null")
     end
