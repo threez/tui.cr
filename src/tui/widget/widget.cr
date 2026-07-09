@@ -45,13 +45,33 @@ module TUI
     # Owns the buffer lifecycle: resizes/clears it, invokes the subclass's
     # `render`, then blits the result onto the screen at (x, y).
     def composite(screen : Screen) : Nil
+      prepare_buffer
+      screen.blit(x, y, @buffer)
+    end
+
+    # Draws this widget into an arbitrary caller-supplied buffer instead
+    # of the screen — for a host that owns its own composed buffer rather
+    # than the real screen (e.g. ScrollableWidget, adapting a plain
+    # Widget into a SplitWindow pane, which only blits Scrollable content
+    # into a sub-buffer it controls). `buffer` must already be sized to
+    # width/height; unlike #composite this never blits anywhere itself,
+    # leaving that to the caller.
+    def render_to(buffer : Buffer) : Nil
+      prepare_buffer
+      buffer.height.times do |row|
+        buffer.width.times do |col|
+          buffer.set_cell(row, col, @buffer.cell(row, col))
+        end
+      end
+    end
+
+    private def prepare_buffer : Nil
       if @buffer.width != width || @buffer.height != height
         @buffer = Buffer.new(width, height)
       else
         @buffer.clear
       end
       render
-      screen.blit(x, y, @buffer)
     end
 
     # Translate a LOCAL (row, col) offset — as used by `render`'s own

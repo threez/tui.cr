@@ -74,6 +74,25 @@ data, tell me what's visible." That's what `Scrollable` decouples from
   `focus_left` resets which pane is active, for reused instances that
   shouldn't carry over stale focus.
 
+- **`ScrollableWidget`** (`src/tui/widget/scrollable_widget.cr`) adapts a
+  plain `Widget` into `Scrollable`, for hosting one as a `SplitWindow`
+  pane — `SplitWindow` only accepts `Scrollable` (its shared border/
+  scrollbar chrome is driven entirely off `content_size`/
+  `render_content`/`header_rows`), so a non-`Scrollable` widget needs
+  wrapping first: `SplitWindow.new(x, y, w, h, ScrollableWidget.new(my_widget, title: "..."), other_pane, ...)`.
+  It reports `content_size` as always exactly filling the last-seen
+  viewport (so its scrollbar shows full/non-scrolling — the wrapped
+  widget is free to scroll internally on its own, same as any
+  `Window`-hosted content would), and delegates `render`/`handle_key`/
+  `status_hint` straight through via `Widget#render_to` (a
+  `Buffer`-targeted sibling of `Widget#composite`, for drawing into a
+  host-owned sub-buffer instead of a `Screen`). This is the mirror of
+  `HSplit.full_screen_scrollables` below, which wraps a `Scrollable` in
+  a `Window` to go the other way (`Scrollable` → `Widget`); together the
+  two adapters mean both layout containers can host either kind of pane
+  with a one-line wrap at the call site, without either container's own
+  type signature changing.
+
 - **`HSplit`** (`src/tui/layout/hsplit.cr`) is the lower-level sibling:
   it positions two full `Widget`s side by side with a plain divider and
   no border of its own — reach for it when you have two
