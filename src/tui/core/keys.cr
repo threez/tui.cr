@@ -46,6 +46,7 @@ module TUI
     # escape sequence (arrow keys, mouse reports, etc).
     ESC_TIMEOUT = 50.milliseconds
 
+    # ameba:disable Metrics/CyclomaticComplexity
     def self.read(io : IO) : KeyEvent
       byte = io.read_byte
       return KeyEvent.new(Key::Unknown) if byte.nil?
@@ -206,6 +207,7 @@ module TUI
       KeyEvent.new(Key::Paste, text: buf.join)
     end
 
+    # ameba:disable Metrics/CyclomaticComplexity
     private def self.csi_key(seq : String) : KeyEvent
       case seq
       when "A"            then KeyEvent.new(Key::Up)

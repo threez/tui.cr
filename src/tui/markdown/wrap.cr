@@ -13,6 +13,7 @@ module TUI
     module Wrap
       private record Token, text : String, style : Style, space : Bool
 
+      # ameba:disable Metrics/CyclomaticComplexity
       def self.wrap(runs : Array(InlineRun), width : Int32) : Array(Array(InlineRun))
         width = [width, 1].max
         tokens = tokenize(runs)

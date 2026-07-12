@@ -91,7 +91,8 @@ module TUI
 
       private def self.layout_code_block(rows : Array(Array(InlineRun)), block : CodeBlock) : Nil
         style = Style.new(fg: TUI.color(:yellow), dim: true)
-        block.lines.each do |line|
+        # block.lines is Array(String), not String — each_line doesn't apply here.
+        block.lines.each do |line| # ameba:disable Performance/ExcessiveAllocations
           rows << [InlineRun.new(line, style)]
         end
       end

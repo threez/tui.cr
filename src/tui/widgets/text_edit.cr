@@ -117,6 +117,7 @@ module TUI
       scroll.reveal(cursor_row)
     end
 
+    # ameba:disable Metrics/CyclomaticComplexity
     def handle_key(ev : KeyEvent, scroll : ScrollControl) : Bool
       ensure_layout(@layout_width)
       case ev.key
@@ -345,6 +346,7 @@ module TUI
 
       target ||= ' '.to_s if visible == col
       return s unless target
+      # ameba:disable Lint/RedundantStringCoercion -- before/after are String::Builder; #to_s is required, not redundant
       "#{before.to_s}#{Term::REVERSE}#{target}#{Term::RESET}#{style_at_cursor}#{after.to_s}"
     end
 

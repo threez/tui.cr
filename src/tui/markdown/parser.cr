@@ -19,6 +19,7 @@ module TUI
       TABLE_ROW        = /\|/
       TABLE_DELIM_CELL = /^:?-+:?$/
 
+      # ameba:disable Metrics/CyclomaticComplexity
       def self.parse(source : String, number_headings : Bool = true, inline_config : Inline::Config = Inline::Config.new) : Array(Block)
         lines = source.gsub("\r\n", "\n").split("\n")
         blocks = [] of Block

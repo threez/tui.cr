@@ -77,6 +77,7 @@ module TUI
     # Markdown::Inline.parse: no link/escape handling, no nested-style
     # composition — just enough to color common inline syntax while
     # typing without corrupting cursor/click column math.
+    # ameba:disable Metrics/CyclomaticComplexity
     private def inline_cells(text : String, base_style : Style = Style.new) : Array(Cell)
       cells = [] of Cell
       chars = text.chars

@@ -27,6 +27,7 @@ module TUI
         code_style : Style = Style.new(fg: TUI.color(:yellow)),
         link_style : Style = Style.new(fg: TUI.color(:blue))
 
+      # ameba:disable Metrics/CyclomaticComplexity
       def self.parse(text : String, base_style : Style = Style.new, config : Config = Config.new) : Array(InlineRun)
         runs = [] of InlineRun
         chars = text.chars
