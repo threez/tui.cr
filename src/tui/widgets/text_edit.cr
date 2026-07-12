@@ -203,8 +203,8 @@ module TUI
       @layout_width = width
       @layout_dirty = false
       rows = [] of Segment
-      @text_lines.each_with_index do |line, li|
-        rows.concat(segments_for(li, line, width))
+      @text_lines.each_with_index do |line, line_idx|
+        rows.concat(segments_for(line_idx, line, width))
       end
       @visual_rows = rows
     end

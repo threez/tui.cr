@@ -49,7 +49,8 @@ describe TUI::ScrollableWidget do
 
     adapter.handle_click(1, 2, TUI::ScrollControl.new(TUI::Scroller.new, 3))
 
-    key = widget.last_key.not_nil!
+    widget.last_key.should_not be_nil
+    key = widget.last_key.as(TUI::KeyEvent)
     key.key.should eq(TUI::Key::MouseClick)
     key.row.should eq(1)
     key.col.should eq(2)

@@ -40,7 +40,7 @@ module TUI
             next
           end
 
-          if (m = ATX_HEADING.match(line))
+          if m = ATX_HEADING.match(line)
             level = m[1].size
             title = m[2]
             number = number_headings ? heading_number(counters, level) : ""
@@ -49,7 +49,7 @@ module TUI
             next
           end
 
-          if (m = FENCE_OPEN.match(line))
+          if m = FENCE_OPEN.match(line)
             fence = m[1]
             language = m[2].empty? ? nil : m[2]
             code_lines = [] of String
@@ -63,7 +63,7 @@ module TUI
             next
           end
 
-          if (m = BLOCKQUOTE.match(line))
+          if m = BLOCKQUOTE.match(line)
             depth = m[1].size
             quote_lines = [] of String
             while i < n && (bm = BLOCKQUOTE.match(lines[i])) && bm[1].size == depth
@@ -128,7 +128,7 @@ module TUI
         return false unless lines[i] =~ TABLE_ROW
         delim_cells = split_table_row(lines[i + 1])
         return false if delim_cells.empty?
-        delim_cells.all? { |c| TABLE_DELIM_CELL.matches?(c.strip) }
+        delim_cells.all? { |cell| TABLE_DELIM_CELL.matches?(cell.strip) }
       end
 
       private def self.split_table_row(line : String) : Array(String)
@@ -148,13 +148,13 @@ module TUI
       end
 
       private def self.parse_table(lines : Array(String), start : Int32, inline_config : Inline::Config) : {Table, Int32}
-        header_cells = split_table_row(lines[start]).map { |c| Inline.parse(c, config: inline_config) }
-        aligns = split_table_row(lines[start + 1]).map { |c| cell_align(c) }
+        header_cells = split_table_row(lines[start]).map { |cell| Inline.parse(cell, config: inline_config) }
+        aligns = split_table_row(lines[start + 1]).map { |cell| cell_align(cell) }
 
         rows = [] of Array(Array(InlineRun))
         i = start + 2
         while i < lines.size && lines[i] =~ TABLE_ROW && !lines[i].strip.empty?
-          rows << split_table_row(lines[i]).map { |c| Inline.parse(c, config: inline_config) }
+          rows << split_table_row(lines[i]).map { |cell| Inline.parse(cell, config: inline_config) }
           i += 1
         end
 
@@ -179,14 +179,14 @@ module TUI
           line = lines[i]
           break if line.strip.empty?
 
-          if (m = UNORDERED_ITEM.match(line))
+          if m = UNORDERED_ITEM.match(line)
             indent = m[1].size
             depth = indent // 2
             checked = task_checked(m[3])
             body = checked.nil? ? m[3] : (TASK_PREFIX.match(m[3]).try(&.[2]) || m[3])
             items << ListItem.new(Inline.parse(body, config: inline_config), depth, false, nil, checked)
             i += 1
-          elsif (m = ORDERED_ITEM.match(line))
+          elsif m = ORDERED_ITEM.match(line)
             indent = m[1].size
             depth = indent // 2
             ordered_counters[depth] += 1

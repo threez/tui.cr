@@ -77,7 +77,7 @@ module TUI
         indent = (heading.level - 1) * config.heading_indent_step
         style = config.heading_styles[[heading.level - 1, config.heading_styles.size - 1].min]
         prefix = heading.number.empty? ? "" : "#{heading.number}  "
-        title_runs = heading.runs.map { |r| InlineRun.new(r.text, style) }
+        title_runs = heading.runs.map { |run| InlineRun.new(run.text, style) }
 
         wrapped = Wrap.wrap(title_runs, [width - indent, 1].max)
         wrapped.each_with_index do |line, i|
@@ -108,7 +108,7 @@ module TUI
       end
 
       private def self.layout_list(rows : Array(Array(InlineRun)), block : ListBlock, width : Int32, config : Config) : Nil
-        marker_width = block.items.map { |item| marker_text(item, block.items).size }.max? || 0
+        marker_width = block.items.max_of? { |item| marker_text(item, block.items).size } || 0
 
         block.items.each do |item|
           indent = item.depth * config.list_indent_step
@@ -134,7 +134,7 @@ module TUI
 
       private def self.marker_text(item : ListItem, siblings : Array(ListItem)) : String
         return "#{item.checked ? "☑" : "☐"}" unless item.checked.nil?
-        return "#{item.index}." if item.ordered
+        return "#{item.index}." if item.ordered?
         glyphs = ["•", "◦", "▪"]
         glyphs[item.depth % glyphs.size]
       end
@@ -144,7 +144,7 @@ module TUI
         return if n == 0
 
         col_widths = compute_col_widths(table, width, config)
-        padded_widths = col_widths.map { |w| w + 2 }
+        padded_widths = col_widths.map { |col_width| col_width + 2 }
 
         rows << [InlineRun.new(Term.border_line(padded_widths, Term::TL, Term::HL, Term::TJ, Term::TR), config.table_border_style)]
         rows << table_row(table.header, table.aligns, col_widths, config.table_header_style, config)
@@ -158,10 +158,10 @@ module TUI
       private def self.table_row(cells : Array(Array(InlineRun)), aligns : Array(Align), col_widths : Array(Int32), cell_style : Style, config : Config) : Array(InlineRun)
         runs = [] of InlineRun
         runs << InlineRun.new(Term::VL, config.table_border_style)
-        col_widths.each_with_index do |cw, i|
+        col_widths.each_with_index do |col_width, i|
           text = (cells[i]? || [] of InlineRun).map(&.text).join
           align = aligns[i]? || Align::Left
-          fitted = Term.fit(text, cw, align)
+          fitted = Term.fit(text, col_width, align)
           runs << InlineRun.new(" ", Style.new)
           runs << InlineRun.new(fitted, cell_style)
           runs << InlineRun.new(" ", Style.new)
@@ -172,10 +172,10 @@ module TUI
 
       private def self.compute_col_widths(table : Table, width : Int32, config : Config) : Array(Int32)
         n = table.header.size
-        natural = (0...n).map do |c|
-          cells = [table.header[c]] + table.rows.map { |r| r[c]? || [] of InlineRun }
-          w = cells.map { |cell| cell.map(&.text).join.size }.max? || 1
-          [[w, 1].max, config.table_max_col_width].min
+        natural = (0...n).map do |col|
+          cells = [table.header[col]] + table.rows.map { |row| row[col]? || [] of InlineRun }
+          natural_width = cells.max_of?(&.map(&.text).join.size) || 1
+          [[natural_width, 1].max, config.table_max_col_width].min
         end
 
         total = natural.sum
@@ -186,14 +186,14 @@ module TUI
           slack = budget - total
           widths = natural.dup
           if slack > 0 && total > 0
-            natural.each_with_index do |w, i|
-              widths[i] += (slack * w / total.to_f).to_i
+            natural.each_with_index do |natural_width, i|
+              widths[i] += (slack * natural_width / total.to_f).to_i
             end
             widths[-1] = budget - widths[0...-1].sum
           end
           widths
         else
-          widths = natural.map { |w| [(budget * w / total.to_f).to_i, config.table_min_col_width].max }
+          widths = natural.map { |natural_width| [(budget * natural_width / total.to_f).to_i, config.table_min_col_width].max }
           widths[-1] = [budget - widths[0...-1].sum, config.table_min_col_width].max
           widths
         end

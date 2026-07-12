@@ -6,10 +6,10 @@ describe TUI::Markdown::Inline do
       runs = TUI::Markdown::Inline.parse("plain **bold** and *italic* text")
 
       runs.map(&.text).join.should eq("plain bold and italic text")
-      bold_run = runs.find { |r| r.text == "bold" }.not_nil!
+      bold_run = runs.find! { |run| run.text == "bold" }
       bold_run.style.bold.should be_true
 
-      italic_run = runs.find { |r| r.text == "italic" }.not_nil!
+      italic_run = runs.find! { |run| run.text == "italic" }
       italic_run.style.italic.should be_true
     end
 
@@ -25,7 +25,7 @@ describe TUI::Markdown::Inline do
       runs = TUI::Markdown::Inline.parse("plain ~~struck~~ text")
 
       runs.map(&.text).join.should eq("plain struck text")
-      struck_run = runs.find { |r| r.text == "struck" }.not_nil!
+      struck_run = runs.find! { |run| run.text == "struck" }
       struck_run.style.strikethrough.should be_true
     end
 
@@ -42,7 +42,7 @@ describe TUI::Markdown::Inline do
 
     it "styles inline code distinctly and preserves its literal text" do
       runs = TUI::Markdown::Inline.parse("use `puts x` here")
-      code_run = runs.find { |r| r.text == "puts x" }.not_nil!
+      code_run = runs.find! { |run| run.text == "puts x" }
       code_run.style.should eq(TUI::Style.new(fg: TUI.color(:yellow)))
     end
 

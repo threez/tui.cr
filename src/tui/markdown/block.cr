@@ -56,7 +56,7 @@ module TUI
     class ListItem
       property runs : Array(InlineRun)
       property depth : Int32
-      property ordered : Bool
+      property? ordered : Bool
       property index : Int32?
       property checked : Bool?
 

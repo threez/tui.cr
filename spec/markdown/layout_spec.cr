@@ -6,7 +6,7 @@ describe TUI::Markdown::Layout do
       blocks = TUI::Markdown::Parser.parse("# A\n\n## B")
       rows = TUI::Markdown::Layout.layout(blocks, 40)
 
-      texts = rows.map { |r| r.map(&.text).join }
+      texts = rows.map(&.map(&.text).join)
       texts.should contain("1  A")
       texts.should contain("  1.1  B")
     end
@@ -16,7 +16,7 @@ describe TUI::Markdown::Layout do
       rows = TUI::Markdown::Layout.layout(blocks, 20)
 
       rows.size.should be > 1
-      rows[1..].each { |r| r.map(&.text).join.should start_with("  ") }
+      rows[1..].each(&.map(&.text).join.should(start_with("  ")))
       rows[0].map(&.text).join.should start_with("• ")
     end
 
@@ -29,7 +29,7 @@ describe TUI::Markdown::Layout do
         MD
 
       rows = TUI::Markdown::Layout.layout(blocks, 20)
-      rows.each { |r| r.map(&.text).join.size.should be <= 20 }
+      rows.each(&.map(&.text).join.size.should(be <= 20))
     end
 
     it "renders a GFM table with box-drawing borders at the expected positions" do
@@ -39,7 +39,7 @@ describe TUI::Markdown::Layout do
         | 1 | 2 |
         MD
 
-      rows = TUI::Markdown::Layout.layout(blocks, 40).map { |r| r.map(&.text).join }
+      rows = TUI::Markdown::Layout.layout(blocks, 40).map(&.map(&.text).join)
       rows[0].should start_with(TUI::Term::TL)
       rows[0].should end_with(TUI::Term::TR)
       rows[0].should contain(TUI::Term::TJ)

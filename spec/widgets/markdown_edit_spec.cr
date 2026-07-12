@@ -20,7 +20,7 @@ describe TUI::MarkdownEdit do
       buffer = TUI::Buffer.new(40, 3)
       editor.render_content(buffer, scroll)
 
-      rendered = (0...32).map { |c| buffer.cell(0, c).char }.join
+      rendered = (0...32).map { |col| buffer.cell(0, col).char }.join
       rendered.should eq("**bold** and *italic* and `code`")
       editor.value.should eq("**bold** and *italic* and `code`")
     end
@@ -30,9 +30,9 @@ describe TUI::MarkdownEdit do
       buffer = TUI::Buffer.new(40, 3)
       editor.render_content(buffer, scroll)
 
-      (0...9).map { |c| buffer.cell(0, c).char }.join.should eq("# Heading")
-      (0...6).map { |c| buffer.cell(1, c).char }.join.should eq("- item")
-      (0...7).map { |c| buffer.cell(2, c).char }.join.should eq("> quote")
+      (0...9).map { |col| buffer.cell(0, col).char }.join.should eq("# Heading")
+      (0...6).map { |col| buffer.cell(1, col).char }.join.should eq("- item")
+      (0...7).map { |col| buffer.cell(2, col).char }.join.should eq("> quote")
     end
 
     it "cursor/edit positions stay aligned with the raw (unstripped) line after highlighting" do
@@ -89,7 +89,7 @@ describe TUI::MarkdownEdit do
       buffer = TUI::Buffer.new(40, 3)
       editor.render_content(buffer, scroll)
 
-      rendered = (0...10).map { |c| buffer.cell(0, c).char }.join
+      rendered = (0...10).map { |col| buffer.cell(0, col).char }.join
       rendered.should eq("~~struck~~")
       buffer.cell(0, 0).style.should contain("2") # ~~ delimiter, dim
       buffer.cell(0, 1).style.should contain("2") # ~~ delimiter, dim
@@ -118,7 +118,7 @@ describe TUI::MarkdownEdit do
       buffer = TUI::Buffer.new(40, 3)
       editor.render_content(buffer, scroll)
 
-      rendered = (0...18).map { |c| buffer.cell(0, c).char }.join
+      rendered = (0...18).map { |col| buffer.cell(0, col).char }.join
       rendered.should eq("this *never closes")
       buffer.cell(0, 5).style.should eq("")
     end

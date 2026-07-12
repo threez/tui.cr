@@ -31,7 +31,7 @@ module TUI
     # glyph args (Buffer) or wrap the plain result afterward (Markdown's
     # InlineRun), so no Style parameter is added here.
     def self.border_line(segment_widths : Array(Int32), left : String, fill : String, junction : String, right : String) : String
-      left + segment_widths.map { |w| fill * [w, 0].max }.join(junction) + right
+      left + segment_widths.map { |width| fill * [width, 0].max }.join(junction) + right
     end
 
     def self.enter_raw : Nil

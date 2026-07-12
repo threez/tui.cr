@@ -193,9 +193,9 @@ describe TUI::TextEdit do
       buffer = TUI::Buffer.new(20, 5)
       editor.render_content(buffer, scroll)
 
-      (0...3).map { |c| buffer.cell(0, c).char }.join.should eq("one")
-      (0...3).map { |c| buffer.cell(1, c).char }.join.should eq("two")
-      (0...5).map { |c| buffer.cell(2, c).char }.join.should eq("three")
+      (0...3).map { |col| buffer.cell(0, col).char }.join.should eq("one")
+      (0...3).map { |col| buffer.cell(1, col).char }.join.should eq("two")
+      (0...5).map { |col| buffer.cell(2, col).char }.join.should eq("three")
     end
 
     it "wraps a long line across multiple rows with a trailing marker on every non-final segment" do
@@ -206,7 +206,7 @@ describe TUI::TextEdit do
       buffer.cell(0, 19).char.should eq(TUI::TextEdit::WRAP_MARKER)
       buffer.cell(1, 19).char.should eq(TUI::TextEdit::WRAP_MARKER)
       buffer.cell(2, 19).char.should eq(TUI::TextEdit::WRAP_MARKER)
-      (0...5).map { |c| buffer.cell(3, c).char }.join.should eq(" rows")
+      (0...5).map { |col| buffer.cell(3, col).char }.join.should eq(" rows")
     end
 
     it "does not append a marker on a line's final (or only) segment" do
@@ -222,7 +222,7 @@ describe TUI::TextEdit do
       buffer = TUI::Buffer.new(20, 5)
       editor.render_content(buffer, scroll)
 
-      (0...2).each { |c| buffer.cell(0, c).style.should eq("") }
+      (0...2).each { |col| buffer.cell(0, col).style.should eq("") }
     end
 
     it "reverse-videos the cursor cell when focused" do
@@ -277,32 +277,32 @@ describe TUI::TextEdit do
 
     it "renders each Cell's own style over its own character range" do
       editor = TUI::TextEdit.new("hello world")
-      editor.highlighter = ->(line : String) {
+      editor.highlighter = ->(_line : String) {
         [TUI::Cell.new("hello", TUI::Style.new(bold: true)), TUI::Cell.new(" world", TUI::Style.new)]
       }
       buffer = TUI::Buffer.new(20, 3)
       editor.render_content(buffer, scroll)
 
-      (0...5).each { |c| buffer.cell(0, c).style.should contain("1") }
-      (5...11).each { |c| buffer.cell(0, c).style.should eq("") }
+      (0...5).each { |col| buffer.cell(0, col).style.should contain("1") }
+      (5...11).each { |col| buffer.cell(0, col).style.should eq("") }
     end
 
     it "splits a styled span across a wrap boundary, preserving each side's own style" do
       editor = TUI::TextEdit.new("abcdefghij")
-      editor.highlighter = ->(line : String) {
+      editor.highlighter = ->(_line : String) {
         [TUI::Cell.new("abcde", TUI::Style.new(bold: true)), TUI::Cell.new("fghij", TUI::Style.new(fg: TUI.color(:red)))]
       }
       buffer = TUI::Buffer.new(7, 5)
       editor.render_content(buffer, scroll(5))
 
-      (0...5).each { |c| buffer.cell(0, c).style.should contain("1") }
+      (0...5).each { |col| buffer.cell(0, col).style.should contain("1") }
       buffer.cell(0, 5).style.should contain("31")
-      (0...4).each { |c| buffer.cell(1, c).style.should contain("31") }
+      (0...4).each { |col| buffer.cell(1, col).style.should contain("31") }
     end
 
     it "keeps the highlighter's styling on both sides of the cursor's reverse-video cell" do
       editor = TUI::TextEdit.new("hello world")
-      editor.highlighter = ->(line : String) {
+      editor.highlighter = ->(_line : String) {
         [TUI::Cell.new("hello", TUI::Style.new(bold: true)), TUI::Cell.new(" world", TUI::Style.new)]
       }
       editor.focus_if(true)
@@ -333,7 +333,7 @@ describe TUI::TextEdit do
       window = TUI::Window.new(1, 1, 20, 10, editor)
       window.composite(screen)
 
-      (1...9).map { |r| screen.cell(r, 19).char }.should contain("▐")
+      (1...9).map { |row| screen.cell(row, 19).char }.should contain("▐")
     end
   end
 end

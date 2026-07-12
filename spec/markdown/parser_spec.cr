@@ -31,7 +31,7 @@ describe TUI::Markdown::Parser do
     it "parses emphasis within a paragraph into distinct InlineRun styles" do
       blocks = TUI::Markdown::Parser.parse("plain **bold** text")
       para = blocks[0].as(TUI::Markdown::Paragraph)
-      para.runs.find { |r| r.text == "bold" }.not_nil!.style.bold.should be_true
+      para.runs.find! { |run| run.text == "bold" }.style.bold.should be_true
     end
 
     it "parses a nested unordered+ordered list into ListItems with correct depth/ordered/index fields" do
@@ -45,8 +45,8 @@ describe TUI::Markdown::Parser do
 
       list = blocks[0].as(TUI::Markdown::ListBlock)
       list.items.map(&.depth).should eq([0, 0, 1, 1, 0])
-      list.items.map(&.ordered).should eq([true, true, false, false, true])
-      list.items.select(&.ordered).map(&.index).should eq([1, 2, 3])
+      list.items.map(&.ordered?).should eq([true, true, false, false, true])
+      list.items.select(&.ordered?).map(&.index).should eq([1, 2, 3])
     end
 
     it "parses a GFM table's delimiter row into left/center/right Align per column" do
@@ -58,7 +58,7 @@ describe TUI::Markdown::Parser do
 
       table = blocks[0].as(TUI::Markdown::Table)
       table.aligns.should eq([TUI::Align::Left, TUI::Align::Center, TUI::Align::Right, TUI::Align::Left])
-      table.header.map { |c| c.map(&.text).join }.should eq(["A", "B", "C", "D"])
+      table.header.map(&.map(&.text).join).should eq(["A", "B", "C", "D"])
       table.rows.size.should eq(1)
     end
 

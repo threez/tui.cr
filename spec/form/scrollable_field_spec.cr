@@ -66,7 +66,7 @@ describe TUI::ScrollableField do
       field.render(buffer, 0, 0, 10, height: 2)
 
       chars = (0...2).map { |row| buffer.cell(row, 9).char }
-      chars.any? { |c| c != " " }.should be_true
+      chars.any? { |char| char != " " }.should be_true
     end
 
     it "leaves the last column blank when content fits without scrolling" do

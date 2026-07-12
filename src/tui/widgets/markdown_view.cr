@@ -109,7 +109,7 @@ module TUI
       @layout_rows.each_with_index do |row, i|
         next if i < scroll.offset
         break if current_y >= buffer.height
-        buffer.set(current_y, 0, row.join { |r| Term.apply(r.style, r.text) })
+        buffer.set(current_y, 0, row.join { |run| Term.apply(run.style, run.text) })
         current_y += 1
       end
     end

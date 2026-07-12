@@ -220,7 +220,7 @@ describe TUI::Grid do
     it "shifts every child's y by the scroll offset once scrolled" do
       grid = TUI::Grid.new(1, 1, 20, 3, [1]) # 3 rows tall, borderless -> 3 visible
       widgets = (0...6).map { |i| StubWidget.new(0, 0, 1, 1, i.to_s) }
-      widgets.each_with_index { |w, i| grid.attach(w, col: 0, row: i) }
+      widgets.each_with_index { |widget, i| grid.attach(widget, col: 0, row: i) }
 
       screen = TUI::Screen.new
       grid.composite(screen)
@@ -257,7 +257,7 @@ describe TUI::Grid do
     it "reveals a newly-focused attachment scrolled out of view" do
       grid = TUI::Grid.new(1, 1, 20, 3, [1]) # 3 visible rows
       widgets = (0...6).map { |i| StubWidget.new(0, 0, 1, 1, i.to_s) }
-      widgets.each_with_index { |w, i| grid.attach(w, col: 0, row: i) }
+      widgets.each_with_index { |widget, i| grid.attach(widget, col: 0, row: i) }
 
       5.times { grid.handle_key(TUI::KeyEvent.new(TUI::Key::Tab)) } # focus -> last attachment
       screen = TUI::Screen.new
@@ -270,7 +270,7 @@ describe TUI::Grid do
     it "scrolls with PageDown/PageUp as a fallback when the focused child declines the key" do
       grid = TUI::Grid.new(1, 1, 20, 3, [1])
       widgets = (0...6).map { |i| StubWidget.new(0, 0, 1, 1, i.to_s) }
-      widgets.each_with_index { |w, i| grid.attach(w, col: 0, row: i) }
+      widgets.each_with_index { |widget, i| grid.attach(widget, col: 0, row: i) }
 
       grid.handle_key(TUI::KeyEvent.new(TUI::Key::PageDown)).should be_true
       screen = TUI::Screen.new
@@ -287,7 +287,7 @@ describe TUI::Grid do
       a = StubWidget.new(0, 0, 1, 1, "A")
       a.consumes = true # simulates a ScrollableField-backed cell mid-edit
       widgets = [a] + (1...6).map { |i| StubWidget.new(0, 0, 1, 1, i.to_s) }
-      widgets.each_with_index { |w, i| grid.attach(w, col: 0, row: i) }
+      widgets.each_with_index { |widget, i| grid.attach(widget, col: 0, row: i) }
 
       grid.handle_key(TUI::KeyEvent.new(TUI::Key::PageDown)).should be_true
       a.last_key.try(&.key).should eq(TUI::Key::PageDown)

@@ -66,10 +66,10 @@ module TUI
       private def self.tokenize(runs : Array(InlineRun)) : Array(Token)
         tokens = [] of Token
         runs.each do |run|
-          run.text.scan(/(\s+)|(\S+)/) do |m|
-            if space = m[1]?
+          run.text.scan(/(\s+)|(\S+)/) do |match|
+            if space = match[1]?
               tokens << Token.new(space, run.style, true)
-            elsif word = m[2]?
+            elsif word = match[2]?
               tokens << Token.new(word, run.style, false)
             end
           end
