@@ -36,6 +36,17 @@ module TUI
       @scrollbar_style = style
     end
 
+    # Appended (with a leading double-space separator, matching how
+    # #status_hint already joins its own @menu.hint with active_pane's) to
+    # #status_hint when non-empty — for a host embedding this SplitWindow
+    # that wants its own app-level bindings (e.g. a sidebar-hide toggle)
+    # reflected in the one status line #status_hint produces, without
+    # this widget needing to know anything about what those bindings do.
+    # A host intercepting a key ahead of this widget's own #handle_key
+    # (e.g. to special-case Tab while the left pane is hidden) is
+    # responsible for keeping this in sync with what it actually does.
+    property extra_hint : String = ""
+
     @menu : KeyMenu
 
     def initialize(x : Int32, y : Int32, width : Int32, height : Int32,
@@ -77,6 +88,13 @@ module TUI
       @active = :left
     end
 
+    # Symmetric counterpart to #focus_left — for a host that collapses the
+    # left pane (e.g. width 0) and needs focus off it since it can no
+    # longer usefully hold keyboard input.
+    def focus_right : Nil
+      @active = :right
+    end
+
     def render : Nil
       left_total = @left.content_size
       right_total = @right.content_size
@@ -89,7 +107,11 @@ module TUI
       @right.focus_if(@active == :right)
 
       if bordered?
-        @buffer.box_with_divider(0, 0, height, width, divider_at: @left_width + 1, title: @left.title, style: border_style)
+        # A collapsed left pane (width 0) has nothing to title — show the
+        # right pane's title instead so the border doesn't keep labeling a
+        # pane the user can no longer see.
+        title = @left_width > 0 ? @left.title : @right.title
+        @buffer.box_with_divider(0, 0, height, width, divider_at: @left_width + 1, title: title, style: border_style)
         @buffer.vline(@left_width + 1, 1, height - 2, style: border_style)
         @buffer.scrollbar(0, @left_width + 1, height, @left_scroller.fraction(left_total, left_visible), visible: left_visible, total: left_total, style: scrollbar_style)
         @buffer.scrollbar(0, width - 1, height, @right_scroller.fraction(right_total, right_visible), visible: right_visible, total: right_total, style: scrollbar_style)
@@ -116,12 +138,21 @@ module TUI
     end
 
     def status_hint : String
-      @menu.hint + "  " + active_pane.status_hint
+      suffix = extra_hint.empty? ? "" : "  " + extra_hint
+      @menu.hint + suffix + "  " + active_pane.status_hint
     end
 
     private def build_menu : KeyMenu
       menu = KeyMenu.new
-      menu.bind(Key::Tab, "Tab:switch pane") { @active = @active == :left ? :right : :left }
+      # Guarded by left_width > 0: switching focus onto a collapsed
+      # (width-0) left pane has nothing to land on, so the hint would
+      # otherwise advertise a Tab press that does nothing visible — a host
+      # that collapses the left pane to hide it (there's no dedicated
+      # "hidden" state, just width 0) typically intercepts Tab itself
+      # ahead of this widget's #handle_key to give it different meaning
+      # instead (e.g. prostore's App uses it to unhide), so this binding
+      # would rarely even be reached in that state anyway.
+      menu.bind(Key::Tab, "Tab:switch pane", when: -> { @left_width > 0 }) { @active = @active == :left ? :right : :left }
       menu
     end
 
