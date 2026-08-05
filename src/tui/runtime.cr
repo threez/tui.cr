@@ -32,6 +32,14 @@ module TUI
       end
 
       print Term.enter_alt_screen
+      # The alt screen isn't guaranteed blank on entry — some terminals/
+      # multiplexers restore prior alt-screen content instead of clearing
+      # it. Screen#flush only diffs+emits cells that changed since @front
+      # (which starts as blank BufferCells), so without this, any
+      # widget-drawn cell that happens to also be blank would never get
+      # (re-)emitted on the first frame, leaving old content showing
+      # through underneath.
+      print Term.clear
       print Term.hide_cursor
       print Term.enter_mouse
       print Term.enter_bracketed_paste
