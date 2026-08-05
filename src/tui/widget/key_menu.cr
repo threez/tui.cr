@@ -16,7 +16,7 @@ module TUI
     # on a match.
     record Binding,
       trigger : Key | Char,
-      label : String,
+      label : -> String,
       when : (-> Bool)?,
       action : KeyEvent -> Nil
 
@@ -27,8 +27,14 @@ module TUI
     # `action` receives the matched KeyEvent — ignore it (`{ do_thing }`)
     # if the binding doesn't need it. Matching always consumes the event;
     # a binding that wants to conditionally decline should use `when:`.
-    def bind(trigger : Key | Char, label : String, when condition : (-> Bool)? = nil, &action : KeyEvent -> _) : Nil
-      @bindings << Binding.new(trigger, label, condition, ->(ev : KeyEvent) { action.call(ev); nil })
+    #
+    # `label` is either a fixed String (the common case) or a `-> String`
+    # for a binding whose hint text itself depends on runtime state (e.g.
+    # "h:hide"/"h:show" toggling with what it would currently do) —
+    # re-evaluated on every #hint call, same as `when:`.
+    def bind(trigger : Key | Char, label : String | (-> String), when condition : (-> Bool)? = nil, &action : KeyEvent -> _) : Nil
+      label_proc = label.is_a?(String) ? -> { label } : label
+      @bindings << Binding.new(trigger, label_proc, condition, ->(ev : KeyEvent) { action.call(ev); nil })
     end
 
     # Tries every active binding in registration order. Returns true
@@ -50,7 +56,7 @@ module TUI
     # dispatch and displayed hint can never drift apart.
     def hint : String
       active = @bindings.select { |binding| (w = binding.when).nil? || w.call }
-      " " + active.map(&.label).join("  ")
+      " " + active.map(&.label.call).join("  ")
     end
 
     private def matches?(b : Binding, ev : KeyEvent) : Bool
