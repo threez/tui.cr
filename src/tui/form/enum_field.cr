@@ -19,7 +19,7 @@ module TUI
     end
 
     def handle_key(ev : KeyEvent) : Symbol?
-      return nil if @options.empty?
+      return if @options.empty?
       case ev.key
       when Key::Esc
         :cancel
@@ -33,8 +33,6 @@ module TUI
         nil
       when Key::Char
         ev.char == ' ' ? :commit : nil
-      else
-        nil
       end
     end
 

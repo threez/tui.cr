@@ -7,43 +7,43 @@ require "../../src/tui"
 # and, verbatim, as the manual-smoke-test target in the implementation
 # plan.
 MARKDOWN_SAMPLE = <<-MD
-# Guide
+  # Guide
 
-Welcome to **tui.cr**. This is a *sample* document with `inline code`
-and a [link](https://example.com) to prove word-wrap handles long
-paragraphs correctly by breaking only at whitespace boundaries.
+  Welcome to **tui.cr**. This is a *sample* document with `inline code`
+  and a [link](https://example.com) to prove word-wrap handles long
+  paragraphs correctly by breaking only at whitespace boundaries.
 
-## Installation
+  ## Installation
 
-1. Clone the repo
-2. Run `shards install`
-   - Verify Crystal >= 1.19.1
-   - Check shard.yml
-3. Build
+  1. Clone the repo
+  2. Run `shards install`
+     - Verify Crystal >= 1.19.1
+     - Check shard.yml
+  3. Build
 
-## Features
+  ## Features
 
-- Headings are numbered
-- Lists nest with proper indentation
-- Tables align columns
-- [x] Word-wrap preserves inline styling
-- [ ] Syntax highlighting (not yet)
+  - Headings are numbered
+  - Lists nest with proper indentation
+  - Tables align columns
+  - [x] Word-wrap preserves inline styling
+  - [ ] Syntax highlighting (not yet)
 
-### Example table
+  ### Example table
 
-| Name   | Type  | Price |
-|:-------|:-----:|------:|
-| Widget | tool  | $9.99 |
-| Gadget | gizmo | $19.99 |
+  | Name   | Type  | Price |
+  |:-------|:-----:|------:|
+  | Widget | tool  | $9.99 |
+  | Gadget | gizmo | $19.99 |
 
-> Blockquotes render indented with a bar.
+  > Blockquotes render indented with a bar.
 
----
+  ---
 
-```crystal
-puts "code block, not word-wrapped"
-```
-MD
+  ```crystal
+  puts "code block, not word-wrapped"
+  ```
+  MD
 
 # Builds the "Markdown viewer" demo page: a MarkdownView over
 # MARKDOWN_SAMPLE, hosted in a bordered Window for the scrollbar/title

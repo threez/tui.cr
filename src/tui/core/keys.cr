@@ -46,7 +46,6 @@ module TUI
     # escape sequence (arrow keys, mouse reports, etc).
     ESC_TIMEOUT = 50.milliseconds
 
-    # ameba:disable Metrics/CyclomaticComplexity
     def self.read(io : IO) : KeyEvent
       byte = io.read_byte
       return KeyEvent.new(Key::Unknown) if byte.nil?
@@ -92,8 +91,6 @@ module TUI
         ensure
           fd.read_timeout = old
         end
-      else
-        nil
       end
     end
 

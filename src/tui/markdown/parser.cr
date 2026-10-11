@@ -203,7 +203,7 @@ module TUI
 
       private def self.task_checked(item_text : String) : Bool?
         m = TASK_PREFIX.match(item_text)
-        return nil unless m
+        return unless m
         state = m[1]
         state == "x" || state == "X"
       end

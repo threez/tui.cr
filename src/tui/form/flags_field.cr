@@ -26,7 +26,7 @@ module TUI
     end
 
     def handle_key(ev : KeyEvent) : Symbol?
-      return nil if @options.empty?
+      return if @options.empty?
       case ev.key
       when Key::Esc
         :cancel
@@ -46,8 +46,6 @@ module TUI
             @selected << @focus_index
           end
         end
-        nil
-      else
         nil
       end
     end

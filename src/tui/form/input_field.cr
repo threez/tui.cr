@@ -35,8 +35,6 @@ module TUI
       when Key::Left, Key::Right, Key::Home, Key::End
         handle_cursor_key(ev.key)
         nil
-      else
-        nil
       end
     end
 
