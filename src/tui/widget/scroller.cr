@@ -43,7 +43,7 @@ module TUI
     # 0.0..1.0 position of the viewport within the content, or nil if the
     # content fits entirely (no scrollbar needed).
     def fraction(total : Int32, visible : Int32) : Float64?
-      return nil if total <= visible
+      return if total <= visible
       max_offset = total - visible
       max_offset > 0 ? @offset / max_offset.to_f : 0.0
     end

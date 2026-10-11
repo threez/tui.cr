@@ -28,8 +28,6 @@ module TUI
           @bool_pending = !@bool_pending
         end
         nil
-      else
-        nil
       end
     end
 

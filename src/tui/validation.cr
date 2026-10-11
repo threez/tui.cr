@@ -21,12 +21,10 @@ module TUI
     # True if the input parses successfully under any accepted format.
     def self.valid_time?(s : String) : Bool
       TIME_FORMATS.any? do |fmt|
-        begin
-          Time.parse(s.strip, fmt, Time::Location::UTC)
-          true
-        rescue
-          false
-        end
+        Time.parse(s.strip, fmt, Time::Location::UTC)
+        true
+      rescue
+        false
       end
     end
 

@@ -162,7 +162,7 @@ module TUI
     # the data-row area (header, filter prompt).
     private def row_at(local_row : Int32, scroll : ScrollControl) : Int32?
       offset = content_row_offset
-      return nil if local_row < offset
+      return if local_row < offset
       idx = scroll.offset + (local_row - offset)
       idx if idx >= 0 && idx < @source.size
     end

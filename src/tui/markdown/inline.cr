@@ -159,10 +159,10 @@ module TUI
       # supported, matching this scanner's line-at-a-time operation.
       private def self.try_parse_link(chars : Array(Char), i : Int32) : LinkMatch?
         text_close = chars.index(']', i + 1)
-        return nil unless text_close
-        return nil unless chars[text_close + 1]? == '('
+        return unless text_close
+        return unless chars[text_close + 1]? == '('
         url_close = chars.index(')', text_close + 2)
-        return nil unless url_close
+        return unless url_close
 
         text = chars[(i + 1)...text_close].join
         url = chars[(text_close + 2)...url_close].join
